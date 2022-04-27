@@ -1,0 +1,190 @@
+<html>
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serifss;
+        }
+
+        body {
+            background-color: rgb(237, 219, 189);
+            color: black;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            padding: 15px 10px;
+        }
+
+        .grid-container a {
+            color: white;
+        }
+
+        .grid-container a:hover {
+            background-color: rgb(14, 55, 12);
+            color: white;
+        }
+
+        .grid-container {
+            background-color: rgb(24, 98, 20);
+            display: grid;
+            grid-template-areas:
+                'one two three . . . . . . . . . lone-link';
+            text-align: center;
+        }
+
+        .one,
+        .two,
+        .three {
+            grid-area: group-links;
+        }
+
+        .item4 {
+            grid-area: lone-link;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-areas:
+                'img1 img2 img3'
+                'img4 img5 img6'
+                'img7 img8 img9';
+            gap: 20px;
+        }
+
+        img {
+            border-radius: 10px;
+        }
+
+        .image1 {
+            grid-area: img1;
+        }
+
+        .image2 {
+            grid-area: img2;
+        }
+
+        .image3 {
+            grid-area: img3;
+        }
+
+        .image4 {
+            grid-area: img4;
+        }
+
+        .image6 {
+            grid-area: img6;
+        }
+
+        .image7 {
+            grid-area: img7;
+        }
+        
+        .image8 {
+            grid-area: img8;
+        }
+
+        .image9 {
+            grid-area: img9;
+        }
+
+        .social-media {
+            display: grid;
+            grid-template-areas:
+                '. . . . facebook instagram twitter . . . .';
+            gap: 0px;
+        }
+
+        .media1 {
+            grid-area: facebook;
+            justify-self: right;
+        }
+
+        .media2 {
+            grid-area: instagram;
+            justify-self: center;
+        }
+
+        .media3 {
+            grid-area: twitter;
+            justify-self: left;
+        }
+
+        @media screen and (max-width: 650px) {
+            .gallery {
+                display: grid;
+                grid-template-areas:
+                    'img1'
+                    'img2' 'img3' 'img4' 'img5' 'img6' 'img7' 'img8' 'img9';
+                gap: 20px;
+            }
+
+            img {
+                width: 98%;
+            }
+
+            .grid-container {
+                background-color: rgb(24, 98, 20);
+                display: grid;
+                grid-template-areas:
+                    'one'
+                    'two'
+                    'three'
+                    'lone-link';
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Responsive Web Gallery</h3>
+    <div class="grid-container">
+        <a href="#" class="item1">Link1</a>
+        <a href="#" class="item2">Link2</a>
+        <a href="#" class="item3">Link3</a>
+        <a href="#" class="item4">Link4</a>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos ipsam animi nam cupiditate eum et accusantium odit
+        obcaecati, aspernatur deserunt repudiandae quisquam praesentium soluta accusamus expedita earum! Tempore,
+        dolorem provident.</p>
+    <div class="gallery">
+        <img src="https://picsum.photos/536/351" class="image1">
+
+        <img src="https://picsum.photos/536/352" class="image2">
+
+        <img src="https://picsum.photos/536/353" class="image3">
+
+        <img src="https://picsum.photos/536/354" class="image4">
+
+        <img src="https://picsum.photos/536/355" class="image5">
+
+        <img src="https://picsum.photos/536/356" class="image6">
+
+        <img src="https://picsum.photos/536/357" class="image7">
+
+        <img src="https://picsum.photos/536/358" class="image8">
+
+        <img src="https://picsum.photos/536/359" class="image9">
+    </div>
+    <div class="footer">
+        <h3>Copyright My Website</h3>
+        <div class="social-media">
+            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/96/iconmonstr-twitter-3.png"
+                style="width: 50px; height: 50px" class="media1">
+            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2016/96/iconmonstr-instagram-11.png"
+                style="width: 50px; height: 50px" class="media2">
+            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2012/96/iconmonstr-facebook-4.png"
+                style="width: 50px; height: 50px" class="media3">
+        </div>
+        <a href="#">Go Back</a>
+    </div>
+</body>
+
+</html>
