@@ -38,11 +38,11 @@
         }
 
         #navbar a {
-            padding: 15px;
+            padding: 20px;
         }
 
-        #navbar div {
-            padding: 15px 0;
+        #navbar .group-links, #link4 {
+            display: flex;
         }
 
         #main-content {
@@ -54,6 +54,7 @@
             flex-direction: column;
             justify-content: space-between;
             flex-wrap: wrap;
+            row-gap: 30px;
         }
 
         .image {
@@ -68,7 +69,6 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin-bottom: 30px;
 
         }
 
@@ -92,7 +92,6 @@
             #navbar div {
                 display: flex;
                 flex-direction: column;
-                padding: 0;
                 width: 100%;
                 text-align: center;
             }
@@ -103,7 +102,6 @@
 
             .image {
                 width: 98%;
-                margin-bottom: 30px;
             }
 
             #gallery {
@@ -123,9 +121,11 @@
     <h2>Responsive Web Gallery</h2>
     <div id="navbar">
         <div>
-            <a href="#">Link1</a>
-            <a href="#">Link2</a>
-            <a href="#">Link3</a>
+            <div class="group-links">
+                <a href="#">Link1</a>
+                <a href="#">Link2</a>
+                <a href="#">Link3</a>
+            </div>
         </div>
         <div id="link4">
             <a href="#">Link4</a>
