@@ -1,28 +1,220 @@
 <html>
-    <head>
-        <style>
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                font-family: Arial, Helvetica, sans-serif;
-            }
 
-            header {
-                text-align: center;
-                background-image: linear-gradient(rgb(73, 73, 73), rgb(208, 208, 208));
-            }
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-        </style>
-        <script src="code.js"></script>
-    </head>
-    <body>
-        <header>
+        header {
+            text-align: center;
+            background-image: linear-gradient(rgb(73, 73, 73), rgb(208, 208, 208));
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .pokemons h5,
+        p {
+            text-align: center;
+        }
+
+        h4 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        span {
+            color: white;
+        }
+
+        .img {
+            display: block;
+            width: 130px;
+        }
+
+        .pokemon {
+            border-radius: 5px;
+        }
+
+        .pokemon:hover {
+            background-color: lightgray;
+        }
+
+        .pokemons {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-template-rows: auto auto auto;
+            gap: 20px;
+            justify-content: space-around;
+        }
+
+        .search {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .types {
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+            grid-template-rows: auto;
+            gap: 10px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 15% 85%;
+            grid-template-rows: auto;
+            gap: 10px;
+        }
+
+        #page_buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #weight_search {
+            text-align: left;
+        }
+    </style>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="code.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
             <h2>Poké Searcher</h2>
-        </header>
-        <main>
-        </main>
-        <footer>
+        </a>
+    </header>
+    <main>
+        <div>
+            <h4>History</h4>
+            <div id="clear_history">
+                <button id="clear_all">Clear All</button>
+            </div>
+            <div id="search_history" style="height:85vh; overflow:auto;">
+            
+            </div>
+        </div>
+        <div>
+            <div class="search">
+                <p>Search for Pokémons</p>
+                <hr>
+                Name: <input type="text" id="name"> <button id="find_by_name">Search</button>
+                <br>
+                <hr>
+                <div class="types">
+                    <div>
+                        <label>Search by Type</label>
+                        <br>
+                        <select id="type_dropdown">
+                            <option value="normal" class="type_selected">Normal</option>
+                            <option value="fire" class="type_selected">Fire</option>
+                            <option value="water" class="type_selected">Water</option>
+                            <option value="electric" class="type_selected">Electric</option>
+                            <option value="grass" class="type_selected">Grass</option>
+                            <option value="ice" class="type_selected">Ice</option>
+                            <option value="fighting" class="type_selected">Fighting</option>
+                            <option value="poison" class="type_selected">Poison</option>
+                            <option value="ground" class="type_selected">Ground</option>
+                            <option value="flying" class="type_selected">Flying</option>
+                            <option value="psychic" class="type_selected">Psychic</option>
+                            <option value="bug" class="type_selected">Bug</option>
+                            <option value="rock" class="type_selected">Rock</option>
+                            <option value="ghost" class="type_selected">Ghost</option>
+                            <option value="dragon" class="type_selected">Dragon</option>
+                            <option value="dark" class="type_selected">Dark</option>
+                            <option value="steel" class="type_selected">Steel</option>
+                            <option value="fairy" class="type_selected">Fairy</option>
+                        </select>
+                        <button id="find_by_type">Search</button>
+                    </div>
+                    <div>
+                        <label>Search by Weight(kg)</label>
+                        <br>
+                        <div id="weight_search">
+                            <label for="min-weight">Min Weight: </label>
+                            <input type="number" id="min-weight"><br>
+                            <label for="max-weight">Max Weight: </label>
+                            <input type="number" id="max-weight">
+                            <button id="find_by_weight">Search</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Search by Base Stats</label>
+                        <div id="rarity_search">
+                            <input type="radio" id="high_stats" value="high" name="base_stats">
+                            <label for="high">High</label><br>
+                            <input type="radio" id="moderate_stats" value="moderate" name="base_stats">
+                            <label for="moderate">Moderate</label><br>
+                            <input type="radio" id="low_stats" value="low" name="base_stats">
+                            <label for="low">Low</label><br>
+                            <button id="find_by_stats">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="display_pokemons">
+                <h4 id="random">Random Pokémons</h4>
+                <div class="pokemons">
+                </div>
+                <div id="page_buttons">
 
-        </footer>
-    </body>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
 </html>
+<!-- const url = "pokemonapi url and a id variable for requested pokemon" -->
+<!-- https.get(url, function(data){ the JSON is to big to be read all at once
+    data = ""
+    https_res.on("data", function(chunck) { with this it will keep adding the chunks of the data till the fill json is assembled
+        data += chunk
+    })
+    https_res.on('end', function() {
+        data = JSON.parse(data)
+
+        hp_ = data.stats.filter((obj => {  the stats array may not always be in the same order everytime
+            return obj.stat.name == "hp" // use a filter on the array to filter the element in the array that has name "hp" to access the stat value later 
+        })).map((obj_2) => { can use a call back function to map the filtered array and only return back the base stat of the element (which in this case was a JSON)
+            return obj_2.base_stat now only the base stat of hp is sent and not the whole entire JSON of that array index, we only need the stat value not the whole JSON
+        }) 
+    })
+    res.render("profile.ejs") {
+        "id": req.params.id,
+        "name": data.name,
+        "img": datas.sprites.other["official-artwork"]["front_default"],
+        "hp": hp_[0] remember an array is sent back since we sent an array into the filter function
+    }
+
+    can add progess bar to display the stat value, so they know the scale of how good the satat is (google progres bar html)
+    tip: loop through ajax requests for each pokemon, in success function call another function to ajax again to get the pokemon info and add the item to the html
+    rather than getting all the pokemons all at once and displaying them with a loop
+    meaning display each pokemon one by one instead of getting all the pokemons and display them together, this way there prob wont async errors
+    also use sprites.other.official-artwork instead of sprites.front_default: the image sizes and style are consistent
+
+    //use async and await if you plan to exectue code in the function after ajax requests since ajax is an aysnchronous function, this applies to all async functions
+    async function display() {
+        for (i=0; i<5; i++) {
+            await $.ajax({
+                url: ""
+                type: ""
+                success: ""
+            })
+        }
+        //with this, the function will ensure to wait for each ajax request to fininsh before proceeding with the rest of the code
+        some_stuff() will wait for all the ajax request to be finished before it is called
+        some_stuff()
+    }
+}) -->
