@@ -7,6 +7,7 @@ function change_type_background(type_name) {
 }
 
 function get_this_pokemon_info() {
+    console.log($(this).attr("id"))
     $.ajax(
         {
             "url": `https://pokeapi.co/api/v2/pokemon/${$(this).attr("id")}`,
@@ -43,7 +44,7 @@ function get_random_pokemons() {
 
 function setup() {
     get_random_pokemons()
-    $('.pokemon').click(get_this_pokemon_info)
+    $("body").on("click", ".pokemon", get_this_pokemon_info)
 }
 
 $(document).ready(setup)
