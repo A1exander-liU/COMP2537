@@ -72,10 +72,6 @@ function display_this_pokemon(data) {
     for (i = 0; i < data.types.length; i++) {
         result += change_type_background(data.types[i].type.name)
     }
-    result += `<br><h4>Abilities</h4>`
-    for (i = 0; i < data.abilities.length; i++) {
-        result += `${captialize(data.abilities[i].ability.name)} `
-    }
     result += `</div>`
     result += `<div class='tabs'>`
     result += `<button class="tablinks" id="base_stats">Base Stats</button>`
