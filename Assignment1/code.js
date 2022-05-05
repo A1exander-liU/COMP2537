@@ -17,6 +17,7 @@ function get_english_version(data) {
 function get_english_ability_info(data) {
     english_ability_info = data.effect_entries.filter(get_english_version)
     if ($(`#abilities div#${ability_name}`).text() == "") {
+        $(".ability-content").text("")
         $(`#abilities div#${ability_name}`).text(english_ability_info[0].effect)
     }
     else {
