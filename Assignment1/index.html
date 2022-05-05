@@ -48,6 +48,23 @@
             color: black;
         }
 
+        button{
+            border-radius: 0px;
+            border-width: 0px;
+            padding: 10px 0;
+            width: 33%;
+        }
+
+        #desc, #abilities-tab {
+            border-radius: 0px;
+            border-width: 0px;
+            padding: 10px 0;
+        }
+
+        button:hover {
+            background-color: rgb(172, 172, 172);
+        }
+
         .pokemons h5,
         p {
             text-align: center;
@@ -87,21 +104,18 @@
         .pokemon_full {
             text-align: center;
             display: grid;
-            grid-template-columns: auto auto;
+            grid-template-columns: 40% 300px;
             grid-template-rows: auto;
-            column-gap: 5px;
+            column-gap: 20px;
+        }
+
+        #base-stats {
+            width: 100%;
         }
 
         .search {
             margin: 20px 0;
             text-align: center;
-        }
-
-        .types {
-            display: grid;
-            grid-template-columns: 25% 25% 25% 25%;
-            grid-template-rows: auto;
-            gap: 10px;
         }
 
         main {
@@ -146,7 +160,7 @@
             </div>
         </div>
         <div>
-            <div class="search">
+            <!-- <div class="search">
                 <p>Search for Pokémons</p>
                 <hr>
                 Name: <input type="text" id="name"> <button id="find_by_name">Search</button>
@@ -202,7 +216,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="display_pokemons">
                 <h4 id="random">Random Pokémons</h4>
                 <div class="pokemons">
