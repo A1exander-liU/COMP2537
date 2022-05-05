@@ -15,10 +15,12 @@ function get_english_version(data) {
 }
 
 function get_english_ability_info(data) {
+    $(".ability-content").css("height", "0vh")
     english_ability_info = data.effect_entries.filter(get_english_version)
     if ($(`#abilities div#${ability_name}`).text() == "") {
         $(".ability-content").text("")
         $(`#abilities div#${ability_name}`).text(english_ability_info[0].effect)
+        $(`#abilities div#${ability_name}`).css({"height":"15vh", "overflow":"auto"})
     }
     else {
         $(`#abilities div#${ability_name}`).text("")
@@ -104,7 +106,7 @@ function display_this_pokemon(data) {
                         <p>${data.base_experience}</p>
                     </div>
                </div>`
-    result += `<div id='abilities' class='tabcontent' style="display:none;">`
+    result += `<div id='abilities' class='tabcontent' style="display:none; margin-top:5px;">`
     for (i = 0; i < data.abilities.length; i++) {
         console.log(captialize(data.abilities[i].ability.name))
         result += `<button class='ability' id='${data.abilities[i].ability.name}'>${captialize(data.abilities[i].ability.name)}</button><div id="${data.abilities[i].ability.name}" class="ability-content"></div>`
