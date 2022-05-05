@@ -19,8 +19,8 @@ function get_english_ability_info(data) {
     english_ability_info = data.effect_entries.filter(get_english_version)
     if ($(`#abilities div#${ability_name}`).text() == "") {
         $(".ability-content").text("")
-        $(`#abilities div#${ability_name}`).text(english_ability_info[0].effect)
-        $(`#abilities div#${ability_name}`).css({"height":"15vh", "overflow":"auto"})
+        $(`#abilities div#${ability_name}`).text(english_ability_info[0].short_effect)
+        $(`#abilities div#${ability_name}`).css({"height":"10vh", "overflow":"auto"})
     }
     else {
         $(`#abilities div#${ability_name}`).text("")
