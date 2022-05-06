@@ -12,6 +12,15 @@ function change_type_background(type_name) {
     return `<span class='${type_name}'>${type_name.toUpperCase()}</span>`
 }
 
+function get_current_page() {
+    current_page = $(this).children().val()
+    display_current_page_pokemons()
+}
+
+function get_first_prev_next_last() {
+
+}
+
 function display_page_buttons(total_pages) {
     console.log(total_pages)
     console.log("page button called")
@@ -32,6 +41,7 @@ function display_page_buttons(total_pages) {
 }
 
 function display_current_page_pokemons() {
+    $(".pokemons").html("")
     if (searched_pokemons.length > 12) {
         page_size = 12
         total_pages = Math.ceil(searched_pokemons.length / 12)
@@ -270,6 +280,8 @@ function setup() {
     $("#search").click(hide_pokemons)
     $("#find_by_name").click(get_pokemon_by_name)
     $("#find_by_type").click(get_pokemon_by_type)
+    $("body").on("click", "#page_buttons button", get_first_prev_next_last)
+    $("body").on("click", ".page_button", get_current_page)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
