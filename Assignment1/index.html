@@ -8,24 +8,77 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        .normal {background-color: #aa9;}
-        .fire {background-color: #f42;}
-        .water {background-color: #39f;}
-        .electric{background-color: #fc3;}
-        .grass {background-color: #7c5;}
-        .ice {background-color: #6cf;}
-        .fighting {background-color: #b54;}
-        .poison {background-color: #a59;}
-        .ground {background-color: #db5;}
-        .flying {background-color: #89f;}
-        .psychic {background-color: #f59;}
-        .bug {background-color: #ab2;} 
-        .rock {background-color: #ba6;} 
-        .ghost {background-color: #66b;}
-        .dragon {background-color: #76e;}
-        .dark {background-color: #754;}
-        .steel {background-color: #aab;}
-        .fairy {background-color: #e9e;}
+        .normal {
+            background-color: #aa9;
+        }
+
+        .fire {
+            background-color: #f42;
+        }
+
+        .water {
+            background-color: #39f;
+        }
+
+        .electric {
+            background-color: #fc3;
+        }
+
+        .grass {
+            background-color: #7c5;
+        }
+
+        .ice {
+            background-color: #6cf;
+        }
+
+        .fighting {
+            background-color: #b54;
+        }
+
+        .poison {
+            background-color: #a59;
+        }
+
+        .ground {
+            background-color: #db5;
+        }
+
+        .flying {
+            background-color: #89f;
+        }
+
+        .psychic {
+            background-color: #f59;
+        }
+
+        .bug {
+            background-color: #ab2;
+        }
+
+        .rock {
+            background-color: #ba6;
+        }
+
+        .ghost {
+            background-color: #66b;
+        }
+
+        .dragon {
+            background-color: #76e;
+        }
+
+        .dark {
+            background-color: #754;
+        }
+
+        .steel {
+            background-color: #aab;
+        }
+
+        .fairy {
+            background-color: #e9e;
+        }
 
         span {
             border-radius: 5px;
@@ -48,14 +101,15 @@
             color: black;
         }
 
-        button{
+        button {
             border-radius: 0px;
             border-width: 0px;
             padding: 10px 0;
             width: 33%;
         }
 
-        #desc, #abilities-tab {
+        #desc,
+        #abilities-tab {
             border-radius: 0px;
             border-width: 0px;
             padding: 10px 0;
@@ -116,7 +170,7 @@
             border-radius: 5px;
         }
 
-        .pokemon_full > div:first-child {
+        .pokemon_full>div:first-child {
             background-color: rgb(199, 197, 197);
             border-radius: 5px;
         }
@@ -169,6 +223,14 @@
         .page-tab {
             width: 100%;
         }
+
+        .tab-stuff {
+            display: none;
+        }
+
+        .page-tabs button.active {
+            background-color: rgb(165, 164, 164);
+        }
     </style>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -182,9 +244,72 @@
         </a>
     </header>
     <div class="page-tabs">
-        <button class="page-tab" id="home">Home</button>
+        <button class="page-tab active" id="home">Home</button>
         <button class="page-tab" id="search">Search</button>
         <button class="page-tab" id="history">History</button>
+    </div>
+    <div class="tab-stuff" id="home-page">
+
+    </div>
+    <div class="tab-stuff" id="search-page">
+        <p>Search for Pokémons</p>
+        <hr>
+        Name: <input type="text" id="name"> <button id="find_by_name">Search</button>
+        <br>
+        <hr>
+        <div class="types">
+            <div>
+                <label>Search by Type</label>
+                <br>
+                <select id="type_dropdown">
+                    <option value="normal" class="type_selected">Normal</option>
+                    <option value="fire" class="type_selected">Fire</option>
+                    <option value="water" class="type_selected">Water</option>
+                    <option value="electric" class="type_selected">Electric</option>
+                    <option value="grass" class="type_selected">Grass</option>
+                    <option value="ice" class="type_selected">Ice</option>
+                    <option value="fighting" class="type_selected">Fighting</option>
+                    <option value="poison" class="type_selected">Poison</option>
+                    <option value="ground" class="type_selected">Ground</option>
+                    <option value="flying" class="type_selected">Flying</option>
+                    <option value="psychic" class="type_selected">Psychic</option>
+                    <option value="bug" class="type_selected">Bug</option>
+                    <option value="rock" class="type_selected">Rock</option>
+                    <option value="ghost" class="type_selected">Ghost</option>
+                    <option value="dragon" class="type_selected">Dragon</option>
+                    <option value="dark" class="type_selected">Dark</option>
+                    <option value="steel" class="type_selected">Steel</option>
+                    <option value="fairy" class="type_selected">Fairy</option>
+                </select>
+                <button id="find_by_type">Search</button>
+            </div>
+            <div>
+                <label>Search by Weight(kg)</label>
+                <br>
+                <div id="weight_search">
+                    <label for="min-weight">Min Weight: </label>
+                    <input type="number" id="min-weight"><br>
+                    <label for="max-weight">Max Weight: </label>
+                    <input type="number" id="max-weight">
+                    <button id="find_by_weight">Search</button>
+                </div>
+            </div>
+            <div>
+                <label>Search by Base Stats</label>
+                <div id="rarity_search">
+                    <input type="radio" id="high_stats" value="high" name="base_stats">
+                    <label for="high">High</label><br>
+                    <input type="radio" id="moderate_stats" value="moderate" name="base_stats">
+                    <label for="moderate">Moderate</label><br>
+                    <input type="radio" id="low_stats" value="low" name="base_stats">
+                    <label for="low">Low</label><br>
+                    <button id="find_by_stats">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-stuff" id="history-page">
+        <h3>History</h3>
     </div>
     <main>
         <div>

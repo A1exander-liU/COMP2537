@@ -16,6 +16,14 @@ function get_english_version(data) {
     }
 }
 
+function view_page() {
+    tab = $(this).attr("id")
+    $(".page-tab").removeClass("active")
+    $(".tab-stuff").hide()
+    $(`#${tab}-page`).addClass("active")
+    $(`#${tab}-page`).show()
+}
+
 function get_english_ability_info(data) {
     // $(".ability-content").css("height", "0vh")
     ability_info = data.effect_entries.filter(get_english_version)
@@ -169,6 +177,7 @@ function setup() {
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
     $("body").on("click", "#abilities-tab", view_abilities)
+    $(".page-tabs button").click(view_page)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
