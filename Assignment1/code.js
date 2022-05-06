@@ -19,14 +19,72 @@ function project_only_name(data) {
     return data.name
 }
 
-function filter_selected_weight_range(data) {
-    if ((data.weight / 10 >= min_weight) && (data.weight / 10 <= max_weight)) {
+function get_all_pokemons(data) {
+    searched_pokemons.push(data)
+}
+
+function filter_by_low_stats(data) {
+    base_stat_total = 0
+    for (i = 0; i < data.stats.length; i++) {
+        base_stat_total += data.stats[i.base_stat]
+    }
+    if (base_stat_total < 300) {
         return data
     }
 }
 
-function get_all_pokemons(data) {
-    searched_pokemons.push(data)
+function filter_by_moderate_stats(data) {
+    base_stat_total = 0
+    for (i = 0; i < data.stats.length; i++) {
+        base_stat_total += data.stats[i.base_stat]
+    }
+    if (base_stat_total < 550 && base_stat_total >= 300) {
+        return data
+    }
+}
+
+function filter_by_high_stats(data) {
+    base_stat_total = 0
+    for (i = 0; i < data.stats.length; i++) {
+        base_stat_total += data.stats[i].base_stat
+    }
+    if (base_stat_total >= 550) {
+        return data
+    }
+}
+
+async function get_pokemon_by_determined_base_stat_range() {
+    searched_pokemons = []
+    for (i = 1; i < 890; i++) {
+        await $.ajax(
+            {
+                "url": `https://pokeapi.co/api/v2/pokemon/${i}`,
+                "type": "GET",
+                "success": get_all_pokemons
+            }
+        )   
+    }
+    console.log(searched_pokemons)
+    if ($("#high_stats").is(":checked")) {
+        searched_pokemons = searched_pokemons.filter(filter_by_high_stats)
+    }
+    if ($("#moderate_stats").is(":checked")) {
+        searched_pokemons = searched_pokemons.filter(filter_by_moderate_stats)
+    }
+    if ($("#low_stats").is(":checked")) {
+        searched_pokemons = searched_pokemons.filter(filter_by_low_stats)
+    }
+    console.log(searched_pokemons)
+    searched_pokemons = searched_pokemons.map(project_only_name)
+    console.log(searched_pokemons)
+    display_current_page_pokemons()
+
+}
+
+function filter_selected_weight_range(data) {
+    if ((data.weight / 10 >= min_weight) && (data.weight / 10 <= max_weight)) {
+        return data
+    }
 }
 
 async function search_pokemon_by_weight() {
@@ -105,7 +163,6 @@ function display_page_buttons(total_pages) {
     buttons += `<button id='next'>Next</button> `
     buttons += `<button id='last'>Last</button>`
     old = $("#page_buttons").html()
-    console.log(buttons)
     $("#search-page #page_buttons").html(buttons)
 }
 
@@ -352,6 +409,7 @@ function setup() {
     $("body").on("click", "#page_buttons button", get_first_prev_next_last)
     $("body").on("click", ".page_button", get_current_page)
     $("#find_by_weight").click(get_pokemon_by_weight)
+    $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
