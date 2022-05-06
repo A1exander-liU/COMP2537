@@ -10,10 +10,19 @@ function change_type_background(type_name) {
     return `<span class='${type_name}'>${captialize(type_name)}</span>`
 }
 
-function get_english_version(data) {
-    if (data.language.name == "en") {
-        return data
-    }
+function get_pokemon_by_name() {
+    searched_name = $("#name").val()
+    $.ajax(
+        {
+            "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
+            "type": "GET",
+            "success": display_random_pokemons 
+        }
+    )
+}
+
+function hide_pokemons() {
+    $(".pokemons").html("")
 }
 
 function view_page() {
@@ -22,6 +31,12 @@ function view_page() {
     $(".tab-stuff").hide()
     $(`#${tab}-page`).addClass("active")
     $(`#${tab}-page`).show()
+}
+
+function get_english_version(data) {
+    if (data.language.name == "en") {
+        return data
+    }
 }
 
 function get_english_ability_info(data) {
@@ -185,6 +200,8 @@ function setup() {
     $("body").on("click", "#abilities-tab", view_abilities)
     $(".page-tabs button").click(view_page)
     $("#home").click(get_random_pokemons)
+    $("#search").click(hide_pokemons)
+    $("#find_by_name").click(get_pokemon_by_name)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
