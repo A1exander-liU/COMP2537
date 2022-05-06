@@ -4,6 +4,8 @@ result = ""
 searched_pokemons = []
 current_page = 1
 total_pages = 0
+min_weight = 0
+max_weight = 0
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
@@ -11,6 +13,51 @@ function captialize(some_string) {
 
 function change_type_background(type_name) {
     return `<span class='${type_name}'>${type_name.toUpperCase()}</span>`
+}
+
+function project_only_name(data) {
+    return data.name
+}
+
+function filter_selected_weight_range(data) {
+    if ((data.weight / 10 >= min_weight) && (data.weight / 10 <= max_weight)) {
+        return data
+    }
+}
+
+function get_all_pokemons(data) {
+    searched_pokemons.push(data)
+}
+
+async function search_pokemon_by_weight() {
+    searched_pokemons = []
+    console.log(min_weight, max_weight)
+    if (parseInt(min_weight) < parseInt(max_weight)) {
+        for (i = 1; i < 890; i++) {
+            await $.ajax(
+                {
+                    "url": `https://pokeapi.co/api/v2/pokemon/${i}`,
+                    "type": "GET",
+                    "success": get_all_pokemons
+                }
+            )   
+        }
+        searched_pokemons = searched_pokemons.filter(filter_selected_weight_range)
+        searched_pokemons = searched_pokemons.map(project_only_name)
+        console.log(searched_pokemons)
+        display_current_page_pokemons()
+        
+    }
+}
+
+function get_pokemon_by_weight() {
+    min_weight = parseInt($("#min-weight").val())
+    max_weight = parseInt($("#max-weight").val()) 
+    if ($("#min-weight").val().length > 0 && $("#max-weight").val().length > 0) {
+        if ((parseInt($("#min-weight").val()) >= 0) && (parseInt($("#max-weight").val()) >= 0)) {
+            search_pokemon_by_weight()
+        }
+    }
 }
 
 function get_current_page() {
@@ -304,6 +351,7 @@ function setup() {
     $("#find_by_type").click(get_pokemon_by_type)
     $("body").on("click", "#page_buttons button", get_first_prev_next_last)
     $("body").on("click", ".page_button", get_current_page)
+    $("#find_by_weight").click(get_pokemon_by_weight)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
