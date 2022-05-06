@@ -162,6 +162,7 @@ function display_random_pokemons(data) {
 }
 
 function get_random_pokemons() {
+    $(".pokemons").empty()
     for (i = 0; i < 12; i++) {
         $.ajax({
             "url": `https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 899)}`,
@@ -171,13 +172,19 @@ function get_random_pokemons() {
     }
 }
 
+function load_home_page() {
+    $("#home-page").show()
+}
+
 function setup() {
     get_random_pokemons()
+    load_home_page()
     $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
     $("body").on("click", "#abilities-tab", view_abilities)
     $(".page-tabs button").click(view_page)
+    $("#home").click(get_random_pokemons)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
