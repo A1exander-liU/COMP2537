@@ -102,7 +102,7 @@
             grid-template-columns: auto auto auto auto;
             grid-template-rows: auto auto auto;
             gap: 20px;
-            justify-content: space-between;
+            justify-content: space-around;
         }
 
         .pokemon_full {
@@ -142,7 +142,7 @@
 
         main {
             display: grid;
-            grid-template-columns: 10% 90%;
+            grid-template-columns: auto;
             grid-template-rows: auto;
             gap: 10px;
         }
@@ -159,6 +159,16 @@
         .active {
             display: block;
         }
+
+        .page-tabs {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            /* justify-content: space-between; */
+        }
+
+        .page-tab {
+            width: 100%;
+        }
     </style>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -171,16 +181,12 @@
             <h2>Poké Searcher</h2>
         </a>
     </header>
+    <div class="page-tabs">
+        <button class="page-tab" id="home">Home</button>
+        <button class="page-tab" id="search">Search</button>
+        <button class="page-tab" id="history">History</button>
+    </div>
     <main>
-        <div>
-            <h4>History</h4>
-            <div id="clear_history">
-                <button id="clear_all">Clear All</button>
-            </div>
-            <div id="search_history" style="height:85vh; overflow:auto;">
-            
-            </div>
-        </div>
         <div>
             <!-- <div class="search">
                 <p>Search for Pokémons</p>

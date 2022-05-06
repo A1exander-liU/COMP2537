@@ -1,4 +1,6 @@
 ability_name = ""
+ability_info = ""
+result = ""
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
@@ -15,31 +17,33 @@ function get_english_version(data) {
 }
 
 function get_english_ability_info(data) {
-    $(".ability-content").css("height", "0vh")
-    english_ability_info = data.effect_entries.filter(get_english_version)
-    if ($(`#abilities div#${ability_name}`).text() == "") {
-        $(".ability-content").text("")
-        $(`#abilities div#${ability_name}`).text(english_ability_info[0].short_effect)
-        $(`#abilities div#${ability_name}`).css({"height":"10vh", "overflow":"auto"})
-    }
-    else {
-        $(`#abilities div#${ability_name}`).text("")
-    }
+    // $(".ability-content").css("height", "0vh")
+    ability_info = data.effect_entries.filter(get_english_version)
+    result += `<div id="${ability_name}" class="ability-content">${ability_info}</div>`
+    // if ($(`#abilities div#${ability_name}`).text() == "") {
+    //     $(".ability-content").text("")
+        // $(`#abilities div#${ability_name}`).css({"height":"10vh", "overflow":"auto"})
+    // }
+    // else {
+    //     $(`#abilities div#${ability_name}`).text("")
+    // }
 }
 
-async function view_ability_detail() {
-    ability_name = $(this).attr("id")
-    console.log(ability_name)
-    await $.ajax(
-        {
-            "url": `https://pokeapi.co/api/v2/ability/${ability_name}`,
-            "type": "GET",
-            "success": get_english_ability_info    
-        }
-    )
+function view_ability_detail() {
+    console.log("abiltes")
+    for (i = 0; i < ability_name.length; i++) {
+        $.ajax(
+            {
+                "url": `https://pokeapi.co/api/v2/ability/${ability_name[i]}`,
+                "type": "GET",
+                "success": get_english_ability_info    
+            }
+        )
+    }
 }
 
 function view_abilities() {
+    // view_ability_detail()
     $(".tabcontent").removeClass("active")
     $(".tabcontent").hide()
     $("#abilities").show()
@@ -108,8 +112,17 @@ function display_this_pokemon(data) {
                </div>`
     result += `<div id='abilities' class='tabcontent' style="display:none; margin-top:5px;">`
     for (i = 0; i < data.abilities.length; i++) {
+        ability_name = data.abilities[i].ability.name
+        console.log(`ability name: ${ability_name}`)
         console.log(captialize(data.abilities[i].ability.name))
-        result += `<button class='ability' id='${data.abilities[i].ability.name}'>${captialize(data.abilities[i].ability.name)}</button><div id="${data.abilities[i].ability.name}" class="ability-content"></div>`
+        result += `<button class='ability' id='${data.abilities[i].ability.name}'>${captialize(data.abilities[i].ability.name)}</button>`
+        $.ajax(
+            {
+                url: `https://pokeapi.co/api/v2/ability/${ability_name}`,
+                type: "GET",
+                success: get_english_ability_info
+            }
+        )
     }
     result += `</div>`
     result += `</div>`
@@ -156,7 +169,7 @@ function setup() {
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
     $("body").on("click", "#abilities-tab", view_abilities)
-    $("body").on("click", "#abilities button", view_ability_detail)
+    // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
 
