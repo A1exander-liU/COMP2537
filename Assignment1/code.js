@@ -26,7 +26,7 @@ function get_all_pokemons(data) {
 function filter_by_low_stats(data) {
     base_stat_total = 0
     for (i = 0; i < data.stats.length; i++) {
-        base_stat_total += data.stats[i.base_stat]
+        base_stat_total += data.stats[i].base_stat
     }
     if (base_stat_total < 300) {
         return data
@@ -36,7 +36,7 @@ function filter_by_low_stats(data) {
 function filter_by_moderate_stats(data) {
     base_stat_total = 0
     for (i = 0; i < data.stats.length; i++) {
-        base_stat_total += data.stats[i.base_stat]
+        base_stat_total += data.stats[i].base_stat
     }
     if (base_stat_total < 550 && base_stat_total >= 300) {
         return data
