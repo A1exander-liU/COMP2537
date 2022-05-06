@@ -1,29 +1,72 @@
 ability_name = ""
 ability_info = ""
 result = ""
+searched_pokemons = []
+current_page = 1
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
 }
 
 function change_type_background(type_name) {
-    return `<span class='${type_name}'>${captialize(type_name)}</span>`
+    return `<span class='${type_name}'>${type_name.toUpperCase()}</span>`
 }
 
-function get_pokemon_basic_info(data) {
-    console.log(data)
-    for (i = 0; i < data.pokemon.length; i++) {
-        $.ajax(
-            {
-                "url": `${data.pokemon[i].pokemon.url}`,
-                "type": "GET",
-                "success": display_random_pokemons    
-            }
-        )
+function display_page_buttons(total_pages) {
+    console.log(total_pages)
+    console.log("page button called")
+    $("#search-page #page_buttons").html("")
+    buttons = ""
+    buttons += `<button id='first'>First</button> `
+    buttons += `<button id='prev'>Prev</button>`
+    for (i = 1; i < total_pages + 1; i++) {
+        buttons += `<span class='page_button'>`
+        buttons += `<button class='page_number_button' value='${i}'>${i}</button>`
+        buttons += `</span>`
+    }
+    buttons += `<button id='next'>Next</button> `
+    buttons += `<button id='last'>Last</button>`
+    old = $("#page_buttons").html()
+    console.log(buttons)
+    $("#search-page #page_buttons").html(buttons)
+}
+
+function display_current_page_pokemons() {
+    if (searched_pokemons.length > 12) {
+        page_size = 12
+        total_pages = Math.ceil(searched_pokemons.length / 12)
+        start = current_page * (current_page - 1)
+        end = current_page * (current_page - 1) + page_size
+        display_page_buttons(total_pages)
+        for (start; start < end; start++) {
+            $.ajax(
+                {
+                    "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
+                    "type": "GET",
+                    "success": display_random_pokemons
+                }
+            )
+        }
     }
 }
 
+function get_pokemon_basic_info(data) {
+    searched_pokemons = []
+    for (i = 0; i < data.pokemon.length; i++) {
+        searched_pokemons.push(data.pokemon[i].pokemon.name)
+        // $.ajax(
+        //     {
+        //         "url": `${data.pokemon[i].pokemon.url}`,
+        //         "type": "GET",
+        //         "success": display_random_pokemons    
+        //     }
+        // )
+    }
+    display_current_page_pokemons()
+}
+
 function get_pokemon_by_type() {
+    $(".pokemons").html("")
     searched_type = $("#type_dropdown option:selected").val()
     $.ajax(
         {
