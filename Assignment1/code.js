@@ -10,6 +10,30 @@ function change_type_background(type_name) {
     return `<span class='${type_name}'>${captialize(type_name)}</span>`
 }
 
+function get_pokemon_basic_info(data) {
+    console.log(data)
+    for (i = 0; i < data.pokemon.length; i++) {
+        $.ajax(
+            {
+                "url": `${data.pokemon[i].pokemon.url}`,
+                "type": "GET",
+                "success": display_random_pokemons    
+            }
+        )
+    }
+}
+
+function get_pokemon_by_type() {
+    searched_type = $("#type_dropdown option:selected").val()
+    $.ajax(
+        {
+            "url": `https://pokeapi.co/api/v2/type/${searched_type}`,
+            "type": "GET",
+            "success": get_pokemon_basic_info
+        }
+    )
+}
+
 function get_pokemon_by_name() {
     searched_name = $("#name").val()
     $.ajax(
@@ -202,6 +226,7 @@ function setup() {
     $("#home").click(get_random_pokemons)
     $("#search").click(hide_pokemons)
     $("#find_by_name").click(get_pokemon_by_name)
+    $("#find_by_type").click(get_pokemon_by_type)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
