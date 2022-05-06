@@ -3,6 +3,7 @@ ability_info = ""
 result = ""
 searched_pokemons = []
 current_page = 1
+total_pages = 0
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
@@ -18,7 +19,28 @@ function get_current_page() {
 }
 
 function get_first_prev_next_last() {
-
+    if ($(this).attr("id") == "first") {
+        current_page = 1
+        display_current_page_pokemons()
+    }
+    if ($(this).attr("id") == "prev") {
+        current_page -= 1
+        if (current_page < 1) {
+            current_page = 1
+        }
+        display_current_page_pokemons()
+    }
+    if ($(this).attr("id") == "next") {
+        current_page += 1
+        if (current_page > total_pages) {
+            current_page = total_pages
+        }
+        display_current_page_pokemons()
+    }
+    if ($(this).attr("id") == "last") {
+        current_page = total_pages
+        display_current_page_pokemons()
+    }
 }
 
 function display_page_buttons(total_pages) {
