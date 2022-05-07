@@ -28,6 +28,14 @@ function get_all_pokemons(data) {
     searched_pokemons.push(data)
 }
 
+function remove_page_buttons() {
+    $("#search-page #page_buttons").html("")
+}
+
+function clear_history() {
+    $("#displayed-history").html("")
+}
+
 function view_search_result() {
     $(".pokemons").html("")
     searched_pokemons = []
@@ -441,6 +449,8 @@ function setup() {
     $("#find_by_weight").click(get_pokemon_by_weight)
     $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
     $("body").on("click", ".history-item", view_search_result)
+    $("body").on("click", "#search", remove_page_buttons)
+    $("#clear-history").click(clear_history)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
