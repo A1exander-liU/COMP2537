@@ -7,7 +7,7 @@ total_pages = 0
 min_weight = 0
 max_weight = 0
 search_history = []
-current_tab = ""
+current_tab = "home-page"
 
 
 function captialize(some_string) {
