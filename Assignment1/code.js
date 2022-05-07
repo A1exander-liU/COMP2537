@@ -325,7 +325,7 @@ function display_this_pokemon(data) {
                     <label for="speed">Speed   ${data.stats[5].base_stat}</label>
                     <progress class="speed" value="${data.stats[5].base_stat}" max="255"></progress>
                </div>`
-    result += `<div id="description" class="tabcontent" style="display:none; grid-template-columns:auto auto; grid-template-rows:auto; column-gap:5px;">
+    result += `<div id="description" class="tabcontent">
                     <div style='text-align:right;'>
                         <p>Height</p>
                         <p>Weight</p>
