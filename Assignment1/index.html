@@ -269,6 +269,16 @@
             grid-template-columns: auto;
             grid-template-rows: auto auto;
         }
+
+        #displayed-history {
+            height: 30vh;
+            overflow: auto;
+        }
+
+        #displayed-history div button{
+            width: 100%;
+            overflow: hidden;
+        }
     </style>
     <!-- <meta charset="utf-8"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -358,6 +368,11 @@
     </div>
     <div class="tab-stuff" id="history-page">
         <h3>History</h3>
+        <div id="displayed-history">
+        </div>
+        <div class="pokemons">
+            
+        </div>
     </div>
     <main>
     </main>

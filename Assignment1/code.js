@@ -28,6 +28,17 @@ function get_all_pokemons(data) {
     searched_pokemons.push(data)
 }
 
+function view_search_result() {
+    $(".pokemons").html("")
+    searched_pokemons = []
+    history_item = $(this).attr("id")
+    history_item = history_item.split(",")
+    for (i = 0; i < history_item.length; i++) {
+        searched_pokemons.push(history_item[i])
+    }
+    display_current_page_pokemons()
+}
+
 function filter_by_low_stats(data) {
     base_stat_total = 0
     for (i = 0; i < data.stats.length; i++) {
@@ -218,6 +229,7 @@ function get_pokemon_by_type() {
 function get_pokemon_by_name() {
     searched_name = $("#name").val()
     search_history.push([searched_name])
+    console.log(search_history)
     $.ajax(
         {
             "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
@@ -231,7 +243,18 @@ function hide_pokemons() {
     $(".pokemons").html("")
 }
 
+function display_history() {
+    $("#displayed-history").empty()
+    for (i = 0; i < search_history.length; i++) {
+        old = $("#displayed-history").html()
+        result = ""
+        result += `<div class="history-item" id="${search_history[i]}"><button>${i}: ${search_history[i]}</button></div>`
+        $("#displayed-history").html(old + result)
+    }
+}
+
 function view_page() {
+    $(".pokemons").html("")
     tab = $(this).attr("id")
     $(".page-tab").removeClass("active")
     $(".tab-stuff").hide()
@@ -408,6 +431,7 @@ function setup() {
     $("body").on("click", "#desc", view_desc)
     $("body").on("click", "#abilities-tab", view_abilities)
     $(".page-tabs button").click(view_page)
+    $("#history").click(display_history)
     $("#home").click(get_random_pokemons)
     $("#search").click(hide_pokemons)
     $("#find_by_name").click(get_pokemon_by_name)
@@ -416,6 +440,7 @@ function setup() {
     $("body").on("click", ".page_button", get_current_page)
     $("#find_by_weight").click(get_pokemon_by_weight)
     $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
+    $("body").on("click", ".history-item", view_search_result)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
