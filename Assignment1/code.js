@@ -278,7 +278,8 @@ function view_abilities() {
 }
 
 function view_desc() {
-    $(".tabcontent").removeClass("active") // class active has css rule to set display to block
+    $(".tabcontent").removeClass("active")
+    $("#description").css("display", "grid") // class active has css rule to set display to block
     $(".tabcontent").hide() // hide all content of each tab
     $("#description").show() // show the clicked tab's content
     $("#description div").css("display", "block") // add a class to make the display to block
@@ -286,7 +287,7 @@ function view_desc() {
 
 function view_base_stats() {
     $(".tablinks").attr("background-color", "rgb(239, 239, 239)")
-    $(this).attr("background-color", "rgb(172, 172, 172)")
+    $(this).attr("display", "grid")
     $(".tabcontent").removeClass("active")
     $(".tabcontent").hide()
     $("#base-stats").show()
@@ -310,7 +311,7 @@ function display_this_pokemon(data) {
     result += `<button class="tablinks" id="base_stats">Base Stats</button>`
     result += `<button class="tablinks" id="desc">Desc</button>`
     result += `<button class="tablinks" id="abilities-tab">Abilities</button>`
-    result += `<div id="base-stats" class="tabcontent active" style='text-align:right; display:grid; grid-template-columns:auto auto; grid-template-rows:auto auto auto auto auto auto; column-gap:5px;'>
+    result += `<div id="base-stats" class="tabcontent active"'>
                     <label for="hp">HP   ${data.stats[0].base_stat}</label>
                     <progress class="hp" value="${data.stats[0].base_stat}" max="255"></progress>
                     <label for="attack">Attack   ${data.stats[1].base_stat}</label>
@@ -324,13 +325,13 @@ function display_this_pokemon(data) {
                     <label for="speed">Speed   ${data.stats[5].base_stat}</label>
                     <progress class="speed" value="${data.stats[5].base_stat}" max="255"></progress>
                </div>`
-    result += `<div id="description" class="tabcontent" style="display:grid; grid-template-columns:auto auto; grid-template-rows:auto; column-gap:5px;">
-                    <div style='display:none; text-align:right;'>
+    result += `<div id="description" class="tabcontent" style="display:none; grid-template-columns:auto auto; grid-template-rows:auto; column-gap:5px;">
+                    <div style='text-align:right;'>
                         <p>Height</p>
                         <p>Weight</p>
                         <p>Base Exp</p>
                     </div>
-                    <div style='display:none; text-align:right;'>
+                    <div style='text-align:right;'>
                         <p>${(data.height) / 10}m</p>
                         <p>${(data.weight) / 10}kg</p>
                         <p>${data.base_experience}</p>
