@@ -241,6 +241,7 @@ function get_pokemon_by_type() {
 }
 
 function get_pokemon_by_name() {
+    $(".pokemons").html("")
     searched_name = $("#name").val()
     search_history.push([searched_name])
     console.log(search_history)
