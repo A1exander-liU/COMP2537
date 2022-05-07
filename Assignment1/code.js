@@ -405,7 +405,7 @@ function display_this_pokemon(data) {
     }
     result += `</div>`
     result += `</div>`
-    $(".pokemons").html(old + result)
+    $(`#${current_tab} .pokemons`).html(old + result)
     $(".tabcontent").hide()
     $("#base-stats").show()
 }
