@@ -32,6 +32,10 @@ function remove_page_buttons() {
     $("#search-page #page_buttons").html("")
 }
 
+function remove_from_history() {
+    $(this).parent().remove()
+}
+
 function clear_history() {
     $("#displayed-history").html("")
 }
@@ -256,7 +260,7 @@ function display_history() {
     for (i = 0; i < search_history.length; i++) {
         old = $("#displayed-history").html()
         result = ""
-        result += `<div class="history-item" id="${search_history[i]}"><button>${i}: ${search_history[i]}</button></div>`
+        result += `<div class="history-item" id="${search_history[i]}"><button>${i}: ${search_history[i]}</button><button class="remove">Remove</button></div>`
         $("#displayed-history").html(old + result)
     }
 }
@@ -451,6 +455,7 @@ function setup() {
     $("body").on("click", ".history-item", view_search_result)
     $("body").on("click", "#search", remove_page_buttons)
     $("#clear-history").click(clear_history)
+    $("body").on("click", ".remove", remove_from_history)
     // $("body").on("click", "#abilities-tab", view_ability_detail)
 
 }
