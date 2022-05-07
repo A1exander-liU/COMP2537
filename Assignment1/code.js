@@ -50,6 +50,7 @@ function view_search_result() {
     for (i = 0; i < history_item.length; i++) {
         searched_pokemons.push(history_item[i])
     }
+    console.log(searched_pokemons)
     display_current_page_pokemons()
 }
 
@@ -207,6 +208,16 @@ function display_current_page_pokemons() {
         end = current_page * (current_page - 1) + page_size
         display_page_buttons(total_pages)
         for (start; start < end; start++) {
+            $.ajax(
+                {
+                    "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
+                    "type": "GET",
+                    "success": display_random_pokemons
+                }
+            )
+        }
+    }else {
+        for (start = 0; start < searched_pokemons.length; start++) {
             $.ajax(
                 {
                     "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
