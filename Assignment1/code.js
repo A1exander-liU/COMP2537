@@ -7,6 +7,8 @@ total_pages = 0
 min_weight = 0
 max_weight = 0
 search_history = []
+current_tab = ""
+
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
@@ -181,7 +183,7 @@ function get_first_prev_next_last() {
 function display_page_buttons(total_pages) {
     console.log(total_pages)
     console.log("page button called")
-    $("#search-page #page_buttons").html("")
+    $(`#${current_tab} #page_buttons`).html("")
     buttons = ""
     buttons += `<button id='first'>First</button> `
     buttons += `<button id='prev'>Prev</button>`
@@ -193,7 +195,7 @@ function display_page_buttons(total_pages) {
     buttons += `<button id='next'>Next</button> `
     buttons += `<button id='last'>Last</button>`
     old = $("#page_buttons").html()
-    $("#search-page #page_buttons").html(buttons)
+    $(`#${current_tab} #page_buttons`).html(buttons)
 }
 
 function display_current_page_pokemons() {
@@ -266,6 +268,7 @@ function display_history() {
 }
 
 function view_page() {
+    current_tab = ($(this).attr("id") + "-page")
     $(".pokemons").html("")
     tab = $(this).attr("id")
     $(".page-tab").removeClass("active")
