@@ -337,7 +337,7 @@ function display_this_pokemon(data) {
                         <p>${data.base_experience}</p>
                     </div>
                </div>`
-    result += `<div id='abilities' class='tabcontent' style="display:none; margin-top:5px;">`
+    result += `<div id="abilities" class="tabcontent">`
     for (i = 0; i < data.abilities.length; i++) {
         ability_name = data.abilities[i].ability.name
         console.log(`ability name: ${ability_name}`)
