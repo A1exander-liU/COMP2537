@@ -6,6 +6,7 @@ current_page = 1
 total_pages = 0
 min_weight = 0
 max_weight = 0
+search_history = []
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
@@ -17,6 +18,10 @@ function change_type_background(type_name) {
 
 function project_only_name(data) {
     return data.name
+}
+
+function project_search_name(data) {
+    return data.pokemon.name
 }
 
 function get_all_pokemons(data) {
@@ -77,6 +82,7 @@ async function get_pokemon_by_determined_base_stat_range() {
     console.log(searched_pokemons)
     searched_pokemons = searched_pokemons.map(project_only_name)
     console.log(searched_pokemons)
+    search_history.push(searched_pokemons)
     display_current_page_pokemons()
 
 }
@@ -103,6 +109,7 @@ async function search_pokemon_by_weight() {
         searched_pokemons = searched_pokemons.filter(filter_selected_weight_range)
         searched_pokemons = searched_pokemons.map(project_only_name)
         console.log(searched_pokemons)
+        search_history.push(searched_pokemons)
         display_current_page_pokemons()
         
     }
@@ -190,14 +197,9 @@ function get_pokemon_basic_info(data) {
     searched_pokemons = []
     for (i = 0; i < data.pokemon.length; i++) {
         searched_pokemons.push(data.pokemon[i].pokemon.name)
-        // $.ajax(
-        //     {
-        //         "url": `${data.pokemon[i].pokemon.url}`,
-        //         "type": "GET",
-        //         "success": display_random_pokemons    
-        //     }
-        // )
     }
+    search_data = data.pokemon.map(project_search_name)
+    search_history.push(search_data)
     display_current_page_pokemons()
 }
 
@@ -215,6 +217,7 @@ function get_pokemon_by_type() {
 
 function get_pokemon_by_name() {
     searched_name = $("#name").val()
+    search_history.push([searched_name])
     $.ajax(
         {
             "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
@@ -270,28 +273,27 @@ function view_ability_detail() {
 
 function view_abilities() {
     // view_ability_detail()
-    $(".tabcontent").removeClass("active")
+    // $(".tabcontent").removeClass("active")
     $(".tabcontent").hide()
     $("#abilities").show()
-    $("#abilities button").css({"display":"inline-block", "width":"99%"})
-    $("#abilities").addClass("active")
+    // $("#abilities").addClass("active")
 }
 
 function view_desc() {
-    $(".tabcontent").removeClass("active")
-    $("#description").css("display", "grid") // class active has css rule to set display to block
+    // $(".tabcontent").removeClass("active")
+    // $("#description").css("display", "grid") // class active has css rule to set display to block
     $(".tabcontent").hide() // hide all content of each tab
     $("#description").show() // show the clicked tab's content
-    $("#description div").css("display", "block") // add a class to make the display to block
+    // $("#description div").css("display", "block") // add a class to make the display to block
 }
 
 function view_base_stats() {
-    $(".tablinks").attr("background-color", "rgb(239, 239, 239)")
-    $(this).attr("display", "grid")
-    $(".tabcontent").removeClass("active")
+    // $(".tablinks").attr("background-color", "rgb(239, 239, 239)")
+    // $("#base-stats").css("display", "grid")
+    // $(".tabcontent").removeClass("active")
     $(".tabcontent").hide()
     $("#base-stats").show()
-    $("#base-stats").addClass("active")
+    // $("#base-stats").addClass("active")
 
 }
 
@@ -311,7 +313,7 @@ function display_this_pokemon(data) {
     result += `<button class="tablinks" id="base_stats">Base Stats</button>`
     result += `<button class="tablinks" id="desc">Desc</button>`
     result += `<button class="tablinks" id="abilities-tab">Abilities</button>`
-    result += `<div id="base-stats" class="tabcontent active"'>
+    result += `<div id="base-stats" class="tabcontent"'>
                     <label for="hp">HP   ${data.stats[0].base_stat}</label>
                     <progress class="hp" value="${data.stats[0].base_stat}" max="255"></progress>
                     <label for="attack">Attack   ${data.stats[1].base_stat}</label>
@@ -354,6 +356,8 @@ function display_this_pokemon(data) {
     result += `</div>`
     result += `</div>`
     $(".pokemons").html(old + result)
+    $(".tabcontent").hide()
+    $("#base-stats").show()
 }
 
 function get_this_pokemon_info() {
@@ -392,6 +396,7 @@ function get_random_pokemons() {
 }
 
 function load_home_page() {
+    $(".tab-stuff").hide()
     $("#home-page").show()
 }
 
