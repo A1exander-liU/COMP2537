@@ -281,6 +281,18 @@
             border-width: 1px;
             border-style: solid;
         }
+
+        @media screen and (max-width: 800px) {
+            .pokemons {
+                grid-template-columns: auto auto !important;
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            .pokemons {
+                grid-template-columns: auto !important;
+            }
+        }
     </style>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
