@@ -353,6 +353,7 @@ function display_history() {
 }
 
 function view_page() {
+    $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     current_tab = ($(this).attr("id") + "-page")
     $(".pokemons").html("")
     tab = $(this).attr("id")
@@ -421,6 +422,7 @@ function view_base_stats() {
 }
 
 function display_this_pokemon(data) {
+    $(".pokemons").css("grid-template-columns", "auto")
     $(".pokemons").empty()
     old = $(".pokemons").html()
     result = ""
