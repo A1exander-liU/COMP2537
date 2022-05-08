@@ -419,6 +419,71 @@ function get_this_pokemon_info() {
     })
 }
 
+function get_color(type) {
+    if (type == "normal") {
+        return "#aa9"
+    }
+    if (type == "ice") {
+        return "#6cf"
+    }
+    if (type == "psychic") {
+        return "#f59"
+    }
+    if (type == "fire") {
+        return "#f42"
+    }
+    if (type == "fighting") {
+        return "#b54"
+    }
+    if (type == "bug") {
+        return "#ab2"
+    }
+    if (type == "dark") {
+        return "#754"
+    }
+    if (type == "water") {
+        return "#39f"
+    }
+    if (type == "poison") {
+        return "#a59"
+    }
+    if (type == "rock") {
+        return "#ba6"
+    }
+    if (type == "steel") {
+        return "#aab"
+    }
+    if (type == "electric") {
+        return "#fc3"
+    }
+    if (type == "ground") {
+        return "#db5"
+    }
+    if (type == "ghost") {
+        return "#66b"
+    }
+    if (type == "fairy") {
+        return "#e9e"
+    }
+    if (type == "grass") {
+        return "#7c5"
+    }
+    if (type == "flying") {
+        return "#89f"
+    }
+    if (type == "dragon") {
+        return "#76e"
+    }
+}
+
+function apply_background_gradient(data) {
+    if (data.types.length == 2) {
+        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, ${get_color(data.types[1].type.name)})`)
+    }else {
+        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, rgb(228, 228, 228))`)
+    }
+}
+
 function display_random_pokemons(data) {
     old = $(".pokemons").html()
     result = ""
@@ -432,6 +497,7 @@ function display_random_pokemons(data) {
     result += "</p>"
     result += "</div>"
     $(".pokemons").html(old + result)
+    apply_background_gradient(data)
 }
 
 function get_random_pokemons() {
