@@ -110,11 +110,12 @@ function remove_page_buttons() {
 }
 
 function remove_from_history() {
+    search_history.splice($(this).attr("id"), 1)
     $(this).parent().remove()
 }
 
 function clear_history() {
-    // search_history = []
+    search_history.length = 0
     $("#displayed-history").html("")
 }
 
@@ -363,7 +364,7 @@ function display_history() {
         console.log(search_history[i])
         old = $("#displayed-history").html()
         result = ""
-        result += `<div class="history-item" id="${search_history[i][0]}"><button>${i}: ${search_history[i][1]}</button><button class="remove">Remove</button></div>`
+        result += `<div class="history-item" id="${search_history[i][0]}"><button id="${i}">${i}: ${search_history[i][1]}</button><button class="remove">Remove</button></div>`
         $("#displayed-history").html(old + result)
     }
 }
