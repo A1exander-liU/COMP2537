@@ -2,6 +2,7 @@ ability_name = ""
 ability_info = ""
 result = ""
 searched_pokemons = []
+searched_type = ""
 current_page = 1
 total_pages = 0
 min_weight = 0
@@ -173,17 +174,20 @@ async function get_pokemon_by_determined_base_stat_range() {
     console.log(searched_pokemons)
     if ($("#high_stats").is(":checked")) {
         searched_pokemons = searched_pokemons.filter(filter_by_high_stats)
+        searched_pokemons = searched_pokemons.map(project_only_name)
+        search_history.push([searched_pokemons, `Searched by high base stat total`])
     }
     if ($("#moderate_stats").is(":checked")) {
         searched_pokemons = searched_pokemons.filter(filter_by_moderate_stats)
+        searched_pokemons = searched_pokemons.map(project_only_name)
+        search_history.push([searched_pokemons, `Searched by moderate base stat total`])
     }
     if ($("#low_stats").is(":checked")) {
         searched_pokemons = searched_pokemons.filter(filter_by_low_stats)
+        searched_pokemons = searched_pokemons.map(project_only_name)
+        search_history.push([searched_pokemons, `Searched by low base stat total`])
     }
     console.log(searched_pokemons)
-    searched_pokemons = searched_pokemons.map(project_only_name)
-    console.log(searched_pokemons)
-    search_history.push(searched_pokemons)
     display_current_page_pokemons()
 
 }
@@ -210,7 +214,7 @@ async function search_pokemon_by_weight() {
         searched_pokemons = searched_pokemons.filter(filter_selected_weight_range)
         searched_pokemons = searched_pokemons.map(project_only_name)
         console.log(searched_pokemons)
-        search_history.push(searched_pokemons)
+        search_history.push([searched_pokemons, `Searched by weight range: ${min_weight}kg - ${max_weight}kg`])
         display_current_page_pokemons()
         
     }
@@ -314,7 +318,7 @@ function get_pokemon_basic_info(data) {
         searched_pokemons.push(data.pokemon[i].pokemon.name)
     }
     search_data = data.pokemon.map(project_search_name)
-    search_history.push(search_data)
+    search_history.push([search_data, `Searched by ${searched_type} type pokemons`])
     display_current_page_pokemons()
     $(`#${current_tab} #page_buttons button#1`).addClass("active")
 }
@@ -336,7 +340,7 @@ function get_pokemon_by_name() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_name = $("#name").val()
-    search_history.push([searched_name])
+    search_history.push([searched_name, `Searched by name: ${searched_name}`])
     console.log(search_history)
     $.ajax(
         {
@@ -354,9 +358,10 @@ function hide_pokemons() {
 function display_history() {
     $("#displayed-history").empty()
     for (i = 0; i < search_history.length; i++) {
+        console.log(search_history[i])
         old = $("#displayed-history").html()
         result = ""
-        result += `<div class="history-item" id="${search_history[i]}"><button>${i}: ${search_history[i]}</button><button class="remove">Remove</button></div>`
+        result += `<div class="history-item" id="${search_history[i][0]}"><button>${i}: ${search_history[i][1]}</button><button class="remove">Remove</button></div>`
         $("#displayed-history").html(old + result)
     }
 }
@@ -494,6 +499,7 @@ async function display_this_pokemon(data) {
 }
 
 function get_this_pokemon_info() {
+    $(`#${current_tab} #page_buttons`).html("")
     console.log($(this).attr("id"))
     $.ajax({
         "url": `https://pokeapi.co/api/v2/pokemon/${$(this).attr("id")}`,
@@ -556,8 +562,8 @@ function setup() {
     $("body").on("click", "#search", remove_page_buttons)
     $("#clear-history").click(clear_history)
     $("body").on("click", ".remove", remove_from_history)
-    // $("body").on("click", "#abilities-tab", view_ability_detail)
-
 }
 
 $(document).ready(setup)
+//whats left, make the history item desc more readable
+//add a footer to link to index.html homepage and other stuff 
