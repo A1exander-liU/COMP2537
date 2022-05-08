@@ -159,6 +159,7 @@ function filter_by_high_stats(data) {
 }
 
 async function get_pokemon_by_determined_base_stat_range() {
+    $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     searched_pokemons = []
     for (i = 1; i < 890; i++) {
         await $.ajax(
@@ -216,6 +217,7 @@ async function search_pokemon_by_weight() {
 }
 
 function get_pokemon_by_weight() {
+    $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     min_weight = parseInt($("#min-weight").val())
     max_weight = parseInt($("#max-weight").val()) 
     if ($("#min-weight").val().length > 0 && $("#max-weight").val().length > 0) {
@@ -318,6 +320,7 @@ function get_pokemon_basic_info(data) {
 }
 
 function get_pokemon_by_type() {
+    $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_type = $("#type_dropdown option:selected").val()
     $.ajax(
@@ -330,6 +333,7 @@ function get_pokemon_by_type() {
 }
 
 function get_pokemon_by_name() {
+    $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_name = $("#name").val()
     search_history.push([searched_name])
