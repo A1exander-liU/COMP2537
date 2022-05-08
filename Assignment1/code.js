@@ -515,7 +515,7 @@ function get_random_pokemons() {
     $(".pokemons").empty()
     for (i = 0; i < 12; i++) {
         $.ajax({
-            "url": `https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 899)}`,
+            "url": `https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 898) + 1}`,
             "type": "GET",
             "success": display_random_pokemons
         })
