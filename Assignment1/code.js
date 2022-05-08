@@ -395,28 +395,24 @@ function view_ability_detail() {
 }
 
 function view_abilities() {
-    // view_ability_detail()
-    // $(".tabcontent").removeClass("active")
+    $(".tablinks").removeClass("active")
     $(".tabcontent").hide()
     $("#abilities").show()
-    // $("#abilities").addClass("active")
+    $("#abilities-tab").addClass("active")
 }
 
 function view_desc() {
-    // $(".tabcontent").removeClass("active")
-    // $("#description").css("display", "grid") // class active has css rule to set display to block
+    $(".tablinks").removeClass("active")
     $(".tabcontent").hide() // hide all content of each tab
+    $("#desc").addClass("active")
     $("#description").show() // show the clicked tab's content
-    // $("#description div").css("display", "block") // add a class to make the display to block
 }
 
 function view_base_stats() {
-    // $(".tablinks").attr("background-color", "rgb(239, 239, 239)")
-    // $("#base-stats").css("display", "grid")
-    // $(".tabcontent").removeClass("active")
+    $(".tablinks").removeClass("active")
     $(".tabcontent").hide()
+    $("#base_stats").addClass("active")
     $("#base-stats").show()
-    // $("#base-stats").addClass("active")
 
 }
 
@@ -434,7 +430,7 @@ async function display_this_pokemon(data) {
     }
     result += `</div>`
     result += `<div class='tabs'>`
-    result += `<button class="tablinks" id="base_stats">Base Stats</button>`
+    result += `<button class="tablinks active" id="base_stats">Base Stats</button>`
     result += `<button class="tablinks" id="desc">Desc</button>`
     result += `<button class="tablinks" id="abilities-tab">Abilities</button>`
     result += `<div id="base-stats" class="tabcontent"'>
