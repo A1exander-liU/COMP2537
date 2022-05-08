@@ -86,9 +86,11 @@
 
         span {
             border-radius: 5px;
-            padding: 0 2px;
+            padding: 2px 4px;
             margin: 0 1px;
             color: white;
+            border-width: 1px;
+            border-style: solid;
         }
 
         img {
@@ -160,8 +162,8 @@
             grid-template-columns: 40% 300px;
             grid-template-rows: auto;
             column-gap: 20px;
-            padding: 60px;
-            border-radius: 5px;
+            padding: 300px;
+            border-radius: 20px;
         }
 
         .pokemon_full>div:first-child {
@@ -203,6 +205,7 @@
         .page-tabs {
             display: grid;
             grid-template-columns: auto auto auto;
+            margin-bottom: 5%;
         }
 
         .page-tab {
@@ -222,6 +225,10 @@
         #page_buttons button {
             width: 5%;
             border-radius: 10px;
+        }
+
+        #page_buttons .page_number_button.active {
+            background-color: rgb(165, 164, 164);
         }
 
         #base-stats {
@@ -249,6 +256,10 @@
             width: 99%;
         }
 
+        .ability {
+            background-color: white;
+            border-radius: 10px;
+        }
 
         .all-info {
             display: grid;
@@ -289,7 +300,6 @@
     </div>
     <div class="tab-stuff" id="home-page">
         <div class="display_pokemons">
-            <h4 id="random">Random Pokémons</h4>
             <div class="pokemons">
             </div>
             <div id="page_buttons">

@@ -225,7 +225,9 @@ function get_pokemon_by_weight() {
 }
 
 function get_current_page() {
-    current_page = $(this).children().val()
+    console.log(current_tab)
+    $(`#${current_tab} #page_buttons button`).removeClass("active")
+    current_page = $(this).val()
     display_current_page_pokemons()
 }
 
@@ -262,9 +264,9 @@ function display_page_buttons(total_pages) {
     buttons += `<button id='first'>First</button> `
     buttons += `<button id='prev'>Prev</button>`
     for (i = 1; i < total_pages + 1; i++) {
-        buttons += `<span class='page_button'>`
-        buttons += `<button class='page_number_button' value='${i}'>${i}</button>`
-        buttons += `</span>`
+        // buttons += `<span class='page_button'>`
+        buttons += `<button class='page_number_button' value='${i}' id ='${i}'>${i}</button>`
+        // buttons += `</span>`
     }
     buttons += `<button id='next'>Next</button> `
     buttons += `<button id='last'>Last</button>`
@@ -280,6 +282,7 @@ function display_current_page_pokemons() {
         start = current_page * (current_page - 1)
         end = current_page * (current_page - 1) + page_size
         display_page_buttons(total_pages)
+        $(`#${current_tab} #page_buttons button#${current_page}`).addClass("active")
         for (start; start < end; start++) {
             $.ajax(
                 {
@@ -310,6 +313,7 @@ function get_pokemon_basic_info(data) {
     search_data = data.pokemon.map(project_search_name)
     search_history.push(search_data)
     display_current_page_pokemons()
+    $(`#${current_tab} #page_buttons button#1`).addClass("active")
 }
 
 function get_pokemon_by_type() {
@@ -464,7 +468,7 @@ async function display_this_pokemon(data) {
         ability_name = data.abilities[i].ability.name
         console.log(`ability name: ${ability_name}`)
         console.log(captialize(data.abilities[i].ability.name))
-        result += `<button class='ability' id='${data.abilities[i].ability.name}'>${captialize(data.abilities[i].ability.name)}</button>`
+        result += `<div class='ability' id='${data.abilities[i].ability.name}'>${captialize(data.abilities[i].ability.name)}</div>`
         await $.ajax(
             {
                 url: `https://pokeapi.co/api/v2/ability/${ability_name}`,
@@ -537,7 +541,7 @@ function setup() {
     $("#find_by_name").click(get_pokemon_by_name)
     $("#find_by_type").click(get_pokemon_by_type)
     $("body").on("click", "#page_buttons button", get_first_prev_next_last)
-    $("body").on("click", ".page_button", get_current_page)
+    $("body").on("click", ".page_number_button", get_current_page)
     $("#find_by_weight").click(get_pokemon_by_weight)
     $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
     $("body").on("click", ".history-item", view_search_result)
