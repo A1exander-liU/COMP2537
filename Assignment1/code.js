@@ -359,7 +359,7 @@ function view_page() {
     tab = $(this).attr("id")
     $(".page-tab").removeClass("active")
     $(".tab-stuff").hide()
-    $(`#${tab}-page`).addClass("active")
+    $(`#${tab}`).addClass("active")
     $(`#${tab}-page`).show()
 }
 
