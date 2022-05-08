@@ -272,7 +272,7 @@
             overflow: auto;
         }
 
-        #displayed-history div button{
+        #displayed-history div button {
             width: 100%;
             overflow: hidden;
         }
@@ -280,6 +280,43 @@
         .history-item {
             border-width: 1px;
             border-style: solid;
+        }
+
+        .types {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto auto auto;
+            background-color: rgb(214, 214, 214);
+            padding: 20px;
+            border-radius: 20px;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        #search-criteria {
+            display: grid;
+            row-gap: 5px;
+        }
+
+        #search-criteria > div{
+            display: grid;
+            grid-template-columns: 75% 25%;
+            row-gap: 10px;
+            align-items: center;
+        }
+
+        #search-criteria div {
+            background-color: rgba(226, 226, 226, 0.862);
+            padding: 5px;
+            border-radius: 10px;
+        }
+        
+        #search-criteria > div button {
+            width: 100%;
+        }
+
+        #search-buttons button {
+            width: 100%;
         }
 
         @media screen and (max-width: 800px) {
@@ -319,58 +356,73 @@
         </div>
     </div>
     <div class="tab-stuff" id="search-page">
-        <p>Search for Pokémons</p>
-        <hr>
-        Name: <input type="text" id="name"> <button id="find_by_name">Search</button>
-        <br>
-        <hr>
         <div class="types">
-            <div>
-                <label>Search by Type</label>
-                <br>
-                <select id="type_dropdown">
-                    <option value="normal" class="type_selected">Normal</option>
-                    <option value="fire" class="type_selected">Fire</option>
-                    <option value="water" class="type_selected">Water</option>
-                    <option value="electric" class="type_selected">Electric</option>
-                    <option value="grass" class="type_selected">Grass</option>
-                    <option value="ice" class="type_selected">Ice</option>
-                    <option value="fighting" class="type_selected">Fighting</option>
-                    <option value="poison" class="type_selected">Poison</option>
-                    <option value="ground" class="type_selected">Ground</option>
-                    <option value="flying" class="type_selected">Flying</option>
-                    <option value="psychic" class="type_selected">Psychic</option>
-                    <option value="bug" class="type_selected">Bug</option>
-                    <option value="rock" class="type_selected">Rock</option>
-                    <option value="ghost" class="type_selected">Ghost</option>
-                    <option value="dragon" class="type_selected">Dragon</option>
-                    <option value="dark" class="type_selected">Dark</option>
-                    <option value="steel" class="type_selected">Steel</option>
-                    <option value="fairy" class="type_selected">Fairy</option>
-                </select>
-                <button id="find_by_type">Search</button>
-            </div>
-            <div>
-                <label>Search by Weight(kg)</label>
-                <br>
-                <div id="weight_search">
-                    <label for="min-weight">Min Weight: </label>
-                    <input type="number" id="min-weight"><br>
-                    <label for="max-weight">Max Weight: </label>
-                    <input type="number" id="max-weight">
-                    <button id="find_by_weight">Search</button>
+            <div id="search-criteria">
+                <div>
+                    <div>
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name">
+                    </div>
+                    <div>
+                        <button id="find_by_name">Search</button>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <label>Search by Base Stats</label>
-                <div id="rarity_search">
-                    <input type="radio" id="high_stats" value="high" name="base_stats">
-                    <label for="high">High</label><br>
-                    <input type="radio" id="moderate_stats" value="moderate" name="base_stats">
-                    <label for="moderate">Moderate</label><br>
-                    <input type="radio" id="low_stats" value="low" name="base_stats">
-                    <label for="low">Low</label><br>
-                    <button id="find_by_stats">Search</button>
+                <div>
+                    <div>
+                        <label for="type_dropdown">Search by Type</label><br>
+                        <select id="type_dropdown">
+                            <option value="normal" class="type_selected">Normal</option>
+                            <option value="fire" class="type_selected">Fire</option>
+                            <option value="water" class="type_selected">Water</option>
+                            <option value="electric" class="type_selected">Electric</option>
+                            <option value="grass" class="type_selected">Grass</option>
+                            <option value="ice" class="type_selected">Ice</option>
+                            <option value="fighting" class="type_selected">Fighting</option>
+                            <option value="poison" class="type_selected">Poison</option>
+                            <option value="ground" class="type_selected">Ground</option>
+                            <option value="flying" class="type_selected">Flying</option>
+                            <option value="psychic" class="type_selected">Psychic</option>
+                            <option value="bug" class="type_selected">Bug</option>
+                            <option value="rock" class="type_selected">Rock</option>
+                            <option value="ghost" class="type_selected">Ghost</option>
+                            <option value="dragon" class="type_selected">Dragon</option>
+                            <option value="dark" class="type_selected">Dark</option>
+                            <option value="steel" class="type_selected">Steel</option>
+                            <option value="fairy" class="type_selected">Fairy</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="find_by_type">Search</button>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="weight_search">Search by Weight(kg)</label>
+                        <br>
+                        <div id="weight_search">
+                            <label for="min-weight">Min Weight: </label><br>
+                            <input type="number" id="min-weight"><br>
+                            <label for="max-weight">Max Weight: </label><br>
+                            <input type="number" id="max-weight">
+                        </div>
+                    </div>
+                    <div>
+                        <button id="find_by_weight">Search</button>
+                    </div>
+                </div>
+                <div>
+                    <div id="rarity_search">
+                        <label>Search by Base Stats</label><br>
+                        <input type="radio" id="high_stats" value="high" name="base_stats">
+                        <label for="high">High</label><br>
+                        <input type="radio" id="moderate_stats" value="moderate" name="base_stats">
+                        <label for="moderate">Moderate</label><br>
+                        <input type="radio" id="low_stats" value="low" name="base_stats">
+                        <label for="low">Low</label><br>
+                    </div>
+                    <div>
+                        <button id="find_by_stats">Search</button>
+                    </div>
                 </div>
             </div>
         </div>
