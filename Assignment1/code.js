@@ -104,7 +104,8 @@ function apply_background_gradient(data) {
 }
 
 function remove_page_buttons() {
-    $("#search-page #page_buttons").html("")
+    this_page = $(this).attr("id") + "-page"
+    $(`#${this_page} #page_buttons`).html("")
 }
 
 function remove_from_history() {
@@ -545,6 +546,7 @@ function setup() {
     $("#find_by_weight").click(get_pokemon_by_weight)
     $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
     $("body").on("click", ".history-item", view_search_result)
+    $("body").on("click", "#history", remove_page_buttons)
     $("body").on("click", "#search", remove_page_buttons)
     $("#clear-history").click(clear_history)
     $("body").on("click", ".remove", remove_from_history)

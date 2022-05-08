@@ -277,11 +277,6 @@
             overflow: hidden;
         }
 
-        .history-item {
-            border-width: 1px;
-            border-style: solid;
-        }
-
         .types {
             display: grid;
             grid-template-columns: auto;
@@ -291,6 +286,7 @@
             border-radius: 20px;
             border-width: 1px;
             border-style: solid;
+            margin-bottom: 1%;
         }
 
         #search-criteria {
@@ -315,8 +311,35 @@
             width: 100%;
         }
 
-        #search-buttons button {
+        #history-container {
+            display: grid;
+            grid-template-columns: 90%;
+            grid-template-rows: auto auto auto;
+            row-gap: 5px;
+            background-color: rgb(214, 214, 214);
+            border-radius: 20px;
+            border-width: 1px;
+            border-style: solid;
+            text-align: center;
+            justify-content: center;
+            margin-bottom: 1%;
+        }
+
+        #history-container h3 {
+            margin-top: 5px;
+        }
+
+        #history-container button {
             width: 100%;
+        }
+
+        #displayed-history {
+            margin: 2% 0;
+        }
+
+        .history-item {
+            display: grid;
+            grid-template-columns: 75% 25%;
         }
 
         @media screen and (max-width: 800px) {
@@ -432,9 +455,11 @@
         </div>
     </div>
     <div class="tab-stuff" id="history-page">
-        <h3>History</h3>
-        <button id="clear-history">Clear All</button>
-        <div id="displayed-history">
+        <div id="history-container">
+            <h3>History</h3>
+            <button id="clear-history">Clear All</button>
+            <div id="displayed-history">
+            </div>
         </div>
         <div class="pokemons">
         </div>
