@@ -565,5 +565,3 @@ function setup() {
 }
 
 $(document).ready(setup)
-//whats left, make the history item desc more readable
-//add a footer to link to index.html homepage and other stuff 
