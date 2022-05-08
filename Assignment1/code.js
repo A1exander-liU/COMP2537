@@ -435,21 +435,23 @@ async function display_this_pokemon(data) {
     }
     result += `</div>`
     result += `<div class='tabs'>`
+    result += `<div class="tab-container">`
     result += `<button class="tablinks active" id="base_stats">Base Stats</button>`
     result += `<button class="tablinks" id="desc">Desc</button>`
     result += `<button class="tablinks" id="abilities-tab">Abilities</button>`
+    result += `</div>`
     result += `<div id="base-stats" class="tabcontent"'>
                     <label for="hp">HP   ${data.stats[0].base_stat}</label>
                     <progress class="hp" value="${data.stats[0].base_stat}" max="255"></progress>
-                    <label for="attack">Attack   ${data.stats[1].base_stat}</label>
+                    <label for="attack">Atk   ${data.stats[1].base_stat}</label>
                     <progress class="attack" value="${data.stats[1].base_stat}" max="255"></progress>
-                    <label for="defense">Defense   ${data.stats[2].base_stat}</label>
+                    <label for="defense">Def   ${data.stats[2].base_stat}</label>
                     <progress class="defense" value="${data.stats[2].base_stat}" max="255"></progress>
                     <label for="special_attack">Sp. Atk   ${data.stats[3].base_stat}</label>
                     <progress class="special_attack" value="${data.stats[3].base_stat}" max="255"></progress>
                     <label for="special_defense">Sp. Def   ${data.stats[4].base_stat}</label>
                     <progress class="special_defense" value="${data.stats[4].base_stat}" max="255"></progress>
-                    <label for="speed">Speed   ${data.stats[5].base_stat}</label>
+                    <label for="speed">Spd   ${data.stats[5].base_stat}</label>
                     <progress class="speed" value="${data.stats[5].base_stat}" max="255"></progress>
                </div>`
     result += `<div id="description" class="tabcontent">
