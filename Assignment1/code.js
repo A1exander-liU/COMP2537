@@ -123,7 +123,7 @@ function view_search_result() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_pokemons = []
-    history_item = $(this).attr("id")
+    history_item = $(this).parent().attr("id")
     history_item = history_item.split(",")
     for (i = 0; i < history_item.length; i++) {
         searched_pokemons.push(history_item[i])
@@ -560,7 +560,7 @@ function setup() {
     $("body").on("click", ".page_number_button", get_current_page)
     $("#find_by_weight").click(get_pokemon_by_weight)
     $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
-    $("body").on("click", ".history-item div", view_search_result)
+    $("body").on("click", ".history-item button", view_search_result)
     $("body").on("click", "#history", remove_page_buttons)
     $("body").on("click", "#search", remove_page_buttons)
     $("#clear-history").click(clear_history)
