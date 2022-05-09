@@ -364,7 +364,7 @@ function display_history() {
         console.log(search_history[i])
         old = $("#displayed-history").html()
         result = ""
-        result += `<div class="history-item" id="${search_history[i][0]}"><button id="${i}">${i}: ${search_history[i][1]}</button><button class="remove">Remove</button></div>`
+        result += `<div class="history-item" id="${search_history[i][0]}"><button class="show-result" id="${i}">${i}: ${search_history[i][1]}</button><button class="remove">Remove</button></div>`
         $("#displayed-history").html(old + result)
     }
 }
@@ -560,7 +560,7 @@ function setup() {
     $("body").on("click", ".page_number_button", get_current_page)
     $("#find_by_weight").click(get_pokemon_by_weight)
     $("#find_by_stats").click(get_pokemon_by_determined_base_stat_range)
-    $("body").on("click", ".history-item button", view_search_result)
+    $("body").on("click", ".history-item button.show-result", view_search_result)
     $("body").on("click", "#history", remove_page_buttons)
     $("body").on("click", "#search", remove_page_buttons)
     $("#clear-history").click(clear_history)
