@@ -87,6 +87,40 @@ app.get("/findPokemonByWeightRange", function(req, res) {
     })
 })
 
+app.get("/findPokemonByLowBaseStatTotal", function(req, res) {
+    pokemonModel.find({base_stat_total: {$lt: 300}}, function(err, found_pokemon) {
+        if (err) {
+            console.log("Err" + err) 
+        }else {
+            console.log("Data" + found_pokemon)
+            res.json(found_pokemon)
+        }
+    })
+})
+
+app.get("/findPokemonByModerateBaseStatTotal", function(req, res) {
+    pokemonModel.find({$and: [{base_stat_total: {$gte: 300},}, {base_stat_total: {$lt: 550}}]}, function(err, found_pokemon) {
+        if (err) {
+            console.log("Err" + err) 
+        }else {
+            console.log("Data" + found_pokemon)
+            res.json(found_pokemon)
+        }
+    })
+})
+
+
+app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
+    pokemonModel.find({base_stat_total: {$gte: 550}}, function(err, found_pokemon) {
+        if (err) {
+            console.log("Err" + err) 
+        }else {
+            console.log("Data" + found_pokemon)
+            res.json(found_pokemon)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
@@ -104,7 +138,8 @@ const timelineSchema = new mongoose.Schema({
 const pokemonSchema = new mongoose.Schema({
     name: String,
     type: [String],
-    weight: Number
+    weight: Number,
+    base_stat_total: Number
 })
 const timelineModel = mongoose.model("timelinevents", timelineSchema); 
 const pokemonModel = mongoose.model("pokemons", pokemonSchema)
