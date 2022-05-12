@@ -343,7 +343,7 @@ function get_pokemon_by_name() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_name = $("#name").val()
-    search_history.push([searched_name, `Searched by name: ${searched_name}`])
+    search_history.push([searched_name, `Searched by name: ${searched_name.toLowerCase()}`])
     console.log(search_history)
     $.ajax(
         {
@@ -538,6 +538,29 @@ function get_random_pokemons() {
     }
 }
 
+function display_timeline(data) {
+    $("#timeline").html("")
+    for (i = 0; i < data.length; i++){
+        result = ``
+        result += `<p>Text: ${data[i].text}</p>`
+        result += `<p>Hits: ${data[i].hits}</p>`
+        result += `<p>Date: ${data[i].date}</p>`
+        // 
+        old = $("#timeline").html()
+        $("#timeline").html(old + result)
+    }
+}
+
+function load_timeline() {
+    $.ajax(
+        {
+            "url": `http://localhost:5010/timeline/insert`,
+            "type": "GET",
+            "success": display_timeline
+        }
+    )
+}
+
 function load_home_page() {
     $(".tab-stuff").hide()
     $("#home-page").show()
@@ -546,6 +569,7 @@ function load_home_page() {
 function setup() {
     get_random_pokemons()
     load_home_page()
+    load_timeline()
     $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
