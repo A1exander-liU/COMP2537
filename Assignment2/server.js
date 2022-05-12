@@ -54,6 +54,17 @@ app.get("/timeline/remove/:id", function(req, res) {
     })
 })
 
+app.get("/findPokemonByName", function(req, res) {
+    pokemonModel.find({name: req.body.name}, function(err, found_pokemon) {
+        if (err) {
+            console.log("Err" + err)
+        }else {
+            console.log("Data" + found_pokemon)
+            res.json(found_pokemon)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
