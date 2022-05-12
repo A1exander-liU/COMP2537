@@ -76,6 +76,17 @@ app.get("/findPokemonByType", function(req, res) {
     })
 })
 
+app.get("/findPokemonByWeightRange", function(req, res) {
+    pokemonModel.find({$and: [{weight: {$gte: req.body.min_weight}}, {weight: {$lte: req.body.max_weight}}]}, function(err, found_pokemon) {
+        if (err){
+            console.log("Err" + err)
+        }else {
+            console.log("Data" + found_pokemon)
+            res.json(found_pokemon)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
@@ -92,7 +103,8 @@ const timelineSchema = new mongoose.Schema({
 
 const pokemonSchema = new mongoose.Schema({
     name: String,
-    type: [String]
+    type: [String],
+    weight: Number
 })
 const timelineModel = mongoose.model("timelinevents", timelineSchema); 
 const pokemonModel = mongoose.model("pokemons", pokemonSchema)
