@@ -65,6 +65,17 @@ app.get("/findPokemonByName", function(req, res) {
     })
 })
 
+app.get("/findPokemonByType", function(req, res) {
+    pokemonModel.find({type: {$in: req.body.type}}, function(err, found_pokemon) {
+        if (err){
+            console.log("Err" + err)
+        }else {
+            console.log("Data" + found_pokemon)
+            res.json(found_pokemon)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
