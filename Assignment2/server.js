@@ -55,6 +55,18 @@ app.get("/timeline/remove/:id", function(req, res) {
     })
 })
 
+app.post("/findAllPokemons", function(req, res) {
+    pokemonModel.find({}, function(err, all_pokemons) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + all_pokemons)
+            res.json(all_pokemons)
+        }
+    })
+})
+
 app.post("/findPokemonByName", function(req, res) {
     console.log(req.body)
     pokemonModel.find({name: req.body.name}, function(err, found_pokemon) {

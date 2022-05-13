@@ -135,7 +135,7 @@ function view_search_result() {
 function filter_by_low_stats(data) {
     base_stat_total = 0
     for (i = 0; i < data.stats.length; i++) {
-        base_stat_total += data.stats[i].base_stat
+        base_stat_total += data.stats[i]
     }
     if (base_stat_total < 300) {
         return data
@@ -145,7 +145,7 @@ function filter_by_low_stats(data) {
 function filter_by_moderate_stats(data) {
     base_stat_total = 0
     for (i = 0; i < data.stats.length; i++) {
-        base_stat_total += data.stats[i].base_stat
+        base_stat_total += data.stats[i]
     }
     if (base_stat_total < 550 && base_stat_total >= 300) {
         return data
@@ -155,7 +155,7 @@ function filter_by_moderate_stats(data) {
 function filter_by_high_stats(data) {
     base_stat_total = 0
     for (i = 0; i < data.stats.length; i++) {
-        base_stat_total += data.stats[i].base_stat
+        base_stat_total += data.stats[i]
     }
     if (base_stat_total >= 550) {
         return data
@@ -165,15 +165,26 @@ function filter_by_high_stats(data) {
 async function get_pokemon_by_determined_base_stat_range() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     searched_pokemons = []
-    for (i = 1; i < 890; i++) {
-        await $.ajax(
-            {
-                "url": `https://pokeapi.co/api/v2/pokemon/${i}`,
-                "type": "GET",
-                "success": get_all_pokemons
+    // for (i = 1; i < 890; i++) {
+    //     await $.ajax(
+    //         {
+    //             "url": `https://pokeapi.co/api/v2/pokemon/${i}`,
+    //             "type": "GET",
+    //             "success": get_all_pokemons
+    //         }
+    //     )   
+    // }
+    await $.ajax(
+        {
+            "url": "findAllPokemons",
+            "type": "POST",
+            "success": function(data) {
+                for (i = 0; i < data.length; i++) {
+                    get_all_pokemons(data[i])
+                }
             }
-        )   
-    }
+        }
+    )
     console.log(searched_pokemons)
     if ($("#high_stats").is(":checked")) {
         searched_pokemons = searched_pokemons.filter(filter_by_high_stats)
