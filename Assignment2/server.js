@@ -33,23 +33,44 @@ app.get("/timeline", function(req, res) {
     res.json(JSON.stringify(timeline))
 })
 
-app.post("/timline/insert", function(req, res) {
-    // request to insert a new doc in the timeline collection
-    timlineModel.create({
-    text: req.body.text,
-    hit: req.body.hit,
-    time: req.body.time
+app.post("/findEvent", function(req, res) {
+    // return back a json of all the docs in the timline collection
+    timelineModel.find({event: req.body.event}, function(err, timeline) {
+        if (err) {
+            console.log("Err"+ err)
+        }
+        else {
+            console.log("Data" + timeline)
+            res.json([timeline, req.body.event])
+        }
     })
-    // res.send()
 })
 
-app.put("/timemline/update/:id", function(req, res) {
+app.post("/insertEvent", function(req, res) {
+    // request to insert a new doc in the timeline collection
+    var timeline_event = new timelineModel({
+        event: req.body.event,
+        times: req.body.times,
+        date: req.body.date
+    })
+    timeline_event.save(function(err, event) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + event)
+        }
+    })
+    res.send("Successful insertion!")
+})
+
+app.put("/updateEvent", function(req, res) {
     timelineModel.updateOne({
         "_id":  req.params.id 
     }, {$inc: {hits: 1}})
 })
 
-app.get("/timeline/remove/:id", function(req, res) {
+app.get("/deleteEvent", function(req, res) {
     timelineModel.remove({
         "_id": req.params.id 
     })
@@ -144,8 +165,8 @@ app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
     {useNewUrlParser: true, useUnifiedTopology: true});
 
 const timelineSchema = new mongoose.Schema({
-    text: String,
-    hits: Number,
+    event: String,
+    times: Number,
     date: String
 });
 

@@ -10,6 +10,10 @@ max_weight = 0
 search_history = []
 current_tab = "home-page"
 
+function get_current_timestamp() {
+    var date = new Date()
+    return date.toUTCString()
+}
 
 function captialize(some_string) {
     return some_string[0].toUpperCase() + some_string.slice(1)
@@ -369,13 +373,36 @@ function get_pokemon_by_type() {
     )
 }
 
-function get_pokemon_by_name() {
+function insert_or_update_event(data) {
+    console.log("Event Data", data)
+    if (data[0].length > 0) {
+        // send put request to increment the count
+        console.log("event exists")
+    }
+    else {
+        current_timestamp = get_current_timestamp()
+        $.ajax(
+            {
+                "url": `/insertEvent`,
+                "type": "POST",
+                "data": {
+                    "event": `${data[1]}`,
+                    "times": 1,
+                    "date": current_timestamp
+                }
+            }
+        )
+    }
+}
+
+async function get_pokemon_by_name() {
+    current_timestamp = get_current_timestamp()
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_name = $("#name").val()
     search_history.push([searched_name, `Searched by name: ${searched_name.toLowerCase()}`])
     console.log(search_history)
-    $.ajax(
+    await $.ajax(
         {
             "url": `/findPokemonByName`,
             // "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
@@ -384,6 +411,16 @@ function get_pokemon_by_name() {
                 "name": searched_name
             },
             "success": display_random_pokemons 
+        }
+    )
+    $.ajax(
+        {
+            "url": "/findEvent",
+            "type": "POST",
+            "data": {
+                "event": `User searched pokemons by name, ${searched_name}.`
+            },
+            "success": insert_or_update_event
         }
     )
 }
