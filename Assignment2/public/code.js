@@ -347,8 +347,12 @@ function get_pokemon_by_name() {
     console.log(search_history)
     $.ajax(
         {
+            "url": `/findPokemonByName`,
             "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
             "type": "GET",
+            "data": {
+                "name": searched_name
+            },
             "success": display_random_pokemons 
         }
     )
