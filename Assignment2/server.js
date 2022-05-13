@@ -1,8 +1,8 @@
 const express = require('express') 
 const app = express() 
 
-const cors = require('cors');
-app.use(cors())
+// const cors = require('cors');
+// app.use(cors())
 
 const mongoose = require('mongoose');
 
@@ -10,6 +10,7 @@ const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({
     extended: true
 }));
+app.use(bodyparser.json());
 
 app.listen(5010, function (err) {
     if (err) {
@@ -54,18 +55,19 @@ app.get("/timeline/remove/:id", function(req, res) {
     })
 })
 
-app.get("/findPokemonByName", function(req, res) {
+app.post("/findPokemonByName", function(req, res) {
+    console.log(req.body)
     pokemonModel.find({name: req.body.name}, function(err, found_pokemon) {
         if (err) {
             console.log("Err" + err)
         }else {
             console.log("Data" + found_pokemon)
-            res.json(found_pokemon)
+            res.json(found_pokemon[0])
         }
     })
 })
 
-app.get("/findPokemonByType", function(req, res) {
+app.post("/findPokemonByType", function(req, res) {
     pokemonModel.find({type: {$in: req.body.type}}, function(err, found_pokemon) {
         if (err){
             console.log("Err" + err)

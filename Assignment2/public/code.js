@@ -90,17 +90,17 @@ function get_color(type) {
 
 function apply_background_gradient_full_info(data) {
     if (data.types.length == 2) {
-        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, ${get_color(data.types[1].type.name)})`)
+        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, ${get_color(data.types[1])})`)
     }else {
-        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, rgb(228, 228, 228))`)
+        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, rgb(228, 228, 228))`)
     }
 }
 
 function apply_background_gradient(data) {
     if (data.types.length == 2) {
-        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, ${get_color(data.types[1].type.name)})`)
+        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, ${get_color(data.types[1])})`)
     }else {
-        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, rgb(228, 228, 228))`)
+        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, rgb(228, 228, 228))`)
     }
 }
 
@@ -330,10 +330,15 @@ function get_pokemon_by_type() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_type = $("#type_dropdown option:selected").val()
+    console.log(searched_type)
     $.ajax(
         {
+            // "url": `/findPokemonByType`,
             "url": `https://pokeapi.co/api/v2/type/${searched_type}`,
             "type": "GET",
+            // "data": {
+            //     "type": searched_type
+            // },
             "success": get_pokemon_basic_info
         }
     )
@@ -348,8 +353,8 @@ function get_pokemon_by_name() {
     $.ajax(
         {
             "url": `/findPokemonByName`,
-            "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
-            "type": "GET",
+            // "url": `https://pokeapi.co/api/v2/pokemon/${searched_name}`,
+            "type": "POST",
             "data": {
                 "name": searched_name
             },
@@ -516,14 +521,15 @@ function get_this_pokemon_info() {
 }
 
 function display_random_pokemons(data) {
+    console.log(data)
     old = $(".pokemons").html()
     result = ""
     result += `<div class='pokemon' id='${data.name}'>`
     result += `<p>${captialize(data.name)}</p>`
-    result += `<img src='${data.sprites.other["official-artwork"].front_default}'>`
+    result += `<img src='${data.official_artwork}'>`
     result += "<p>"
     for (i = 0; i < data.types.length; i++) {
-        result += change_type_background(data.types[i].type.name)
+        result += change_type_background(data.types[i])
     }
     result += "</p>"
     result += "</div>"
