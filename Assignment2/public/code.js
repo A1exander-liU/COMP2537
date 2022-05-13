@@ -90,9 +90,9 @@ function get_color(type) {
 
 function apply_background_gradient_full_info(data) {
     if (data.types.length == 2) {
-        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, ${get_color(data.types[1])})`)
+        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, ${get_color(data.types[1].type.name)})`)
     }else {
-        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, rgb(228, 228, 228))`)
+        $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, rgb(228, 228, 228))`)
     }
 }
 
