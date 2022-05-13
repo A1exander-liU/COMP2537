@@ -79,7 +79,7 @@ app.post("/findPokemonByType", function(req, res) {
     })
 })
 
-app.get("/findPokemonByWeightRange", function(req, res) {
+app.post("/findPokemonByWeightRange", function(req, res) {
     pokemonModel.find({$and: [{weight: {$gte: req.body.min_weight}}, {weight: {$lte: req.body.max_weight}}]}, function(err, found_pokemon) {
         if (err){
             console.log("Err" + err)

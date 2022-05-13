@@ -205,17 +205,22 @@ async function search_pokemon_by_weight() {
     searched_pokemons = []
     console.log(min_weight, max_weight)
     if (parseInt(min_weight) < parseInt(max_weight)) {
-        for (i = 1; i < 890; i++) {
-            await $.ajax(
-                {
-                    "url": `https://pokeapi.co/api/v2/pokemon/${i}`,
-                    "type": "GET",
-                    "success": get_all_pokemons
-                }
-            )   
-        }
-        searched_pokemons = searched_pokemons.filter(filter_selected_weight_range)
-        searched_pokemons = searched_pokemons.map(project_only_name)
+        await $.ajax(
+            {
+                "url": "/findPokemonByWeightRange",
+                "type": "POST",
+                "data": {
+                    "min_weight": min_weight,
+                    "max_weight": max_weight
+                },
+                "success": function(data) {
+                    console.log(data)
+                    searched_pokemons = data.map(project_only_name)
+                },
+            }
+        )
+        // searched_pokemons = searched_pokemons.filter(filter_selected_weight_range)
+        // searched_pokemons = searched_pokemons.map(project_only_name)
         console.log(searched_pokemons)
         search_history.push([searched_pokemons, `Searched by weight range: ${min_weight}kg - ${max_weight}kg`])
         display_current_page_pokemons()
