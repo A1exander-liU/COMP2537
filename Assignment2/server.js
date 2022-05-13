@@ -68,7 +68,8 @@ app.post("/findPokemonByName", function(req, res) {
 })
 
 app.post("/findPokemonByType", function(req, res) {
-    pokemonModel.find({type: {$in: req.body.type}}, function(err, found_pokemon) {
+    console.log(req.body.type)
+    pokemonModel.find({types: req.body.type}, function(err, found_pokemon) {
         if (err){
             console.log("Err" + err)
         }else {
@@ -111,7 +112,6 @@ app.get("/findPokemonByModerateBaseStatTotal", function(req, res) {
     })
 })
 
-
 app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
     pokemonModel.find({base_stat_total: {$gte: 550}}, function(err, found_pokemon) {
         if (err) {
@@ -139,7 +139,7 @@ const timelineSchema = new mongoose.Schema({
 
 const pokemonSchema = new mongoose.Schema({
     name: String,
-    type: [String],
+    types: [String],
     weight: Number,
     base_stat_total: Number
 })

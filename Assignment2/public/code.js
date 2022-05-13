@@ -24,7 +24,7 @@ function project_only_name(data) {
 }
 
 function project_search_name(data) {
-    return data.pokemon.name
+    return data.name
 }
 
 function get_all_pokemons(data) {
@@ -296,8 +296,12 @@ function display_current_page_pokemons() {
         for (start; start < end; start++) {
             $.ajax(
                 {
-                    "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
-                    "type": "GET",
+                    "url": "findPokemonByName",
+                    // "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
+                    "type": "POST",
+                    "data": {
+                        "name": searched_pokemons[start]
+                    },
                     "success": display_random_pokemons
                 }
             )
@@ -306,8 +310,12 @@ function display_current_page_pokemons() {
         for (start = 0; start < searched_pokemons.length; start++) {
             $.ajax(
                 {
-                    "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
-                    "type": "GET",
+                    "url": "findPokemonByName",
+                    // "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
+                    "type": "POST",
+                    "data": {
+                        "name": searched_pokemons[start]
+                    },
                     "success": display_random_pokemons
                 }
             )
@@ -316,11 +324,12 @@ function display_current_page_pokemons() {
 }
 
 function get_pokemon_basic_info(data) {
+    console.log(data)
     searched_pokemons = []
-    for (i = 0; i < data.pokemon.length; i++) {
-        searched_pokemons.push(data.pokemon[i].pokemon.name)
+    for (i = 0; i < data.length; i++) {
+        searched_pokemons.push(data[i].name)
     }
-    search_data = data.pokemon.map(project_search_name)
+    search_data = data.map(project_search_name)
     search_history.push([search_data, `Searched by ${searched_type} type pokemons`])
     display_current_page_pokemons()
     $(`#${current_tab} #page_buttons button#1`).addClass("active")
@@ -333,12 +342,12 @@ function get_pokemon_by_type() {
     console.log(searched_type)
     $.ajax(
         {
-            // "url": `/findPokemonByType`,
-            "url": `https://pokeapi.co/api/v2/type/${searched_type}`,
-            "type": "GET",
-            // "data": {
-            //     "type": searched_type
-            // },
+            "url": `/findPokemonByType`,
+            // "url": `https://pokeapi.co/api/v2/type/${searched_type}`,
+            "type": "POST",
+            "data": {
+                "type": searched_type
+            },
             "success": get_pokemon_basic_info
         }
     )
