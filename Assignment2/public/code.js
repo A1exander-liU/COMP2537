@@ -562,6 +562,14 @@ function display_random_pokemons(data) {
     apply_background_gradient(data)
 }
 
+function loop_through_pokemon_db(data) {
+    console.log(data)
+    for (q = 0; q < 12; q++) {
+        console.log(Math.floor(Math.random() * data.length))
+        display_random_pokemons(data[Math.floor(Math.random() * data.length)])
+    }
+}
+
 function get_random_pokemons() {
     $(".pokemons").empty()
     // for (i = 0; i < 12; i++) {
@@ -571,6 +579,13 @@ function get_random_pokemons() {
     //         "success": display_random_pokemons
     //     })
     // }
+    $.ajax(
+        {
+            "url": "/findAllPokemons",
+            "type": "GET",
+            "success": loop_through_pokemon_db
+        }
+    )
 }
 
 function display_timeline(data) {

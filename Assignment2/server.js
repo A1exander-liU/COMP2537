@@ -12,7 +12,7 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 
-app.listen(5010, function (err) {
+app.listen(5050, function (err) {
     if (err) {
         console.log(err);
     }
@@ -55,7 +55,7 @@ app.get("/timeline/remove/:id", function(req, res) {
     })
 })
 
-app.post("/findAllPokemons", function(req, res) {
+app.get("/findAllPokemons", function(req, res) {
     pokemonModel.find({}, function(err, all_pokemons) {
         if (err) {
             console.log("Err" + err)
