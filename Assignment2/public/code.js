@@ -10,6 +10,41 @@ max_weight = 0
 search_history = []
 current_tab = "home-page"
 
+function confirm_timeline_update(data) {
+    console.log(data)
+}
+
+function insert_or_update_event(data) {
+    console.log("Full data", data)
+    // console.log("Event Data", data[0][0].event)
+    if (data[0].length > 0) {
+        $.ajax(
+            {
+                "url": `/updateEvent`,
+                "type": "POST",
+                "data": {
+                    "event": `${data[0][0].event}`
+                },
+                "success": confirm_timeline_update
+            }
+        )
+    }
+    else {
+        current_timestamp = get_current_timestamp()
+        $.ajax(
+            {
+                "url": `/insertEvent`,
+                "type": "POST",
+                "data": {
+                    "event": `${data[1]}`,
+                    "times": 1,
+                    "date": current_timestamp
+                }
+            }
+        )
+    }
+}
+
 function get_current_timestamp() {
     var date = new Date()
     return date.toUTCString()
@@ -355,12 +390,12 @@ function get_pokemon_basic_info(data) {
     $(`#${current_tab} #page_buttons button#1`).addClass("active")
 }
 
-function get_pokemon_by_type() {
+async function get_pokemon_by_type() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_type = $("#type_dropdown option:selected").val()
     console.log(searched_type)
-    $.ajax(
+    await $.ajax(
         {
             "url": `/findPokemonByType`,
             // "url": `https://pokeapi.co/api/v2/type/${searched_type}`,
@@ -371,44 +406,19 @@ function get_pokemon_by_type() {
             "success": get_pokemon_basic_info
         }
     )
-}
-
-function confirm_timeline_update(data) {
-    console.log(data)
-}
-
-function insert_or_update_event(data) {
-    console.log("Event Data", data[0][0].event)
-    if (data[0].length > 0) {
-        $.ajax(
-            {
-                "url": `/updateEvent`,
-                "type": "POST",
-                "data": {
-                    "event": `${data[0][0].event}`
-                },
-                "success": confirm_timeline_update
-            }
-        )
-    }
-    else {
-        current_timestamp = get_current_timestamp()
-        $.ajax(
-            {
-                "url": `/insertEvent`,
-                "type": "POST",
-                "data": {
-                    "event": `${data[1]}`,
-                    "times": 1,
-                    "date": current_timestamp
-                }
-            }
-        )
-    }
+    $.ajax(
+        {
+            "url": "/findEvent",
+            "type": "POST",
+            "data": {
+                "event": `User searched ${searched_type} pokemons.`
+            },
+            "success": insert_or_update_event
+        }
+    )
 }
 
 async function get_pokemon_by_name() {
-    current_timestamp = get_current_timestamp()
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
     searched_name = $("#name").val()
