@@ -185,7 +185,6 @@ app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
 //-all lowercase
 //-has to have an s at the end of the collection name
 
-// mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     {useNewUrlParser: true, useUnifiedTopology: true});
 
