@@ -28,6 +28,7 @@ app.get("/", function(req, res) {
 
 app.get("/pokedex", function(req, res) {
     if (req.session.authenticated) {
+        console.log("User Info" + req.session.current_user)
         res.sendFile(__dirname + "/public/pokedex.html")
     }
     else {
@@ -47,7 +48,7 @@ app.post("/findUser", function(req, res) {
             if (req.body.password == found_user[0].password) {
                 console.log("Correct username and password")
                 req.session.authenticated = true
-                req.session.current_user = found_user[0]
+                req.session.current_user = found_user
                 res.send("success")
             }
             else {
