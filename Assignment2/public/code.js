@@ -633,14 +633,24 @@ async function display_this_pokemon(data) {
     $("#base-stats").show()
 }
 
-function get_this_pokemon_info() {
+async function get_this_pokemon_info() {
     $(`#${current_tab} #page_buttons`).html("")
     console.log($(this).attr("id"))
-    $.ajax({
+    await $.ajax({
         "url": `https://pokeapi.co/api/v2/pokemon/${$(this).attr("id")}`,
         "type": "GET",
         "success": display_this_pokemon
     })
+    $.ajax(
+        {
+            "url": "/findEvent",
+            "type": "POST",
+            "data": {
+                "event": `User viewed full detail of ${$(this).attr("id")}.`
+            },
+            "success": insert_or_update_event
+        }
+    )
 }
 
 function display_random_pokemons(data) {
