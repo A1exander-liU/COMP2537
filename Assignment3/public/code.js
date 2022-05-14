@@ -148,8 +148,30 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
-function confirm_sign_up(data) {
+function confirm_user(data) {
     console.log(data)
+    if (data = "success") {
+        location.href = "/pokedex"
+    }
+    else {
+        $("#incorrect-login").text(data)
+    }
+}
+
+function validate_existing_user() {
+    if ($("#username").val().length > 0 && $("#password").val().length > 0) {
+        $.ajax(
+            {
+                "url": "/findUser",
+                "type": "POST",
+                "data": {
+                    "username": $("#username").val(),
+                    "password": $("#password").val(),
+                },
+                "success": confirm_user
+            }
+        )
+    }
 }
 
 function add_new_user() {
@@ -163,7 +185,7 @@ function add_new_user() {
                     "username": $("#username").val(),
                     "password": $("#password").val(),
                 },
-                "success": confirm_sign_up
+                "success": confirm_user
             }
         )
     }
@@ -802,6 +824,7 @@ function setup() {
     $("body").on("click", ".timeline-remove", remove_from_timeline)
     $("#timeline").click(load_timeline)
     $("#sign-up").click(add_new_user)
+    $("#login").click(validate_existing_user)
 }
 
 $(document).ready(setup)

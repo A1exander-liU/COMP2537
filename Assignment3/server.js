@@ -20,14 +20,41 @@ app.listen(process.env.PORT || 5030, function (err) {
         console.log(err);
 })
 
-app.use(express.static("public"))
+app.use(express.static("./public"))
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/public/login.html")
 })
 
-app.post("/login", function(req, res) {
-    req.session.authenticated = true
+app.get("/pokedex", function(req, res) {
+    if (req.session.authenticated) {
+        res.sendFile(__dirname + "/public/pokedex.html")
+    }
+    else {
+        res.redirect("/")
+    }
+})
+
+app.post("/findUser", function(req, res) {
+    console.log(req.body)
+    userModel.find({username: req.body.username}, function(err, found_user) {
+        if (err) {
+            console.log("Err" + err) 
+            res.send("No user could be found with those information.")
+        }
+        else {
+            console.log("Data" + found_user)
+            if (req.body.password == found_user[0].password) {
+                console.log("Correct username and password")
+                req.session.authenticated = true
+                req.session.current_user = found_user[0]
+                res.send("success")
+            }
+            else {
+                res.send("The password was incorrect, please enter again.")
+            }
+        }
+    })
 })
 
 app.post("/signUp", function(req, res) {
@@ -39,26 +66,18 @@ app.post("/signUp", function(req, res) {
     new_user.save(function(err, event) {
         if (err) {
             console.log("Err" + err)
+            res.send("Username is unavailable, please choose again.")
         }
         else {
             console.log("Data" + event)
-            res.send("Successful insertion!")
             req.session.current_user = new_user
+            res.send("success")
         }
     })
 })
 
 app.get("/signOut", function(req, res) {
     req.session.authenticated = false
-})
-
-app.get("/pokedex", function(req, res) {
-    if (req.session.authenticated) {
-        res.sendFile(__dirname + "/public/index.html")
-    }
-    else {
-        res.redirect("/")
-    }
 })
 
 app.get("/timeline", function(req, res) {
