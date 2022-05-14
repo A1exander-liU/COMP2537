@@ -148,6 +148,29 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+async function remove_from_timeline() {
+    await $.ajax(
+        {
+            "url": "/removeThisEvent",
+            "type": "DELETE",
+            "data": {
+                "event": `${$(this).attr("id")}`
+            }
+        }
+    )
+    load_timeline()
+}
+
+async function clear_timeline() {
+    await $.ajax(
+        {
+            "url": "/removeAllEvents",
+            "type": "DELETE"
+        }
+    )
+    load_timeline()
+}
+
 function remove_from_history() {
     search_history.splice($(this).attr("id"), 1)
     $(this).parent().remove()
@@ -708,7 +731,7 @@ function display_timeline(data) {
         result += `<p class="timeline-event">${data[i].event}</p>`
         result += `<p class="timeline-hits">Times: ${data[i].times}</p>`
         result += `</div>`
-        result += `<button class="timeline-remove">Remove</button>`
+        result += `<button class="timeline-remove" id="${data[i].event}">Remove</button>`
         result += `</div>`
         // 
         old = $("#displayed-timeline").html()
@@ -754,6 +777,8 @@ function setup() {
     $("body").on("click", "#search", remove_page_buttons)
     $("#clear-history").click(clear_history)
     $("body").on("click", ".remove", remove_from_history)
+    $("#clear-timeline").click(clear_timeline)
+    $("body").on("click", ".timeline-remove", remove_from_timeline)
 }
 
 $(document).ready(setup)

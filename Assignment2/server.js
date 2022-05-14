@@ -77,9 +77,27 @@ app.post("/updateEvent", function(req, res) {
     })
 })
 
-app.get("/deleteEvent", function(req, res) {
-    timelineModel.remove({
-        "_id": req.params.id 
+app.delete("/removeThisEvent", function(req, res) {
+    timelineModel.deleteOne({event: req.body.event}, function(err, this_deleted) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + this_deleted)
+            res.send("This event was successfully deleted.")
+        }
+    })
+})
+
+app.delete("/removeAllEvents", function(req, res) {
+    timelineModel.deleteMany({}, function(err, all_deleted) {
+        if (err) {
+            console.log("Err" + err) 
+        }
+        else {
+            console.log("Data" + all_deleted)
+            res.send("Successfully deleted all events.")
+        }
     })
 })
 
