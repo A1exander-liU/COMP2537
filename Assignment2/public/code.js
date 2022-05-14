@@ -779,6 +779,7 @@ function setup() {
     $("body").on("click", ".remove", remove_from_history)
     $("#clear-timeline").click(clear_timeline)
     $("body").on("click", ".timeline-remove", remove_from_timeline)
+    $("#timeline").click(load_timeline)
 }
 
 $(document).ready(setup)
