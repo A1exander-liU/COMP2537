@@ -79,6 +79,7 @@ app.post("/signUp", function(req, res) {
 
 app.get("/signOut", function(req, res) {
     req.session.authenticated = false
+    res.send("Successfully signed out.")
 })
 
 app.get("/timeline", function(req, res) {

@@ -157,6 +157,21 @@ function view_profile_items() {
     }
 }
 
+function redirect_to_login(data) {
+    console.log(data)
+    location.href = "/pokedex"
+}
+
+function sign_out_user() {
+    $.ajax(
+        {
+            "url": "/signOut",
+            "type": "GET",
+            "success": redirect_to_login
+        }
+    )
+}
+
 function confirm_user(data) {
     console.log(data)
     if (data == "success") {
@@ -842,6 +857,7 @@ function setup() {
     $("#login").click(validate_existing_user)
     $(".secondary-tab").click(view_profile_items)
     $("#favourites").click(view_page)
+    $("#sign-out").click(sign_out_user)
 }
 
 $(document).ready(setup)
