@@ -12,10 +12,9 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 
-app.listen(5050, function (err) {
-    if (err) {
+app.listen(proess.env.PORT || 5050, function (err) {
+    if (err)
         console.log(err);
-    }
 })
 
 app.use(express.static("./public"))
