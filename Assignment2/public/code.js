@@ -238,7 +238,7 @@ async function get_pokemon_by_determined_base_stat_range() {
     // }
     await $.ajax(
         {
-            "url": "findAllPokemons",
+            "url": "/findAllPokemons",
             "type": "GET",
             "success": function(data) {
                 for (i = 0; i < data.length; i++) {
@@ -413,7 +413,7 @@ function display_current_page_pokemons() {
         for (start; start < end; start++) {
             $.ajax(
                 {
-                    "url": "findPokemonByName",
+                    "url": "/findPokemonByName",
                     // "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
                     "type": "POST",
                     "data": {
@@ -427,7 +427,7 @@ function display_current_page_pokemons() {
         for (start = 0; start < searched_pokemons.length; start++) {
             $.ajax(
                 {
-                    "url": "findPokemonByName",
+                    "url": "/findPokemonByName",
                     // "url": `https://pokeapi.co/api/v2/pokemon/${searched_pokemons[start]}`,
                     "type": "POST",
                     "data": {
