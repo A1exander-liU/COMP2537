@@ -15,13 +15,33 @@ app.use(bodyparser.json());
 var session = require('express-session')
 app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 
-app.listen(process.env.PORT || 5050, function (err) {
+app.listen(process.env.PORT || 5030, function (err) {
     if (err)
         console.log(err);
 })
 
-app.use(express.static("./public"))
-// get postman
+// app.use(express.static("./public"))
+
+app.get("/", function(req, res) {
+    res.sendFile(__dirname + "/public/login.html")
+})
+
+app.get("/login", function(req, res) {
+    req.session.authenticated = true
+})
+
+app.get("/signOut", function(req, res) {
+    req.session.authenticated = false
+})
+
+app.get("/pokedex", function(req, res) {
+    if (req.session.authenticated) {
+        res.sendFile(__dirname + "/public/index.html")
+    }
+    else {
+        res.redirect("/")
+    }
+})
 
 app.get("/timeline", function(req, res) {
     // return back a json of all the docs in the timline collection
@@ -187,8 +207,8 @@ app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
 //-all lowercase
 //-has to have an s at the end of the collection name
 
-    mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+{useNewUrlParser: true, useUnifiedTopology: true});
 
 const timelineSchema = new mongoose.Schema({
     event: String,
