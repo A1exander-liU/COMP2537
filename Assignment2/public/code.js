@@ -697,22 +697,29 @@ function get_random_pokemons() {
 }
 
 function display_timeline(data) {
-    $("#timeline").html("")
+    console.log("Timeline Data", data)
+    $("#displayed-timeline").html("")
     for (i = 0; i < data.length; i++){
         result = ``
-        result += `<p>Text: ${data[i].text}</p>`
-        result += `<p>Hits: ${data[i].hits}</p>`
-        result += `<p>Date: ${data[i].date}</p>`
+        result += `<div class="timeline-item" id="${data[i].event}">`
+        result += `<div>`
+        result += `<p class="timeline-date">${data[i].date}</p>`
+        result += `<hr>`
+        result += `<p class="timeline-event">${data[i].event}</p>`
+        result += `<p class="timeline-hits">Times: ${data[i].times}</p>`
+        result += `</div>`
+        result += `<button class="timeline-remove">Remove</button>`
+        result += `</div>`
         // 
-        old = $("#timeline").html()
-        $("#timeline").html(old + result)
+        old = $("#displayed-timeline").html()
+        $("#displayed-timeline").html(old + result)
     }
 }
 
 function load_timeline() {
     $.ajax(
         {
-            "url": `http://localhost:5010/timeline/insert`,
+            "url": `/timeline`,
             "type": "GET",
             "success": display_timeline
         }

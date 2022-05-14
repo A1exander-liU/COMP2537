@@ -28,9 +28,9 @@ app.get("/timeline", function(req, res) {
             console.log("Err"+ err)
         }else {
             console.log("Data" + timeline)
+            res.json(timeline)
         }
     })
-    res.json(JSON.stringify(timeline))
 })
 
 app.post("/findEvent", function(req, res) {
