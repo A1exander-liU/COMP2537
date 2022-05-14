@@ -12,13 +12,12 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 
-app.listen(process.env.PORT || 5000, function (err) {
+app.listen(process.env.PORT || 5050, function (err) {
     if (err)
         console.log(err);
 })
 
 app.use(express.static("./public"))
-// get postman
 
 app.get("/timeline", function(req, res) {
     // return back a json of all the docs in the timline collection
