@@ -20,14 +20,32 @@ app.listen(process.env.PORT || 5030, function (err) {
         console.log(err);
 })
 
-// app.use(express.static("./public"))
+app.use(express.static("public"))
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/public/login.html")
 })
 
-app.get("/login", function(req, res) {
+app.post("/login", function(req, res) {
     req.session.authenticated = true
+})
+
+app.post("/signUp", function(req, res) {
+    var new_user = new userModel({
+        username: req.body.username,
+        password: req.body.password,
+        favourites: req.body.favourites
+    })
+    new_user.save(function(err, event) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + event)
+            res.send("Successful insertion!")
+            req.session.current_user = new_user
+        }
+    })
 })
 
 app.get("/signOut", function(req, res) {

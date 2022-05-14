@@ -148,6 +148,27 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function confirm_sign_up(data) {
+    console.log(data)
+}
+
+function add_new_user() {
+    console.log("it works")
+    if ($("#username").val().length > 0 && $("#password").val().length > 0) {
+        $.ajax(
+            {
+                "url": "/signUp",
+                "type": "POST",
+                "data": {
+                    "username": $("#username").val(),
+                    "password": $("#password").val(),
+                },
+                "success": confirm_sign_up
+            }
+        )
+    }
+}
+
 async function remove_from_timeline() {
     await $.ajax(
         {
@@ -780,6 +801,7 @@ function setup() {
     $("#clear-timeline").click(clear_timeline)
     $("body").on("click", ".timeline-remove", remove_from_timeline)
     $("#timeline").click(load_timeline)
+    $("#sign-up").click(add_new_user)
 }
 
 $(document).ready(setup)
