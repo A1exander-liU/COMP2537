@@ -222,5 +222,20 @@ const pokemonSchema = new mongoose.Schema({
     weight: Number,
     base_stat_total: Number
 })
+
+const userSchema = new mongoose.Schema({
+    username: {type: String, unique: true},
+    password: String,
+    favourites: [{
+        name: String,
+        id: Number,
+        types: [String],
+        weight: Number,
+        height: Number,
+        stats: [Number]
+    }]
+})
+
+const userModel = mongoose.model("users", userSchema)
 const timelineModel = mongoose.model("timelinevents", timelineSchema); 
 const pokemonModel = mongoose.model("pokemons", pokemonSchema)
