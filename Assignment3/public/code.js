@@ -150,7 +150,7 @@ function remove_page_buttons() {
 
 function confirm_user(data) {
     console.log(data)
-    if (data = "success") {
+    if (data == "success") {
         location.href = "/pokedex"
     }
     else {

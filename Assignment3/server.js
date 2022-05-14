@@ -44,7 +44,7 @@ app.post("/findUser", function(req, res) {
             res.send("No user could be found with those information.")
         }
         else {
-            console.log("Data" + found_user)
+            console.log("Found User Data" + found_user)
             if (req.body.password == found_user[0].password) {
                 console.log("Correct username and password")
                 req.session.authenticated = true
