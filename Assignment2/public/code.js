@@ -216,10 +216,10 @@ async function get_pokemon_by_determined_base_stat_range() {
     await $.ajax(
         {
             "url": "findAllPokemons",
-            "type": "POST",
+            "type": "GET",
             "success": function(data) {
                 for (i = 0; i < data.length; i++) {
-                    get_all_pokemons(data[i])
+                   get_all_pokemons(data[i])
                 }
             }
         }
@@ -229,20 +229,49 @@ async function get_pokemon_by_determined_base_stat_range() {
         searched_pokemons = searched_pokemons.filter(filter_by_high_stats)
         searched_pokemons = searched_pokemons.map(project_only_name)
         search_history.push([searched_pokemons, `Searched by high base stat total`])
+        await $.ajax(
+            {
+                "url": "/findEvent",
+                "type": "POST",
+                "data": {
+                    "event": `User searched pokemons by high base stat total.`
+                },
+                "success": insert_or_update_event
+            }
+        )
     }
     if ($("#moderate_stats").is(":checked")) {
         searched_pokemons = searched_pokemons.filter(filter_by_moderate_stats)
         searched_pokemons = searched_pokemons.map(project_only_name)
         search_history.push([searched_pokemons, `Searched by moderate base stat total`])
+        await $.ajax(
+            {
+                "url": "/findEvent",
+                "type": "POST",
+                "data": {
+                    "event": `User searched pokemons by moderate base stat total.`
+                },
+                "success": insert_or_update_event
+            }
+        )
     }
     if ($("#low_stats").is(":checked")) {
         searched_pokemons = searched_pokemons.filter(filter_by_low_stats)
         searched_pokemons = searched_pokemons.map(project_only_name)
         search_history.push([searched_pokemons, `Searched by low base stat total`])
+        await $.ajax(
+            {
+                "url": "/findEvent",
+                "type": "POST",
+                "data": {
+                    "event": `User searched pokemons by low base stat total.`
+                },
+                "success": insert_or_update_event
+            }
+        )
     }
     console.log(searched_pokemons)
     display_current_page_pokemons()
-
 }
 
 function filter_selected_weight_range(data) {
@@ -267,6 +296,16 @@ async function search_pokemon_by_weight() {
                     console.log(data)
                     searched_pokemons = data.map(project_only_name)
                 },
+            }
+        )
+        $.ajax(
+            {
+                "url": "/findEvent",
+                "type": "POST",
+                "data": {
+                    "event": `User searched pokemons by weight range: ${min_weight}kg - ${max_weight}kg.`
+                },
+                "success": insert_or_update_event
             }
         )
         // searched_pokemons = searched_pokemons.filter(filter_selected_weight_range)
