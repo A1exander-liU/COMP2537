@@ -148,6 +148,15 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function view_profile_items() {
+    if ($("#profile-tab").css("display") == "none") {
+        $("#profile-tab").show()    
+    }
+    else {
+        $("#profile-tab").hide()
+    }
+}
+
 function confirm_user(data) {
     console.log(data)
     if (data == "success") {
@@ -792,6 +801,10 @@ function load_timeline() {
     )
 }
 
+function hide_stuff() {
+    $("#profile-tab").hide()
+}
+
 function load_home_page() {
     $(".tab-stuff").hide()
     $("#home-page").show()
@@ -801,11 +814,12 @@ function setup() {
     get_random_pokemons()
     load_home_page()
     load_timeline()
+    hide_stuff()
     $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
     $("body").on("click", "#abilities-tab", view_abilities)
-    $(".page-tabs button").click(view_page)
+    $(".page-tabs .page-tab").click(view_page)
     $("#history").click(display_history)
     $("#home").click(get_random_pokemons)
     $("#search").click(hide_pokemons)
@@ -825,6 +839,7 @@ function setup() {
     $("#timeline").click(load_timeline)
     $("#sign-up").click(add_new_user)
     $("#login").click(validate_existing_user)
+    $(".secondary-tab").click(view_profile_items)
 }
 
 $(document).ready(setup)

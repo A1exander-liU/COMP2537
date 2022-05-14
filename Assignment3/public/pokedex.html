@@ -243,8 +243,13 @@
 
         .page-tabs {
             display: grid;
-            grid-template-columns: auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto;
             margin-bottom: 5%;
+        }
+
+        .secondary-tab {
+            width: 100%;
+            background-color: rgb(224, 224, 224);
         }
 
         .page-tab {
@@ -252,7 +257,7 @@
             background-color: rgb(224, 224, 224);
         }
 
-        .page-tabs button.active {
+        .page-tabs .page-tab.active {
             background-color: rgb(165, 164, 164);
         }
 
@@ -487,6 +492,13 @@
         <button class="page-tab" id="search">Search</button>
         <button class="page-tab" id="history">History</button>
         <button class="page-tab" id="timeline">Timeline</button>
+        <div>
+            <button class="secondary-tab" id="profile">Profile</button>
+            <div id="profile-tab">
+                <button class="profile-tabs" id="favourites">Favourites</button>
+                <button class="profile-tabs" id="sign-out">Sign Out</button>
+            </div>
+        </div>
     </div>
     <div class="tab-stuff" id="home-page">
         <div class="display_pokemons">
@@ -592,6 +604,9 @@
 
             </div>
         </div>
+    </div>
+    <div class="tab-stuff" id="favourites-page">
+        <h2>Favourites</h2>
     </div>
     <footer>
         <p>Data pulled from <a href="https://pokeapi.co/">PokeAPI</a></p>
