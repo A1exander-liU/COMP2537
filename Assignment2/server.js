@@ -64,10 +64,17 @@ app.post("/insertEvent", function(req, res) {
     res.send("Successful insertion!")
 })
 
-app.put("/updateEvent", function(req, res) {
-    timelineModel.updateOne({
-        "_id":  req.params.id 
-    }, {$inc: {hits: 1}})
+app.post("/updateEvent", function(req, res) {
+    console.log("time line event", req.body.event)
+    timelineModel.updateOne({event: req.body.event}, {$inc: {times: 1}}, function(err, timeline_event) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + timeline_event)
+            res.send("Successful update")
+        }
+    })
 })
 
 app.get("/deleteEvent", function(req, res) {

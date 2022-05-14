@@ -373,11 +373,23 @@ function get_pokemon_by_type() {
     )
 }
 
+function confirm_timeline_update(data) {
+    console.log(data)
+}
+
 function insert_or_update_event(data) {
-    console.log("Event Data", data)
+    console.log("Event Data", data[0][0].event)
     if (data[0].length > 0) {
-        // send put request to increment the count
-        console.log("event exists")
+        $.ajax(
+            {
+                "url": `/updateEvent`,
+                "type": "POST",
+                "data": {
+                    "event": `${data[0][0].event}`
+                },
+                "success": confirm_timeline_update
+            }
+        )
     }
     else {
         current_timestamp = get_current_timestamp()
