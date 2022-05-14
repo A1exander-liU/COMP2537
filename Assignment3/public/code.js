@@ -577,6 +577,7 @@ function display_history() {
 }
 
 function view_page() {
+    $("#profile-tab").hide()
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     current_tab = ($(this).attr("id") + "-page")
     $(".pokemons").html("")
@@ -840,6 +841,7 @@ function setup() {
     $("#sign-up").click(add_new_user)
     $("#login").click(validate_existing_user)
     $(".secondary-tab").click(view_profile_items)
+    $("#favourites").click(view_page)
 }
 
 $(document).ready(setup)

@@ -243,13 +243,29 @@
 
         .page-tabs {
             display: grid;
-            grid-template-columns: auto auto auto auto auto;
+            grid-template-areas: ". . . . ."
+                                 ". . . . drop";
+            grid-template-columns: 20% 20% 20% 20% 20%;
+            grid-template-rows: auto auto;
             margin-bottom: 5%;
+        }
+
+        .page-tabs > div {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto auto;
         }
 
         .secondary-tab {
             width: 100%;
             background-color: rgb(224, 224, 224);
+        }
+
+        #profile-tab {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto auto;
+            grid-area: drop;
         }
 
         .page-tab {
@@ -494,10 +510,10 @@
         <button class="page-tab" id="timeline">Timeline</button>
         <div>
             <button class="secondary-tab" id="profile">Profile</button>
-            <div id="profile-tab">
-                <button class="profile-tabs" id="favourites">Favourites</button>
-                <button class="profile-tabs" id="sign-out">Sign Out</button>
-            </div>
+        </div>
+        <div id="profile-tab">
+            <button class="profile-tabs" id="favourites">Favourites</button>
+            <button class="profile-tabs" id="sign-out">Sign Out</button>
         </div>
     </div>
     <div class="tab-stuff" id="home-page">
