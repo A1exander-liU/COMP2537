@@ -279,6 +279,11 @@ const userSchema = new mongoose.Schema({
         base_stat_total: Number,
         official_artwork: String,
         stats: [Number]
+    }],
+    timeline: [{
+        event: String,
+        times: Number,
+        date: String
     }]
 })
 
