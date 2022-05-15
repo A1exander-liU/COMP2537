@@ -258,9 +258,13 @@ const timelineSchema = new mongoose.Schema({
 
 const pokemonSchema = new mongoose.Schema({
     name: String,
+    poke_id: Number, 
     types: [String],
-    weight: Number,
-    base_stat_total: Number
+    weight: Number, // in kg
+    height: Number, // in kg
+    base_stat_total: Number,
+    official_artwork: String, // url for image
+    stats: [Number]
 })
 
 const userSchema = new mongoose.Schema({
@@ -268,10 +272,12 @@ const userSchema = new mongoose.Schema({
     password: String,
     favourites: [{
         name: String,
-        id: Number,
+        poke_id: Number,
         types: [String],
         weight: Number,
         height: Number,
+        base_stat_total: Number,
+        official_artwork: String,
         stats: [Number]
     }]
 })
