@@ -88,7 +88,7 @@ app.get("/signOut", function(req, res) {
 app.get("/timeline", function(req, res) {
     console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
     // return back a json of all the docs in the timline collection
-    userModel.find({username: req.session.current_user[0].username}, {timeline: 1, _id: 0}, function(err, timeline) {
+    userModel.find({username: req.session.current_user[0].username}, function(err, timeline) {
         if (err) {
             console.log("Err"+ err)
         }else {
@@ -150,7 +150,7 @@ app.post("/updateEvent", function(req, res) {
 })
 
 app.delete("/removeThisEvent", function(req, res) {
-    timelineModel.deleteOne({event: req.body.event}, function(err, this_deleted) {
+    userModel.deleteOne({event: req.body.event}, function(err, this_deleted) {
         if (err) {
             console.log("Err" + err)
         }
@@ -162,7 +162,7 @@ app.delete("/removeThisEvent", function(req, res) {
 })
 
 app.delete("/removeAllEvents", function(req, res) {
-    timelineModel.deleteMany({}, function(err, all_deleted) {
+    userModel.deleteMany({}, function(err, all_deleted) {
         if (err) {
             console.log("Err" + err) 
         }

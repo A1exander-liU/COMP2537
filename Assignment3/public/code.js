@@ -790,6 +790,8 @@ function get_random_pokemons() {
 
 function display_timeline(data) {
     console.log("Timeline Data", data)
+    console.log("Timeline only", data.timeline)
+    data = data.timeline
     $("#displayed-timeline").html("")
     for (i = 0; i < data.length; i++){
         result = ``
@@ -831,7 +833,6 @@ function load_home_page() {
 function setup() {
     get_random_pokemons()
     load_home_page()
-    load_timeline()
     hide_stuff()
     $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
