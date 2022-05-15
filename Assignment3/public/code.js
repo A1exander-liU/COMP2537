@@ -15,34 +15,34 @@ function confirm_timeline_update(data) {
 }
 
 function insert_or_update_event(data) {
-    console.log("Full data", data)
-    // console.log("Event Data", data[0][0].event)
-    if (data[0].length > 0) {
+    console.log("Full data", data[0][0].timeline.length)
+    console.log(data[1])
+    if (data[0][0].timeline.length > 0) {
         $.ajax(
             {
                 "url": `/updateEvent`,
                 "type": "POST",
                 "data": {
-                    "event": `${data[0][0].event}`
+                    "event": `${data[1]}`
                 },
                 "success": confirm_timeline_update
             }
         )
     }
-    else {
-        current_timestamp = get_current_timestamp()
-        $.ajax(
-            {
-                "url": `/insertEvent`,
-                "type": "POST",
-                "data": {
-                    "event": `${data[1]}`,
-                    "times": 1,
-                    "date": current_timestamp
-                }
-            }
-        )
-    }
+    // else {
+    //     current_timestamp = get_current_timestamp()
+    //     $.ajax(
+    //         {
+    //             "url": `/insertEvent`,
+    //             "type": "POST",
+    //             "data": {
+    //                 "event": `${data[1]}`,
+    //                 "times": 1,
+    //                 "date": current_timestamp
+    //             }
+    //         }
+    //     )
+    // }
 }
 
 function get_current_timestamp() {

@@ -49,6 +49,7 @@ app.post("/findUser", function(req, res) {
                 console.log("Correct username and password")
                 req.session.authenticated = true
                 req.session.current_user = found_user
+                console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
                 res.send("success")
             }
             else {
@@ -62,7 +63,8 @@ app.post("/signUp", function(req, res) {
     var new_user = new userModel({
         username: req.body.username,
         password: req.body.password,
-        favourites: req.body.favourites
+        favourites: req.body.favourites,
+        timeline: req.body.timeline
     })
     new_user.save(function(err, event) {
         if (err) {
@@ -84,53 +86,61 @@ app.get("/signOut", function(req, res) {
 })
 
 app.get("/timeline", function(req, res) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
     // return back a json of all the docs in the timline collection
-    timelineModel.find({}, function(err, timeline) {
+    userModel.find({username: req.session.current_user[0].username}, {timeline: 1, _id: 0}, function(err, timeline) {
         if (err) {
             console.log("Err"+ err)
         }else {
             console.log("Data" + timeline)
-            res.json(timeline)
+            res.json(timeline[0])
         }
     })
 })
 
 app.post("/findEvent", function(req, res) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
     // return back a json of all the docs in the timline collection
-    timelineModel.find({event: req.body.event}, function(err, timeline) {
+    userModel.find({username: req.session.current_user[0].username, timeline: {$elemMatch: {event: req.body.event}}}, {timeline: 1, _id: 0}, function(err, timeline) {
         if (err) {
             console.log("Err"+ err)
         }
         else {
-            console.log("Data" + timeline)
+            console.log("Data of user's timeline" + timeline[0])
             res.json([timeline, req.body.event])
         }
     })
 })
 
 app.post("/insertEvent", function(req, res) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
     // request to insert a new doc in the timeline collection
     var timeline_event = new timelineModel({
         event: req.body.event,
         times: req.body.times,
         date: req.body.date
     })
-    timeline_event.save(function(err, event) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {timeline: timeline_event}}, function(err, user_event) {
         if (err) {
             console.log("Err" + err)
         }
         else {
-            console.log("Data" + event)
+            console.log("Data" + user_event)
+            res.send("Successful insertion!")
         }
     })
-    res.send("Successful insertion!")
 })
 
 app.post("/updateEvent", function(req, res) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
     console.log("time line event", req.body.event)
-    timelineModel.updateOne({event: req.body.event}, {$inc: {times: 1}}, function(err, timeline_event) {
+    criteria = {username: req.session.current_user[0].username}
+    update = {$inc: {"timeline.$[el].times": 1}}
+    filters = {arrayFilters: [{"el.event": req.body.event}]}
+    userModel.findOneAndUpdate(criteria, update, filters, function(err, timeline_event) {
         if (err) {
             console.log("Err" + err)
+            res.send("failed")
         }
         else {
             console.log("Data" + timeline_event)
