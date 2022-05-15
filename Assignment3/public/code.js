@@ -819,6 +819,7 @@ function load_timeline() {
 
 function hide_stuff() {
     $("#profile-tab").hide()
+    $("#incorrect-login").hide()
 }
 
 function load_home_page() {
