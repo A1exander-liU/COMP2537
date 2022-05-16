@@ -166,7 +166,11 @@ app.delete("/removeThisEvent", function(req, res) {
 })
 
 app.delete("/removeAllEvents", function(req, res) {
-    userModel.deleteMany({}, function(err, all_deleted) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
+    criteria = {username: req.session.current_user[0].username}
+    removal = {$pull: {timeline: {}}}
+    extras = {multi: true}
+    userModel.updateMany(criteria, removal, extras, function(err, all_deleted) {
         if (err) {
             console.log("Err" + err) 
         }
