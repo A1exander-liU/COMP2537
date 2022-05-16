@@ -150,7 +150,11 @@ app.post("/updateEvent", function(req, res) {
 })
 
 app.delete("/removeThisEvent", function(req, res) {
-    userModel.deleteOne({event: req.body.event}, function(err, this_deleted) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
+    criteria = {username: req.session.current_user[0].username}
+    removal = {$pull: {timeline: {event: req.body.event}}}
+    extras = {multi: true}
+    userModel.updateMany(criteria, removal, extras, function(err, this_deleted) {
         if (err) {
             console.log("Err" + err)
         }
