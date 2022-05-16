@@ -174,7 +174,7 @@ function sign_out_user() {
 }
 
 function confirm_user(data) {
-    console.log(data)
+    console.log("user error messagers", data)
     if (data == "success") {
         location.href = "/pokedex"
     }
@@ -764,9 +764,9 @@ function display_random_pokemons(data) {
 
 function loop_through_pokemon_db(data) {
     console.log(data)
-    for (q = 0; q < 12; q++) {
+    for (q = 0; q < data.length; q++) {
         console.log(Math.floor(Math.random() * data.length))
-        display_random_pokemons(data[Math.floor(Math.random() * data.length)])
+        display_random_pokemons(data[q])
     }
 }
 

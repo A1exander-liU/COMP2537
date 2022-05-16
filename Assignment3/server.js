@@ -15,7 +15,7 @@ app.use(bodyparser.json());
 var session = require('express-session')
 app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 
-app.listen(process.env.PORT || 5030, function (err) {
+app.listen(process.env.PORT || 5003, function (err) {
     if (err)
         console.log(err);
 })
@@ -41,7 +41,6 @@ app.post("/findUser", function(req, res) {
     userModel.find({username: req.body.username}, function(err, found_user) {
         if (err) {
             console.log("Err" + err) 
-            res.send("No user could be found with those information.")
         }
         else {
             console.log("Found User Data" + found_user[0])
