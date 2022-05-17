@@ -750,6 +750,7 @@ function display_random_pokemons(data) {
     old = $(".pokemons").html()
     result = ""
     result += `<div class='pokemon' id='${data.name}'>`
+    result += `<p>#${data.poke_id}</p>`
     result += `<p>${captialize(data.name)}</p>`
     result += `<img src='${data.official_artwork}'>`
     result += "<p>"
@@ -757,6 +758,14 @@ function display_random_pokemons(data) {
         result += change_type_background(data.types[i])
     }
     result += "</p>"
+    result += `<div class="stat-section">`
+    result += `<p>Stats:</p>`
+    result += `<p>${data.base_stat_total}</p>`
+    result += `<p>Weight:</p>`
+    result += `<p>${data.weight}</p>`
+    result += `<p>Height:</p>`
+    result += `<p>${data.height}</p>`
+    result += `</div>`
     result += "</div>"
     $(".pokemons").html(old + result)
     apply_background_gradient(data)
