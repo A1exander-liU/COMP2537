@@ -506,6 +506,24 @@
             text-align: left;
         }
 
+        .displayed-card-detail {
+            display: grid;
+            width: 90%;
+            grid-template-columns: 50% 50%;
+            background-color: rgb(203, 203, 203);
+            margin: auto auto 60px auto;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 2px 2px 0px rgb(203, 203, 203);
+        }
+
+        .displayed-card-detail .pokemon-card {
+            width: 90%;
+            height: 90%;
+            margin: 10px auto 10px auto;
+        }
+
         @media screen and (max-width: 800px) {
             .pokemons {
                 grid-template-columns: auto auto !important;
@@ -572,6 +590,9 @@
             </div>
             <div id="page_buttons">
             </div>
+        </div>
+        <div class="card-info-shop">
+            
         </div>
     </div>
     <div class="tab-stuff" id="search-page">

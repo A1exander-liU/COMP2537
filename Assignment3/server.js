@@ -262,7 +262,7 @@ app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
 
 app.post("/addToCart", function(req, res) {
     console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
-    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {favourites: {poke_id: req.body.pokemon_id}}}, function(err, cart_item) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {favourites: {name: req.body.pokemon_name, quantity: req.body.amount}}}, function(err, cart_item) {
         if (err) {
             console.log("Err" + err)
         }
@@ -302,7 +302,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     // shopping_cart: [[Object]],
     favourites: [{
-        poke_id: Number,
+        name: String,
+        quantity: Number
     }],
     timeline: [{
         event: String,

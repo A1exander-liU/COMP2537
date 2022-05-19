@@ -12,6 +12,7 @@ current_tab = "home-page"
 
 function confirm_timeline_update(data) {
     console.log(data)
+    $(".pokemons").html("<p></p>")
 }
 
 function insert_or_update_event(data) {
@@ -148,9 +149,9 @@ function apply_background_gradient_full_info(data) {
 
 function apply_background_gradient(data) {
     if (data.types.length == 2) {
-        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, ${get_color(data.types[1])})`)
+        $(`.pokemon#${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, ${get_color(data.types[1])})`)
     }else {
-        $(`.pokemons #${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, rgb(228, 228, 228))`)
+        $(`.pokemon#${data.name}`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0])}, rgb(228, 228, 228))`)
     }
 }
 
@@ -164,15 +165,75 @@ function confirm_addition_to_cart(data) {
 }
 
 function add_card_to_cart() {
-    poke_id = $(this).attr("id")
+    quantity = parseInt($("#card-quantity").val())
+    console.log(quantity)
+    poke_name = $(this).parent().parent().find(".pokemon-card").attr("id")
     $.ajax(
         {
             "url": "/addToCart",
             "type": "POST",
             "data": {
-                "pokemon_id": poke_id
+                "pokemon_name": poke_name,
+                "amount": quantity
             },
             "success": confirm_addition_to_cart
+        }
+    )
+}
+
+function display_card_detail(data) {
+    console.log(data)
+    $(".pokemons").empty()
+    $(".card-info-shop").empty()
+    old = $(".pokemons").html()
+    result = ""
+    result +=`<div class="displayed-card-detail">`
+    result += `<div class="pokemon-card" id="${data.name}">`
+    result += `<div class='pokemon' id='${data.name}'>`
+    result += `<p>#${data.poke_id} ${captialize(data.name)}</p>`
+    result += `<img src='${data.official_artwork}'>`
+    result += "<p>"
+    for (i = 0; i < data.types.length; i++) {
+        result += change_type_background(data.types[i])
+    }
+    result += "</p>"
+    result += `<div class="stat-section">`
+    result += `<p>Stats:</p>`
+    result += `<p>${data.base_stat_total}</p>`
+    result += `<p>Weight:</p>`
+    result += `<p>${data.weight}</p>`
+    result += `<p>Height:</p>`
+    result += `<p>${data.height}</p>`
+    result += `</div>`
+    result += "</div>"
+    result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
+    result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add One to Cart</p>`
+    result += "</div>"
+    result += `<div class="card-shop-settings">`
+    result += `<div class="card-title"><h4>${captialize(data.name)} Pokemon Card</h4></div>`
+    result += `<div class="card-purchase-section">`
+    result += `<p>Quantity</p>`
+    result += `<input type="number" id="card-quantity">`
+    result += `</div>`
+    result += `<div class="card-add-to-cart">`
+    result += `<p><i class="fa-solid fa-cart-shopping"></i> Add to My Cart</p>`
+    result += "</div>"
+    result += "</div>"
+    result += "</div>"
+    $(".card-info-shop").html(old + result)
+    apply_background_gradient(data)
+    apply_border_colours(data)
+}
+
+function get_card_detail() {
+    $.ajax(
+        {
+            "url": "/findPokemonByName",
+            "type": "POST",
+            "data": {
+                "name": $(this).attr("id")
+            },
+            "success": display_card_detail
         }
     )
 }
@@ -797,7 +858,7 @@ function display_random_pokemons(data) {
     result += `</div>`
     result += "</div>"
     result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
-    result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</p>`
+    result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add One to Cart</p>`
     result += "</div>"
     $(".pokemons").html(old + result)
     apply_background_gradient(data)
@@ -875,7 +936,7 @@ function setup() {
     get_random_pokemons()
     load_home_page()
     hide_stuff()
-    $("body").on("click", ".pokemon", get_this_pokemon_info)
+    // $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
     $("body").on("click", "#abilities-tab", view_abilities)
@@ -902,7 +963,8 @@ function setup() {
     $(".secondary-tab").click(view_profile_items)
     $("#favourites").click(view_page)
     $("#sign-out").click(sign_out_user)
-    $("body").on("click", ".cart", add_card_to_cart)
+    $("body").on("click", ".card-add-to-cart", add_card_to_cart)
+    $("body").on("click", ".pokemon-card", get_card_detail)
 }
 
 $(document).ready(setup)
