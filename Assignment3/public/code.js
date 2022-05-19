@@ -128,6 +128,16 @@ function get_color(type) {
     }
 }
 
+function apply_border_colours(data) {
+    if (data.types.length == 2) {
+        $(`.pokemons #${data.name} > div`).css({"border-color": `${get_color(data.types[0])} ${get_color(data.types[1])} ${get_color(data.types[1])} ${get_color(data.types[0])}`,
+    "border-style": "solid", "border-width": "3px"})
+    }else {
+        $(`.pokemons #${data.name} > div`).css({"border-color": `${get_color(data.types[0])}`,
+    "border-style": "solid", "border-width": "3px"})
+    }
+}
+
 function apply_background_gradient_full_info(data) {
     if (data.types.length == 2) {
         $(`.pokemons .pokemon_full`).css("background-image", `linear-gradient(to bottom right, ${get_color(data.types[0].type.name)}, ${get_color(data.types[1].type.name)})`)
@@ -746,12 +756,13 @@ async function get_this_pokemon_info() {
 }
 
 function display_random_pokemons(data) {
+    // also need to display price, put price in db
     console.log(data)
     old = $(".pokemons").html()
     result = ""
+    result += `<div class="pokemon-card" id="${data.name}">`
     result += `<div class='pokemon' id='${data.name}'>`
-    result += `<p>#${data.poke_id}</p>`
-    result += `<p>${captialize(data.name)}</p>`
+    result += `<p>#${data.poke_id} ${captialize(data.name)}</p>`
     result += `<img src='${data.official_artwork}'>`
     result += "<p>"
     for (i = 0; i < data.types.length; i++) {
@@ -767,8 +778,12 @@ function display_random_pokemons(data) {
     result += `<p>${data.height}</p>`
     result += `</div>`
     result += "</div>"
+    result += `<p class="card-price">$100.00</p>`
+    result += `<p class="cart"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</p>`
+    result += "</div>"
     $(".pokemons").html(old + result)
     apply_background_gradient(data)
+    apply_border_colours(data)
 }
 
 function loop_through_pokemon_db(data) {

@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -179,10 +180,48 @@
             margin-top: 1%;
         }
 
+        .pokemon-card {
+            background-color: gainsboro;
+            background-image: none !important;
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 85% 5% 5%;
+            border-radius: 10px;
+            border-width: 3px;
+            border-style: solid;
+            border-color: rgb(122, 122, 122);
+            gap: 5px;
+        }
+
+        .pokemon-card .cart:hover {
+            background-color: rgb(194, 194, 194);
+        }
+
         .pokemon {
             border-radius: 5px;
             text-align: center;
             padding: 10px;
+            border-radius: 10px;
+            width: 95%;
+            margin: 5px auto 0 auto;
+        }
+
+        .stat-section {
+            border-style: none !important;
+        }
+
+        .card-price {
+            width: 95%;
+            margin: auto;
+            background-color: rgb(157, 157, 157);
+            border-radius: 10px;
+        }
+
+        .cart {
+            width: 95%;
+            margin: auto;
             border-radius: 10px;
         }
 
@@ -200,7 +239,7 @@
             border-radius: 20px;
         }
 
-        .pokemon_full>div:first-child {
+        .pokemon_full > div:first-child {
             /* background-color: rgb(199, 197, 197); */
             border-radius: 5px;
         }
