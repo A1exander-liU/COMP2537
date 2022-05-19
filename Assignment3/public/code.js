@@ -164,13 +164,13 @@ function confirm_addition_to_cart(data) {
 }
 
 function add_card_to_cart() {
-    console.log($(this).attr("id"))
+    poke_id = $(this).attr("id")
     $.ajax(
         {
             "url": "/addToCart",
             "type": "POST",
             "data": {
-                "pokemon_id": $(this).attr("id")
+                "pokemon_id": poke_id
             },
             "success": confirm_addition_to_cart
         }

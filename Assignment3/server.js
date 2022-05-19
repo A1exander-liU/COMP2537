@@ -260,6 +260,19 @@ app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
     })
 })
 
+app.post("/addToCart", function(req, res) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {favourites: {poke_id: req.body.pokemon_id}}}, function(err, cart_item) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + cart_item)
+            res.send(cart_item)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
@@ -289,14 +302,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     // shopping_cart: [[Object]],
     favourites: [{
-        name: String,
         poke_id: Number,
-        types: [String],
-        weight: Number,
-        height: Number,
-        base_stat_total: Number,
-        official_artwork: String,
-        stats: [Number]
     }],
     timeline: [{
         event: String,
