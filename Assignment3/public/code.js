@@ -159,6 +159,10 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function add_card_to_cart() {
+    console.log($(this).attr("id"))
+}
+
 function view_profile_items() {
     if ($("#profile-tab").css("display") == "none") {
         $("#profile-tab").show()    
@@ -778,8 +782,8 @@ function display_random_pokemons(data) {
     result += `<p>${data.height}</p>`
     result += `</div>`
     result += "</div>"
-    result += `<p class="card-price">$100.00</p>`
-    result += `<p class="cart"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</p>`
+    result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
+    result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</p>`
     result += "</div>"
     $(".pokemons").html(old + result)
     apply_background_gradient(data)
@@ -884,6 +888,7 @@ function setup() {
     $(".secondary-tab").click(view_profile_items)
     $("#favourites").click(view_page)
     $("#sign-out").click(sign_out_user)
+    $("body").on("click", ".cart", add_card_to_cart)
 }
 
 $(document).ready(setup)
