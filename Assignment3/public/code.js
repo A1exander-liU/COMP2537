@@ -159,8 +159,22 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function confirm_addition_to_cart(data) {
+    console.log(data)
+}
+
 function add_card_to_cart() {
     console.log($(this).attr("id"))
+    $.ajax(
+        {
+            "url": "/addToCart",
+            "type": "POST",
+            "data": {
+                "pokemon_id": $(this).attr("id")
+            },
+            "success": confirm_addition_to_cart
+        }
+    )
 }
 
 function view_profile_items() {
