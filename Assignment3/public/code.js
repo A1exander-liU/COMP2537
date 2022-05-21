@@ -179,7 +179,7 @@ async function add_card_to_cart() {
             "success": function(data) {
                 console.log(data)
                 pokemons_in_cart = data[0].shopping_cart.map(return_poke_names)
-                if (pokemons_in_cart.includes(poke_name)) {
+                if (pokemons_in_cart.includes(poke_name) && quantity > 0) {
                     $.ajax(
                         {
                             "url": "/updateCartItem",
@@ -192,7 +192,7 @@ async function add_card_to_cart() {
                         }
                     )
                 }
-                else {
+                else if (!pokemons_in_cart.includes(poke_name) && quantity > 0) {
                     $.ajax(
                         {
                             "url": "/addToCart",
@@ -711,6 +711,7 @@ function display_history() {
 }
 
 function view_page() {
+    $(".card-info-shop").empty()
     $("#profile-tab").hide()
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     current_tab = ($(this).attr("id") + "-page")
