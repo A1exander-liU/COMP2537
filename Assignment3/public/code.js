@@ -164,19 +164,48 @@ function confirm_addition_to_cart(data) {
     console.log(data)
 }
 
-function add_card_to_cart() {
+function return_poke_names(data) {
+    return data.name
+}
+
+async function add_card_to_cart() {
     quantity = parseInt($("#card-quantity").val())
     console.log(quantity)
     poke_name = $(this).parent().parent().find(".pokemon-card").attr("id")
-    $.ajax(
+    await $.ajax(
         {
-            "url": "/addToCart",
-            "type": "POST",
-            "data": {
-                "pokemon_name": poke_name,
-                "amount": quantity
-            },
-            "success": confirm_addition_to_cart
+            "url": "/getShoppingCart",
+            "type": "GET",
+            "success": function(data) {
+                console.log(data)
+                pokemons_in_cart = data[0].shopping_cart.map(return_poke_names)
+                if (pokemons_in_cart.includes(poke_name)) {
+                    $.ajax(
+                        {
+                            "url": "/updateCartItem",
+                            "type": "POST",
+                            "data": {
+                                "pokemon_name": poke_name,
+                                "amount": quantity
+                            },
+                            "success": confirm_addition_to_cart
+                        }
+                    )
+                }
+                else {
+                    $.ajax(
+                        {
+                            "url": "/addToCart",
+                            "type": "POST",
+                            "data": {
+                                "pokemon_name": poke_name,
+                                "amount": quantity
+                            },
+                            "success": confirm_addition_to_cart
+                        }
+                    )
+                }
+            }
         }
     )
 }

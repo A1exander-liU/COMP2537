@@ -62,7 +62,7 @@ app.post("/signUp", function(req, res) {
     var new_user = new userModel({
         username: req.body.username,
         password: req.body.password,
-        favourites: req.body.favourites,
+        shopping_cart: req.body.favourites,
         timeline: req.body.timeline
     })
     new_user.save(function(err, event) {
@@ -260,15 +260,43 @@ app.get("/findPokemonByHighBaseStatTotal", function(req, res) {
     })
 })
 
+app.get("/getShoppingCart", function(req, res) {
+    console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
+    userModel.find({username: req.session.current_user[0].username}, {shopping_cart: 1, _id: 0}, function(err, whole_cart) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + whole_cart)
+            res.json(whole_cart)
+        }
+    })
+})
+
 app.post("/addToCart", function(req, res) {
     console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
-    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {favourites: {name: req.body.pokemon_name, quantity: req.body.amount}}}, function(err, cart_item) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {shopping_cart: {name: req.body.pokemon_name, quantity: req.body.amount}}}, function(err, cart_item) {
         if (err) {
             console.log("Err" + err)
         }
         else {
             console.log("Data" + cart_item)
             res.send(cart_item)
+        }
+    })
+})
+
+app.post("/updateCartItem", function(req, res) {
+    criteria = {username: req.session.current_user[0].username}
+    update = {$inc: {"shopping_cart.$[el].quantity": req.body.amount}}
+    filters = {arrayFilters: [{"el.name": req.body.pokemon_name}]}
+    userModel.findOneAndUpdate(criteria, update, filters, function(err, updated_card) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + updated_card)
+            res.send(updated_card)
         }
     })
 })
@@ -301,7 +329,7 @@ const userSchema = new mongoose.Schema({
     username: {type: String, unique: true},
     password: String,
     // shopping_cart: [[Object]],
-    favourites: [{
+    shopping_cart: [{
         name: String,
         quantity: Number
     }],
