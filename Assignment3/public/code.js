@@ -1035,9 +1035,9 @@ function display_random_pokemons(data) {
     result += `<p>Stats:</p>`
     result += `<p>${data.base_stat_total}</p>`
     result += `<p>Weight:</p>`
-    result += `<p>${data.weight}</p>`
+    result += `<p>${data.weight}kg</p>`
     result += `<p>Height:</p>`
-    result += `<p>${data.height}</p>`
+    result += `<p>${data.height}m</p>`
     result += `</div>`
     result += "</div>"
     result += `<p class="card-price">$${(data.price).toFixed(2)}</p>`
