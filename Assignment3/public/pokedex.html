@@ -532,13 +532,14 @@
             background-color: rgb(184, 184, 184);
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 15% 75% 10%;
+            grid-template-rows: auto auto auto;
+            padding: 10px;
         }
 
         .card-purchase-section {
             align-self: center;
             justify-self: center;
-            width: 80%;
+            /* width: 80%; */
             height: 100%;
             display: grid;
             grid-template-columns: 50% 50%;
@@ -555,16 +556,24 @@
         }
 
         .card-add-to-cart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
             width: 80%;
-            height: 100%;
+            height: 50%;
             justify-self: center;
+            border-radius: 10px;
+            background-color: rgb(220, 220, 220);
         }
 
-        .card-add-to-cart p:hover {
-            background-color: rgb(220, 220, 220);
-            box-shadow: 2px 2px 4px rgb(117, 117, 117);
-            border-radius: 10px;
-            padding: 1% 0 1% 0;
+        /* .card-add-to-cart p {
+            height: 100%;
+            align-self: center;
+        } */
+
+        .card-add-to-cart:hover {
+            background-color: rgb(147, 147, 147);
         }
 
         .shopping-cart-container {
@@ -645,6 +654,24 @@
 
             .history-item {
                 grid-template-columns: auto;
+            }
+
+            .displayed-card-detail {
+                grid-template-columns: 100%;
+                grid-template-rows: auto auto;
+            }
+
+            .displayed-card-detail h4 {
+                margin: 0;
+            }
+
+            .card-shop-settings {
+                height: 100%;
+                padding: 10px;
+            }
+
+            .card-add-to-cart {
+                height: 100%;
             }
         }
     </style>
