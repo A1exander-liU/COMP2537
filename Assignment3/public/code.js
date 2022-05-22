@@ -180,6 +180,19 @@ function display_all_orders(data) {
     }
 }
 
+async function clear_shopping_cart() {
+    await $.ajax(
+        {
+            "url": "/clearCart",
+            "type": "DELETE",
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
+    load_shopping_cart()
+}
+
 function load_purhcase_history() {
     $.ajax(
         {
@@ -1136,6 +1149,7 @@ function setup() {
     $("body").on("click", ".card-add-to-cart", add_card_to_cart)
     $("body").on("click", ".pokemon-card", get_card_detail)
     $("#favourites").click(load_shopping_cart)
+    $("#clear-cart").click(clear_shopping_cart)
     $(".check-out-cart").click(check_out_cart)
     $("#user_profile").click(load_purhcase_history)
 }
