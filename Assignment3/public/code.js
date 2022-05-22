@@ -270,9 +270,10 @@ function return_poke_names(data) {
 }
 
 async function add_card_to_cart() {
-    quantity = parseInt($("#card-quantity").val())
+    quantity = parseInt($(`#${current_tab} #card-quantity`).val())
     console.log(quantity)
-    poke_name = $(this).parent().parent().find(".pokemon-card").attr("id")
+    poke_name = $(this).parent().parent().find(`.pokemon-card`).attr("id")
+    console.log(poke_name)
     await $.ajax(
         {
             "url": "/getShoppingCart",
