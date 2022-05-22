@@ -163,6 +163,9 @@ function remove_page_buttons() {
 function detect_quantity_change() {
     pokemon_name = $(this).parent().parent().parent().parent().find(".pokemon-card").attr("id")
     amount = $("#card-quantity").val()
+    if (amount < 0) {
+        $("#card-quantity").val(0)
+    }
     $.ajax(
         {
             "url": "/findPokemonByName",
