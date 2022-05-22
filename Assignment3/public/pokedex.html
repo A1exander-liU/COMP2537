@@ -359,11 +359,6 @@
             column-gap: 5px;
         }
 
-        /* .tabcontent {
-            height: 25vh;
-            overflow: auto;
-        } */
-
         #description {
             display: grid;
             grid-template-columns: auto auto;
@@ -576,11 +571,6 @@
             background-color: rgb(220, 220, 220);
         }
 
-        /* .card-add-to-cart p {
-            height: 100%;
-            align-self: center;
-        } */
-
         .card-add-to-cart:hover {
             background-color: rgb(147, 147, 147);
         }
@@ -621,13 +611,35 @@
             justify-content: center;
         }
 
+        .profile-content {
+            background-color: rgb(214, 214, 214);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .user_profile_icon {
+            display: flex;
+            justify-content: center;
+            font-size: 3.5em;
+        }
+
+        .user_profile_icon i {
+            border-radius: 100%;
+            background-color: rgb(162, 162, 162);
+            padding: 20px;
+        }
+
         .purchase-history-container {
             width: 100%;
-            background-color: rgb(214, 214, 214);
             display: grid;
             grid-template-columns: 100%;
             grid-template-rows: auto auto;
             gap: 20px;
+        }
+
+        .purchase-history-container h4 {
+            margin: 0;
         }
 
         .purhcase-history-cards {
@@ -900,12 +912,21 @@
     </div>
     <div class="tab-stuff" id="user_profile-page">
         <div class="profile-content">
-            <p class="profile-username">Username</p>
-        </div>
-        <div class="purchase-history-container">
-            <h4>Purchase History</h4>
-            <div class="purhcase-history-cards">
-
+            <div class="user_profile_info">
+                <div class="user_profile_icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="user_profile_stats">
+                    <p>Username<span class="profile-username" style="color: black; border-style:none;">Username</span></p>
+                    <p>Orders<span class="profile-total-orders" style="color: black; border-style:none;">Number</span></p>
+                    <p>Cards Ordered<span class="profile-total-cards" style="color: black; border-style:none;">Number</span></p>
+                    <p>Cash Spend<span class="profile-spent-cash" style="color: black; border-style:none;">Number</span></p>
+                </div>
+            </div>    
+             <div class="purchase-history-container">
+                <h4>Purchase History</h4>
+                <div class="purhcase-history-cards">
+                </div>
             </div>
         </div>
     </div>
