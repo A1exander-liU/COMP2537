@@ -463,6 +463,9 @@ function validate_existing_user() {
             }
         )
     }
+    else {
+        $("#incorrect-login").text("Please enter a username and password.")
+    }
 }
 
 function add_new_user() {
@@ -479,6 +482,9 @@ function add_new_user() {
                 "success": confirm_user
             }
         )
+    }
+    else {
+        $("#incorrect-login").text("Please enter a username and password.")
     }
 }
 
