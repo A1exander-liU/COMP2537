@@ -373,19 +373,9 @@ function get_card_detail() {
     )
 }
 
-async function view_profile_items() {
-    await $.ajax(
-        {
-            "url": "/getUserInfo",
-            "type": "GET",
-            "success": function(data) {
-                console.log(data)
-                $(".user_profile_name").text(data[0].username)
-                $(".profile-username").text(data[0].username)
-            }
-        }
-    )
+function view_profile_items() {
     if ($("#profile-tab").css("display") == "none") {
+        load_user_info()
         $("#profile-tab").show()    
     }
     else {
