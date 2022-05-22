@@ -302,7 +302,7 @@ app.post("/updateCartItem", function(req, res) {
 })
 
 app.post("/addToOrders", function(req, res) {
-    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {orders: req.body.order}}, function(err, order) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {orders: {order: req.body.order, date: req.body.date}}}, function(err, order) {
         if (err) {
             console.log("Err" + err)
         }

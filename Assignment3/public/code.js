@@ -167,7 +167,8 @@ async function add_order_to_orders(data) {
             "url": "/addToOrders",
             "type": "POST",
             "data": {
-                "order": data[0].shopping_cart
+                "order": data[0].shopping_cart,
+                "date": get_current_timestamp()
             },
             "success": function(data) {
                 console.log(data)
