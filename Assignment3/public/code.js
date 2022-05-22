@@ -160,6 +160,23 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function detect_quantity_change() {
+    pokemon_name = $(this).parent().parent().parent().parent().find(".pokemon-card").attr("id")
+    amount = $("#card-quantity").val()
+    $.ajax(
+        {
+            "url": "/findPokemonByName",
+            "type": "POST",
+            "data": {
+                "name": pokemon_name
+            },
+            "success": function(data) {
+                $(".pricing").text((data.price * amount).toFixed(2))
+            } 
+        }
+    )
+}
+
 function display_all_orders(data) {
     $(".purhcase-history-cards").html("")
     console.log(data)
@@ -361,7 +378,7 @@ function display_card_detail(data) {
     result += `<p>${data.height}</p>`
     result += `</div>`
     result += "</div>"
-    result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
+    result += `<p class="card-price">$${(data.price).toFixed(2)}</p>`
     result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add One to Cart</p>`
     result += "</div>"
     result += `<div class="card-shop-settings">`
@@ -372,7 +389,7 @@ function display_card_detail(data) {
     result += `<input type="number" id="card-quantity">`
     result += `</div>`
     result += `<p>Price</p>`
-    result += `<p class="updated-price">$<span class="pricing" style="border-style:none"></span></p>`
+    result += `<p class="updated-price">$<span class="pricing" style="border-style:none; color:black;">0.00</span></p>`
     result += `</div>`
     result += `<div class="card-add-to-cart">`
     result += `<p><i class="fa-solid fa-cart-shopping"></i> Add to My Cart</p>`
@@ -742,7 +759,7 @@ function display_current_page_pokemons() {
             )
         }
     }else {
-        console.log(`before display:`, $(`#${current_tab} .pokemons`).html())
+        // console.log(`before display:`, $(`#${current_tab} .pokemons`).html())
         for (start = 0; start < searched_pokemons.length; start++) {
             $.ajax(
                 {
@@ -1003,7 +1020,7 @@ function display_random_pokemons(data) {
     // also need to display price, put price in db
     console.log(data)
     old = $(`#${current_tab} .pokemons`).html()
-    console.log("old", old)
+    // console.log("old", old)
     result = ""
     result += `<div class="pokemon-card" id="${data.name}">`
     result += `<div class='pokemon' id='${data.name}'>`
@@ -1023,13 +1040,13 @@ function display_random_pokemons(data) {
     result += `<p>${data.height}</p>`
     result += `</div>`
     result += "</div>"
-    result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
+    result += `<p class="card-price">$${(data.price).toFixed(2)}</p>`
     result += `<p class="cart" id="${data.poke_id}">View Item</p>`
     result += "</div>"
     $(`#${current_tab} .pokemons`).html(old + result)
     apply_background_gradient(data)
     apply_border_colours(data)
-    console.log("after update", $(`#${current_tab} .pokemons`).html())
+    // console.log("after update", $(`#${current_tab} .pokemons`).html())
 }
 
 function loop_through_pokemon_db(data) {
@@ -1152,6 +1169,8 @@ function setup() {
     $("#clear-cart").click(clear_shopping_cart)
     $(".check-out-cart").click(check_out_cart)
     $("#user_profile").click(load_purhcase_history)
+    $("body").on("change", "#card-quantity", detect_quantity_change)
+    $("body").on("keyup", "#card-quantity", detect_quantity_change)
 }
 
 $(document).ready(setup)
