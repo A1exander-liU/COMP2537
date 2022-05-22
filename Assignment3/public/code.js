@@ -160,9 +160,9 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
-function add_order_to_orders(data) {
+async function add_order_to_orders(data) {
     console.log(data[0].shopping_cart)
-    $.ajax(
+    await $.ajax(
         {
             "url": "/addToOrders",
             "type": "POST",
@@ -172,6 +172,15 @@ function add_order_to_orders(data) {
             "success": function(data) {
                 console.log(data)
             } 
+        }
+    )
+    $.ajax(
+        {
+            "url": "/clearCart",
+            "type": "DELETE",
+            "success": function(data) {
+                console.log("success")
+            }
         }
     )
 }

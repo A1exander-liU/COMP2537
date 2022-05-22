@@ -313,6 +313,18 @@ app.post("/addToOrders", function(req, res) {
     })
 })
 
+app.delete("/clearCart", function(req, res) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$pull: {shopping_cart: {}}}, function(err, empty_cart) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + empty_cart)
+            res.send("success")
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
