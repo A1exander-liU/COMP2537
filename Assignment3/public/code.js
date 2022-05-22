@@ -160,6 +160,36 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function display_all_orders(data) {
+    $(".purhcase-history-cards").html("")
+    console.log(data)
+    console.log(data[0].orders[0].order[0])
+    for (i = 0; i < data[0].orders.length; i++) {
+        order_card = ""
+        order_card += `<div class="purchase-history-card">`
+        order_card += `<p>${data[0].orders[i].date}</p>`
+
+        order_card += `<div class="purchase-history-pokemons">`
+        for (j = 0; j < data[0].orders[i].order.length; j++) {
+            order_card += `<p>${data[0].orders[i].order[j].name} X${data[0].orders[i].order[j].quantity}</p>`
+        }
+        order_card += `</div>`
+        order_card += `</div>`
+        old = $(".purhcase-history-cards").html()
+        $(".purhcase-history-cards").html(old + order_card)
+    }
+}
+
+function load_purhcase_history() {
+    $.ajax(
+        {
+            "url": "/getOrders",
+            "type": "GET",
+            "success": display_all_orders
+        }
+    )
+}
+
 async function add_order_to_orders(data) {
     console.log(data[0].shopping_cart)
     await $.ajax(
@@ -1061,11 +1091,13 @@ function setup() {
     $("#login").click(validate_existing_user)
     $(".secondary-tab").click(view_profile_items)
     $("#favourites").click(view_page)
+    $("#user_profile").click(view_page)
     $("#sign-out").click(sign_out_user)
     $("body").on("click", ".card-add-to-cart", add_card_to_cart)
     $("body").on("click", ".pokemon-card", get_card_detail)
     $("#favourites").click(load_shopping_cart)
     $(".check-out-cart").click(check_out_cart)
+    $("#user_profile").click(load_purhcase_history)
 }
 
 $(document).ready(setup)

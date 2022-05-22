@@ -550,6 +550,25 @@
 
         }
 
+        .purchase-history-container {
+            width: 100%;
+            background-color: rgb(214, 214, 214);
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .purhcase-history-cards {
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 100%;
+            gap: 20px;
+            height: 30vh;
+            overflow: auto;
+        }
+
         @media screen and (max-width: 800px) {
             .pokemons {
                 grid-template-columns: auto auto !important;
@@ -733,6 +752,17 @@
             </div>
             <div class="check-out-cart">
                 <p><i class="fa-solid fa-cart-shopping-fast"></i> Check out Cart</p> 
+            </div>
+        </div>
+    </div>
+    <div class="tab-stuff" id="user_profile-page">
+        <div class="profile-content">
+            <p class="profile-username">Username</p>
+        </div>
+        <div class="purchase-history-container">
+            <h4>Purchase History</h4>
+            <div class="purhcase-history-cards">
+
             </div>
         </div>
     </div>

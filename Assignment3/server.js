@@ -313,6 +313,18 @@ app.post("/addToOrders", function(req, res) {
     })
 })
 
+app.get("/getOrders", function(req, res) {
+    userModel.find({username: req.session.current_user[0].username}, function(err, order_history) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + order_history)
+            res.json(order_history)
+        }
+    })
+})
+
 app.delete("/clearCart", function(req, res) {
     userModel.updateOne({username: req.session.current_user[0].username}, {$pull: {shopping_cart: {}}}, function(err, empty_cart) {
         if (err) {
@@ -362,7 +374,7 @@ const userSchema = new mongoose.Schema({
         times: Number,
         date: String
     }],
-    orders: [[Object]]
+    orders: [Object]
 })
 
 const userModel = mongoose.model("users", userSchema)
