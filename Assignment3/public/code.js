@@ -160,6 +160,32 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function add_order_to_orders(data) {
+    console.log(data[0].shopping_cart)
+    $.ajax(
+        {
+            "url": "/addToOrders",
+            "type": "POST",
+            "data": {
+                "order": data[0].shopping_cart
+            },
+            "success": function(data) {
+                console.log(data)
+            } 
+        }
+    )
+}
+
+function check_out_cart() {
+    $.ajax(
+        {
+            "url": "/getShoppingCart",
+            "type": "GET",
+            "success": add_order_to_orders
+        }
+    )
+}
+
 function display_card_items(data) {
     old = $(".shopping-cart-card-container").html("")
     console.log(data)
@@ -1029,6 +1055,7 @@ function setup() {
     $("body").on("click", ".card-add-to-cart", add_card_to_cart)
     $("body").on("click", ".pokemon-card", get_card_detail)
     $("#favourites").click(load_shopping_cart)
+    $(".check-out-cart").click(check_out_cart)
 }
 
 $(document).ready(setup)

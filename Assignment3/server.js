@@ -301,6 +301,18 @@ app.post("/updateCartItem", function(req, res) {
     })
 })
 
+app.post("/addToOrders", function(req, res) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {orders: req.body.order}}, function(err, order) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + order)
+            res.send("Success")
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
@@ -337,7 +349,8 @@ const userSchema = new mongoose.Schema({
         event: String,
         times: Number,
         date: String
-    }]
+    }],
+    orders: [[Object]]
 })
 
 const userModel = mongoose.model("users", userSchema)
