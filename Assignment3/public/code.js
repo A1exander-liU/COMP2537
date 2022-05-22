@@ -235,7 +235,7 @@ function display_card_items(data) {
     for (i = 0; i < data[0].shopping_cart.length; i++) {
         display_card = ""
         display_card += `<div class="shopping-cart-item">`
-        display_card += `<p>${data[0].shopping_cart[i].name} Pokemon Card X${data[0].shopping_cart[i].quantity}</p>`
+        display_card += `<p>${captialize(data[0].shopping_cart[i].name)} Pokemon Card X${data[0].shopping_cart[i].quantity}</p>`
         display_card += `<p>Price: $${(data[0].shopping_cart[i].price).toFixed(2)}</p>` // change with price
         display_card += `</div>`
         old = $(".shopping-cart-card-container").html()
