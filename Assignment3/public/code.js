@@ -1113,6 +1113,7 @@ function setup() {
     $(".secondary-tab").click(view_profile_items)
     $("#favourites").click(view_page)
     $("#user_profile").click(view_page)
+    $("#timeline").click(view_page)
     $("#sign-out").click(sign_out_user)
     $("body").on("click", ".card-add-to-cart", add_card_to_cart)
     $("body").on("click", ".pokemon-card", get_card_detail)

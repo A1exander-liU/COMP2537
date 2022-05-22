@@ -293,9 +293,9 @@
 
         .page-tabs {
             display: grid;
-            grid-template-areas: ". . . . ."
-                                 ". . . . drop";
-            grid-template-columns: 20% 20% 20% 20% 20%;
+            grid-template-areas: ". . . . "
+                                 ". . . drop";
+            grid-template-columns: 25% 25% 25% 25%;
             grid-template-rows: auto auto;
             margin-bottom: 5%;
         }
@@ -314,7 +314,7 @@
         #profile-tab {
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 33% 33% 33%;
+            grid-template-rows: 25% 25% 25% 25%;
             grid-area: drop;
         }
 
@@ -419,7 +419,7 @@
             row-gap: 5px;
         }
 
-        #search-criteria>div {
+        #search-criteria > div {
             display: grid;
             grid-template-columns: 75% 25%;
             row-gap: 10px;
@@ -718,13 +718,14 @@
         <button class="page-tab active" id="home">Home</button>
         <button class="page-tab" id="search">Search</button>
         <button class="page-tab" id="history">History</button>
-        <button class="page-tab" id="timeline">Timeline</button>
+        <!-- <button class="page-tab" id="timeline">Timeline</button> -->
         <div>
             <button class="secondary-tab" id="profile">Profile</button>
         </div>
         <div id="profile-tab">
             <button class="profile-tabs" id="user_profile"><i class="fa-solid fa-user"></i><span class="user_profile_name" style="border-style: none; color: black;"> User</span></button>
             <button class="profile-tabs" id="favourites"><i class="fa-solid fa-cart-shopping"></i> My Cart</button>
+            <button class="profile-tabs" id="timeline"><i class="fa-solid fa-timeline"></i> My Timeline</button>
             <button class="profile-tabs" id="sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
         </div>
     </div>
