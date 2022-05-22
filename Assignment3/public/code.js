@@ -163,9 +163,6 @@ function remove_page_buttons() {
 function detect_quantity_change() {
     pokemon_name = $(this).parent().parent().parent().parent().find(".pokemon-card").attr("id")
     amount = $("#card-quantity").val()
-    if (amount < 0) {
-        $("#card-quantity").val(0)
-    }
     $.ajax(
         {
             "url": "/findPokemonByName",
@@ -174,7 +171,13 @@ function detect_quantity_change() {
                 "name": pokemon_name
             },
             "success": function(data) {
-                $(".pricing").text((data.price * amount).toFixed(2))
+                if (amount < 0) {
+                    $("#card-quantity").val(0)
+                    $(".pricing").text("0.00")
+                }
+                else {
+                    $(".pricing").text((data.price * amount).toFixed(2))
+                }
             } 
         }
     )
