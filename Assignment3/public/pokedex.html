@@ -719,6 +719,28 @@
                 height: 100%;
             }
         }
+
+        @media screen and (max-width: 350px) {
+            .page-tabs {
+                grid-template-areas: "."
+                                     "."
+                                     "."
+                                     "."
+                                     "drop";
+                grid-template-columns: 100%;
+                grid-template-rows: auto auto auto auto auto;
+            }
+        }
+
+        @media screen and (max-width: 200px) {
+            img {
+                width: 100px;
+                height: 100px;
+            }
+            body {
+                font-size: 0.8em;
+            }
+        }
     </style>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
