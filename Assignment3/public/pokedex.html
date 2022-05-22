@@ -621,6 +621,29 @@
             overflow: auto;
         }
 
+        .total-price {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .total-price p {
+            text-align: left;
+        }
+
+        #clear-cart, .check-out-cart {
+            width: 70%;
+            margin: 3px auto;
+            background-color: rgb(182, 182, 182);
+            border-radius: 10px;
+        }
+
+        #clear-cart:hover, .check-out-cart:hover {
+            background-color: rgb(190, 190, 190);
+        }
+
         @media screen and (max-width: 800px) {
             .pokemons {
                 grid-template-columns: auto auto !important;
