@@ -160,6 +160,39 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function display_card_items(data) {
+    old = $(".shopping-cart-card-container").html("")
+    console.log(data)
+    sub_total = 0
+    for (i = 0; i < data[0].shopping_cart.length; i++) {
+        display_card = ""
+        display_card += `<div class="shopping-cart-item">`
+        display_card += `<p>${data[0].shopping_cart[i].name} Pokemon Card X${data[0].shopping_cart[i].quantity}</p>`
+        display_card += `<p>Price: ${data[0].shopping_cart[i].quantity}</p>` // change with price
+        display_card += `</div>`
+        old = $(".shopping-cart-card-container").html()
+        $(".shopping-cart-card-container").html(old + display_card)
+        sub_total += data[0].shopping_cart[i].quantity // change with price
+    }
+    total_price = `<div class="total-price">`
+    total_price += `<p>Sub-total: ${sub_total}</p>`
+    total_price += `<p>Tax: ${sub_total * 0.08}</p>`
+    total_price += `<p>Total: ${sub_total + (sub_total * 0.08)}</p>`
+    total_price += `</div>`
+    old = $(".shopping-cart-card-container").html()
+    $(".shopping-cart-card-container").html(old + total_price)
+}
+
+function load_shopping_cart() {
+    $.ajax(
+        {
+            "url": "/getShoppingCart",
+            "type": "GET",
+            "success": display_card_items
+        }
+    )
+}
+
 function confirm_addition_to_cart(data) {
     console.log(data)
 }
@@ -711,10 +744,10 @@ function display_history() {
 }
 
 function view_page() {
-    $(".card-info-shop").empty()
     $("#profile-tab").hide()
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     current_tab = ($(this).attr("id") + "-page")
+    $(`#${current_tab} .card-info-shop`).empty()
     $(".pokemons").html("")
     tab = $(this).attr("id")
     $(".page-tab").removeClass("active")
@@ -995,6 +1028,7 @@ function setup() {
     $("#sign-out").click(sign_out_user)
     $("body").on("click", ".card-add-to-cart", add_card_to_cart)
     $("body").on("click", ".pokemon-card", get_card_detail)
+    $("#favourites").click(load_shopping_cart)
 }
 
 $(document).ready(setup)

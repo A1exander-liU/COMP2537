@@ -524,6 +524,32 @@
             margin: 10px auto 10px auto;
         }
 
+        .shopping-cart-container {
+            text-align: center;
+            width: 90%;
+            margin: 20px auto;
+            background-color: rgb(214, 214, 214);
+            border-radius: 20px;
+            border-style: solid;
+            border-width: 1px;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto auto auto;
+        }
+
+        .shopping-cart-card-container {
+            width: 90%;
+            height: 30vh;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 100%;
+            overflow: auto;
+        }
+
+        #clear-cart {
+
+        }
+
         @media screen and (max-width: 800px) {
             .pokemons {
                 grid-template-columns: auto auto !important;
@@ -580,8 +606,9 @@
             <button class="secondary-tab" id="profile">Profile</button>
         </div>
         <div id="profile-tab">
-            <button class="profile-tabs" id="favourites">Favourites</button>
-            <button class="profile-tabs" id="sign-out">Sign Out</button>
+            <button class="profile-tabs" id="user_profile"><i class="fa-solid fa-user"></i><span class="user_profile_name" style="border-style: none; color: black;"> User</span></button>
+            <button class="profile-tabs" id="favourites"><i class="fa-solid fa-cart-shopping"></i> My Cart</button>
+            <button class="profile-tabs" id="sign-out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
         </div>
     </div>
     <div class="tab-stuff" id="home-page">
@@ -666,9 +693,14 @@
                 </div>
             </div>
         </div>
-        <div class="pokemons">
+        <div class="display_pokemons">
+            <div class="pokemons">
+            </div>
+            <div id="page_buttons">
+            </div>
         </div>
-        <div id="page_buttons">
+        <div class="card-info-shop">
+
         </div>
     </div>
     <div class="tab-stuff" id="history-page">
@@ -693,7 +725,13 @@
         </div>
     </div>
     <div class="tab-stuff" id="favourites-page">
-        <h2>Favourites</h2>
+        <div class="shopping-cart-container">
+            <h2>Shopping Cart</h2>
+            <div id="clear-cart">Clear shopping cart</div>
+            <div class="shopping-cart-card-container">
+
+            </div>
+        </div>
     </div>
     <footer>
         <p>Data pulled from <a href="https://pokeapi.co/">PokeAPI</a></p>
