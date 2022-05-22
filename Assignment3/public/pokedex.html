@@ -604,6 +604,12 @@
             display: grid;
             grid-template-columns: 100%;
             overflow: auto;
+            gap: 10px;
+        }
+
+        .shopping-cart-item {
+            background-color: rgb(205, 205, 205);
+            border-radius: 20px;
         }
 
         .purchase-history-container {
@@ -849,6 +855,11 @@
             <div id="clear-cart">Clear shopping cart</div>
             <div class="shopping-cart-card-container">
 
+            </div>
+            <div class="total-price">
+                <p class="sub-total"></p>
+                <p class="tax"></p>
+                <p class="total"></p>
             </div>
             <div class="check-out-cart">
                 <p><i class="fa-solid fa-cart-shopping-fast"></i> Check out Cart</p> 

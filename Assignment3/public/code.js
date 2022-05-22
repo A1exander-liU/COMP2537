@@ -242,11 +242,9 @@ function display_card_items(data) {
         $(".shopping-cart-card-container").html(old + display_card)
         sub_total += data[0].shopping_cart[i].quantity // change with price
     }
-    total_price = `<div class="total-price">`
-    total_price += `<p>Sub-total: ${sub_total}</p>`
-    total_price += `<p>Tax: ${sub_total * 0.08}</p>`
-    total_price += `<p>Total: ${sub_total + (sub_total * 0.08)}</p>`
-    total_price += `</div>`
+    $(".sub-total").text(`Sub-total: $${sub_total}`)
+    $(".tax").text(`Tax: $${sub_total * 0.08}`)
+    $(".total").text(`Total: $${sub_total + (sub_total * 0.08)}`)
     old = $(".shopping-cart-card-container").html()
     $(".shopping-cart-card-container").html(old + total_price)
 }
