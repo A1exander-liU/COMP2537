@@ -12,7 +12,7 @@ current_tab = "home-page"
 
 function confirm_timeline_update(data) {
     console.log(data)
-    $(".pokemons").html("<p></p>")
+    // $(".pokemons").html("<p></p>")
 }
 
 function insert_or_update_event(data) {
@@ -694,7 +694,8 @@ function display_page_buttons(total_pages) {
 }
 
 function display_current_page_pokemons() {
-    $(".pokemons").html("")
+    $(`#${current_tab} .pokemons`).html("")
+    $(`#${current_tab} .card-info-shop`).html("")
     if (searched_pokemons.length > 12) {
         page_size = 12
         total_pages = Math.ceil(searched_pokemons.length / 12)
@@ -716,6 +717,7 @@ function display_current_page_pokemons() {
             )
         }
     }else {
+        console.log(`before display:`, $(`#${current_tab} .pokemons`).html())
         for (start = 0; start < searched_pokemons.length; start++) {
             $.ajax(
                 {
@@ -747,6 +749,7 @@ function get_pokemon_basic_info(data) {
 async function get_pokemon_by_type() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     $(".pokemons").html("")
+    $(`#${current_tab} .card-info-shop`).html("")
     searched_type = $("#type_dropdown option:selected").val()
     console.log(searched_type)
     await $.ajax(
@@ -774,7 +777,8 @@ async function get_pokemon_by_type() {
 
 async function get_pokemon_by_name() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
-    $(".pokemons").html("")
+    $(`#${current_tab} .pokemons`).html("")
+    $(`#${current_tab} .card-info-shop`).html("")
     searched_name = $("#name").val()
     search_history.push([searched_name, `Searched by name: ${searched_name.toLowerCase()}`])
     console.log(search_history)
@@ -821,7 +825,7 @@ function view_page() {
     $(".pokemons").css("grid-template-columns", "auto auto auto auto")
     current_tab = ($(this).attr("id") + "-page")
     $(`#${current_tab} .card-info-shop`).empty()
-    $(".pokemons").html("")
+    $(`#${current_tab} .pokemons`).html("")
     tab = $(this).attr("id")
     $(".page-tab").removeClass("active")
     $(".tab-stuff").hide()
@@ -973,7 +977,8 @@ async function get_this_pokemon_info() {
 function display_random_pokemons(data) {
     // also need to display price, put price in db
     console.log(data)
-    old = $(".pokemons").html()
+    old = $(`#${current_tab} .pokemons`).html()
+    console.log("old", old)
     result = ""
     result += `<div class="pokemon-card" id="${data.name}">`
     result += `<div class='pokemon' id='${data.name}'>`
@@ -996,9 +1001,10 @@ function display_random_pokemons(data) {
     result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
     result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add One to Cart</p>`
     result += "</div>"
-    $(".pokemons").html(old + result)
+    $(`#${current_tab} .pokemons`).html(old + result)
     apply_background_gradient(data)
     apply_border_colours(data)
+    console.log("after update", $(`#${current_tab} .pokemons`).html())
 }
 
 function loop_through_pokemon_db(data) {
@@ -1094,7 +1100,7 @@ function setup() {
     $(".page-tabs .page-tab").click(view_page)
     $("#history").click(display_history)
     $("#home").click(get_random_pokemons)
-    $("#search").click(hide_pokemons)
+    // $("#search").click(hide_pokemons)
     $("#find_by_name").click(get_pokemon_by_name)
     $("#find_by_type").click(get_pokemon_by_type)
     $("body").on("click", "#page_buttons button", get_first_prev_next_last)
