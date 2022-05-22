@@ -39,7 +39,7 @@
         }
         
         #form > div {
-            width: 80%;
+            width: 100%;
             margin: auto;
             display: grid;
             grid-template-columns: 100%;
@@ -110,8 +110,8 @@
             }
 
             .box {
-                width: 325px;
-                height: 650px;
+                width: 70%;
+                height: 70%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -153,9 +153,22 @@
 
         }
 
-        @media screen and (max-width: 300px) {
-            #form h2 {
-                font-size: 2.5em;
+        @media screen and (max-width: 500px) {
+            .box {
+                height: 70%;
+                width: 95%;
+            }
+        }
+
+        @media screen and (max-width: 350px) {
+            .box {
+                font-size: 0.75em;
+            }
+        }
+
+        @media screen and (max-width: 200px) {
+            #form > div h2 {
+                font-size: 2.25em;
             }
         }
     </style>
