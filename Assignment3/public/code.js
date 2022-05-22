@@ -192,28 +192,30 @@ function load_purhcase_history() {
 
 async function add_order_to_orders(data) {
     console.log(data[0].shopping_cart)
-    await $.ajax(
-        {
-            "url": "/addToOrders",
-            "type": "POST",
-            "data": {
-                "order": data[0].shopping_cart,
-                "date": get_current_timestamp()
-            },
-            "success": function(data) {
-                console.log(data)
-            } 
-        }
-    )
-    $.ajax(
-        {
-            "url": "/clearCart",
-            "type": "DELETE",
-            "success": function(data) {
-                console.log("success")
+    if (data[0].shopping_cart.length > 0) {
+        await $.ajax(
+            {
+                "url": "/addToOrders",
+                "type": "POST",
+                "data": {
+                    "order": data[0].shopping_cart,
+                    "date": get_current_timestamp()
+                },
+                "success": function(data) {
+                    console.log(data)
+                } 
             }
-        }
-    )
+        )
+        $.ajax(
+            {
+                "url": "/clearCart",
+                "type": "DELETE",
+                "success": function(data) {
+                    console.log("success")
+                }
+            }
+        )
+    }
 }
 
 function check_out_cart() {
