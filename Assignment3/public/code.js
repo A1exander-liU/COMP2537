@@ -373,7 +373,18 @@ function get_card_detail() {
     )
 }
 
-function view_profile_items() {
+async function view_profile_items() {
+    await $.ajax(
+        {
+            "url": "/getUserInfo",
+            "type": "GET",
+            "success": function(data) {
+                console.log(data)
+                $(".user_profile_name").text(data[0].username)
+                $(".profile-username").text(data[0].username)
+            }
+        }
+    )
     if ($("#profile-tab").css("display") == "none") {
         $("#profile-tab").show()    
     }
@@ -999,7 +1010,7 @@ function display_random_pokemons(data) {
     result += `</div>`
     result += "</div>"
     result += `<p class="card-price">$${data.price.$numberDecimal}</p>`
-    result += `<p class="cart" id="${data.poke_id}"><i class="fa-solid fa-cart-shopping"></i> Add One to Cart</p>`
+    result += `<p class="cart" id="${data.poke_id}">View Item</p>`
     result += "</div>"
     $(`#${current_tab} .pokemons`).html(old + result)
     apply_background_gradient(data)
@@ -1092,7 +1103,6 @@ function setup() {
     get_random_pokemons()
     load_home_page()
     hide_stuff()
-    load_user_info()
     // $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
