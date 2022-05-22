@@ -84,6 +84,18 @@ app.get("/signOut", function(req, res) {
     res.send("Successfully signed out.")
 })
 
+app.get("/getUserInfo", function(req, res) {
+    userModel.find({username: req.session.current_user[0].username}, function(err, user_info) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + user_info)
+            res.send(user_info)
+        }
+    })
+})
+
 app.get("/timeline", function(req, res) {
     console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
     // return back a json of all the docs in the timline collection

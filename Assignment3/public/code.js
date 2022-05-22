@@ -1058,6 +1058,20 @@ function load_timeline() {
     )
 }
 
+function load_user_info() {
+    $.ajax(
+        {
+            "url": "/getUserInfo",
+            "type": "GET",
+            "success": function(data) {
+                console.log(data)
+                $(".user_profile_name").text(data[0].username)
+                $(".profile-username").text(data[0].username)
+            }
+        }
+    )
+}
+
 function hide_stuff() {
     $("#profile-tab").hide()
 }
@@ -1071,6 +1085,7 @@ function setup() {
     get_random_pokemons()
     load_home_page()
     hide_stuff()
+    load_user_info()
     // $("body").on("click", ".pokemon", get_this_pokemon_info)
     $("body").on("click", "#base_stats", view_base_stats)
     $("body").on("click", "#desc", view_desc)
