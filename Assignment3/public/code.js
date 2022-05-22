@@ -236,17 +236,15 @@ function display_card_items(data) {
         display_card = ""
         display_card += `<div class="shopping-cart-item">`
         display_card += `<p>${data[0].shopping_cart[i].name} Pokemon Card X${data[0].shopping_cart[i].quantity}</p>`
-        display_card += `<p>Price: ${data[0].shopping_cart[i].quantity}</p>` // change with price
+        display_card += `<p>Price: $${(data[0].shopping_cart[i].price).toFixed(2)}</p>` // change with price
         display_card += `</div>`
         old = $(".shopping-cart-card-container").html()
         $(".shopping-cart-card-container").html(old + display_card)
-        sub_total += data[0].shopping_cart[i].quantity // change with price
+        sub_total += data[0].shopping_cart[i].price // change with price
     }
-    $(".sub-total").text(`Sub-total: $${sub_total}`)
-    $(".tax").text(`Tax: $${sub_total * 0.08}`)
-    $(".total").text(`Total: $${sub_total + (sub_total * 0.08)}`)
-    old = $(".shopping-cart-card-container").html()
-    $(".shopping-cart-card-container").html(old + total_price)
+    $(".sub-total").text(`Sub-total: $${sub_total.toFixed(2)}`)
+    $(".tax").text(`Tax: $${(sub_total * 0.08).toFixed(2)}`)
+    $(".total").text(`Total: $${(sub_total + (sub_total * 0.08)).toFixed(2)}`)
 }
 
 function load_shopping_cart() {
@@ -268,10 +266,23 @@ function return_poke_names(data) {
 }
 
 async function add_card_to_cart() {
+    total_card_price = 0
     quantity = parseInt($(`#${current_tab} #card-quantity`).val())
     console.log(quantity)
     poke_name = $(this).parent().parent().find(`.pokemon-card`).attr("id")
     console.log(poke_name)
+    await $.ajax(
+        {
+            "url": "/findPokemonByName",
+            "type": "POST",
+            "data": {
+                "name": poke_name
+            },
+            "success": function(data) {
+                total_card_price = data.price * quantity
+            }    
+        }
+    )
     await $.ajax(
         {
             "url": "/getShoppingCart",
@@ -286,7 +297,8 @@ async function add_card_to_cart() {
                             "type": "POST",
                             "data": {
                                 "pokemon_name": poke_name,
-                                "amount": quantity
+                                "amount": quantity,
+                                "price": total_card_price.toFixed(2)
                             },
                             "success": confirm_addition_to_cart
                         }
@@ -299,7 +311,8 @@ async function add_card_to_cart() {
                             "type": "POST",
                             "data": {
                                 "pokemon_name": poke_name,
-                                "amount": quantity
+                                "amount": quantity,
+                                "price": total_card_price.toFixed(2)
                             },
                             "success": confirm_addition_to_cart
                         }

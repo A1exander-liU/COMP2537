@@ -287,7 +287,7 @@ app.get("/getShoppingCart", function(req, res) {
 
 app.post("/addToCart", function(req, res) {
     console.log(`Username: ${req.session.current_user[0].username} Password: ${req.session.current_user[0].password}`)
-    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {shopping_cart: {name: req.body.pokemon_name, quantity: req.body.amount}}}, function(err, cart_item) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$push: {shopping_cart: {name: req.body.pokemon_name, quantity: req.body.amount, price: req.body.price}}}, function(err, cart_item) {
         if (err) {
             console.log("Err" + err)
         }
@@ -370,7 +370,8 @@ const pokemonSchema = new mongoose.Schema({
     height: Number, // in kg
     base_stat_total: Number,
     official_artwork: String, // url for image
-    stats: [Number]
+    stats: [Number],
+    price: Number
 })
 
 const userSchema = new mongoose.Schema({
@@ -379,7 +380,8 @@ const userSchema = new mongoose.Schema({
     // shopping_cart: [[Object]],
     shopping_cart: [{
         name: String,
-        quantity: Number
+        quantity: Number,
+        price: Number
     }],
     timeline: [{
         event: String,
