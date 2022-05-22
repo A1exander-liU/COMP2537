@@ -266,11 +266,11 @@ function display_card_items(data) {
         display_card = ""
         display_card += `<div class="shopping-cart-item">`
         display_card += `<p>${captialize(data[0].shopping_cart[i].name)} Pokemon Card X${data[0].shopping_cart[i].quantity}</p>`
-        display_card += `<p>Price: $${(data[0].shopping_cart[i].price).toFixed(2)}</p>` // change with price
+        display_card += `<p>Price: $${(data[0].shopping_cart[i].price * data[0].shopping_cart[i].quantity).toFixed(2)}</p>` // change with price
         display_card += `</div>`
         old = $(".shopping-cart-card-container").html()
         $(".shopping-cart-card-container").html(old + display_card)
-        sub_total += data[0].shopping_cart[i].price // change with price
+        sub_total += data[0].shopping_cart[i].price * data[0].shopping_cart[i].quantity// change with price
     }
     $(".sub-total").text(`Sub-total: $${sub_total.toFixed(2)}`)
     $(".tax").text(`Tax: $${(sub_total * 0.08).toFixed(2)}`)
@@ -313,7 +313,7 @@ async function add_card_to_cart() {
             }    
         }
     )
-    await $.ajax(
+    $.ajax(
         {
             "url": "/getShoppingCart",
             "type": "GET",
