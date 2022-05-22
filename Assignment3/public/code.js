@@ -340,8 +340,12 @@ function display_card_detail(data) {
     result += `<div class="card-shop-settings">`
     result += `<div class="card-title"><h4>${captialize(data.name)} Pokemon Card</h4></div>`
     result += `<div class="card-purchase-section">`
+    result += `<div>`
     result += `<p>Quantity</p>`
     result += `<input type="number" id="card-quantity">`
+    result += `</div>`
+    result += `<p>Price</p>`
+    result += `<p class="updated-price">$<span class="pricing" style="border-style:none"></span></p>`
     result += `</div>`
     result += `<div class="card-add-to-cart">`
     result += `<p><i class="fa-solid fa-cart-shopping"></i> Add to My Cart</p>`
