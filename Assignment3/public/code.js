@@ -178,7 +178,7 @@ function expand_cards() {
 
 function detect_quantity_change() {
     pokemon_name = $(this).parent().parent().parent().parent().find(".pokemon-card").attr("id")
-    amount = $("#card-quantity").val()
+    amount = $(`#${current_tab} #card-quantity`).val()
     $.ajax(
         {
             "url": "/findPokemonByName",
@@ -188,7 +188,7 @@ function detect_quantity_change() {
             },
             "success": function(data) {
                 if (amount < 0) {
-                    $("#card-quantity").val(0)
+                    $(`#${current_tab} #card-quantity`).val(0)
                     $(".pricing").text("0.00")
                 }
                 else {
