@@ -41,6 +41,7 @@ app.post("/findUser", function(req, res) {
     userModel.find({username: req.body.username}, function(err, found_user) {
         if (err) {
             console.log("Err" + err) 
+            res.send("No user could be found, please try again.")
         }
         else {
             console.log("Found User Data" + found_user[0])

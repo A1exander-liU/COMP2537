@@ -212,7 +212,7 @@ function display_all_orders(data) {
         order_card += `<div class="purchase-history-pokemons">`
         for (j = 0; j < data[0].orders[i].order.length; j++) {
             order_card += `<p>${captialize(data[0].orders[i].order[j].name)} Card X${data[0].orders[i].order[j].quantity}</p><p>$${parseFloat(data[0].orders[i].order[j].price).toFixed(2)}</p>`
-            price = data[0].orders[i].order[j].price
+            price += parseFloat(data[0].orders[i].order[j].price)
         }
         order_card += `<p>Total</p><p>$${parseFloat(price * 1.08).toFixed(2)}</p>`
         order_card += `</div>`
