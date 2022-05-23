@@ -216,6 +216,38 @@ async function clear_shopping_cart() {
     load_shopping_cart()
 }
 
+function display_user_stats(data) {
+    ordered_cards = 0
+    spent_cash = 0
+    console.log("user stats", data[0].orders)
+    $(".profile-total-orders").text(data[0].orders.length)
+    if (data[0].orders.length == 0) {
+        $(".profile-total-cards").text("0")
+    $(".profile-spent-cash").text("$0.00")
+    }
+    else {
+        orders_array = data[0].orders
+        for (i = 0; i < orders_array.length; i++) {
+            for (j = 0; j < orders_array[i].order.length; j++) {
+                ordered_cards += parseInt(orders_array[i].order[j].quantity)
+                spent_cash += parseFloat(orders_array[i].order[j].price)
+            }
+        }
+        $(".profile-total-cards").text(ordered_cards)
+        $(".profile-spent-cash").text("$" + spent_cash.toFixed(2))
+    }
+}
+
+function load_user_stats() {
+    $.ajax(
+        {
+            "url": "/getOrders",
+            "type": "GET",
+            "success": display_user_stats
+        }
+    )
+}
+
 function load_purhcase_history() {
     $.ajax(
         {
@@ -1181,6 +1213,7 @@ function setup() {
     $("#clear-cart").click(clear_shopping_cart)
     $(".check-out-cart").click(check_out_cart)
     $("#user_profile").click(load_purhcase_history)
+    $("#user_profile").click(load_user_stats)
     $("body").on("change", "#card-quantity", detect_quantity_change)
     $("body").on("keyup", "#card-quantity", detect_quantity_change)
 }
