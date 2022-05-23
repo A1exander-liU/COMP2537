@@ -315,6 +315,18 @@ app.post("/updateCartItem", function(req, res) {
     })
 })
 
+app.delete("/removeCartItem", function(req ,res) {
+    userModel.updateOne({username: req.session.current_user[0].username}, {$pull: {shopping_cart: {name: req.body.name}}}, function(err, removed) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + removed)
+            res.send("removed cart item")
+        }
+    })
+})
+
 app.post("/addToOrders", function(req, res) {
     userModel.updateOne({username: req.session.current_user[0].username}, {$push: {orders: {order: req.body.order, date: req.body.date}}}, function(err, order) {
         if (err) {

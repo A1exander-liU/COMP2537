@@ -202,7 +202,6 @@ function detect_quantity_change() {
 function display_all_orders(data) {
     $(".purhcase-history-cards").html("")
     console.log(data)
-    console.log(data[0].orders[0].order[0])
     price = 0
     for (i = 0; i < data[0].orders.length; i++) {
         order_card = ""
@@ -228,6 +227,23 @@ async function clear_shopping_cart() {
         {
             "url": "/clearCart",
             "type": "DELETE",
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
+    load_shopping_cart()
+}
+
+async function remove_item_from_cart() {
+    pokemon_name = $(this).attr("id")
+    $.ajax(
+        {
+            "url": "/removeCartItem",
+            "type": "DELETE",
+            "data": {
+                "name": pokemon_name
+            },
             "success": function(data) {
                 console.log(data)
             }
@@ -279,6 +295,7 @@ function load_purhcase_history() {
 }
 
 async function add_order_to_orders(data) {
+    $(".shopping-cart-card-container").text("Order Processed Successfully!")
     console.log(data[0].shopping_cart)
     if (data[0].shopping_cart.length > 0) {
         await $.ajax(
@@ -325,6 +342,7 @@ function display_card_items(data) {
         display_card += `<div class="shopping-cart-item">`
         display_card += `<p>${captialize(data[0].shopping_cart[i].name)} Pokemon Card X${data[0].shopping_cart[i].quantity}</p>`
         display_card += `<p>Price: $${(data[0].shopping_cart[i].price * data[0].shopping_cart[i].quantity).toFixed(2)}</p>` // change with price
+        display_card += `<p class="remove-cart-item" id="${data[0].shopping_cart[i].name}">Remove Item</p>`
         display_card += `</div>`
         old = $(".shopping-cart-card-container").html()
         $(".shopping-cart-card-container").html(old + display_card)
@@ -1237,6 +1255,7 @@ function setup() {
     $("body").on("change", "#card-quantity", detect_quantity_change)
     $("body").on("keyup", "#card-quantity", detect_quantity_change)
     $("body").on("click", ".expand-cards", expand_cards)
+    $("body").on("click", ".remove-cart-item", remove_item_from_cart)
 }
 
 $(document).ready(setup)
