@@ -28,7 +28,7 @@ app.get("/", function(req, res) {
 
 app.get("/pokedex", function(req, res) {
     if (req.session.authenticated) {
-        console.log("User Info" + req.session.current_user)
+        console.log("User Infoaaaaaaaaaaaaaaaaaaaaaaaa" + req.session.current_user)
         res.sendFile(__dirname + "/public/pokedex.html")
     }
     else {
@@ -72,9 +72,10 @@ app.post("/signUp", function(req, res) {
             res.send("Username is unavailable, please choose again.")
         }
         else {
-            console.log("Data" + event)
+            console.log("Datajkhkjhkjhkjhkj" + event)
             req.session.authenticated = true
-            req.session.current_user = new_user
+            req.session.current_user = [event]
+            console.log(req.session.current_user[0].username)
             res.send("success")
         }
     })
