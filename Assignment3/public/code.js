@@ -166,7 +166,8 @@ function expand_cards() {
     if ($(this).parent().find(".purchase-history-pokemons").css("display") == "none") {
         $(this).removeClass("fa-plus")
         $(this).addClass("fa-minus")
-        $(".purchase-history-pokemons").show()
+        $(".purchase-history-pokemons").hide()
+        $(this).next().show()
     }
     else {
         $(this).removeClass("fa-minus")
