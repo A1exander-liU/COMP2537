@@ -619,6 +619,7 @@
         }
 
         .user_profile_icon {
+            margin-top: 10px;
             display: flex;
             justify-content: center;
             font-size: 3.5em;
@@ -628,6 +629,19 @@
             border-radius: 100%;
             background-color: rgb(162, 162, 162);
             padding: 20px;
+        }
+
+        .user_profile_stats {
+            width: 60%;
+            margin: 10px auto;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            background-color: rgb(162, 162, 162);
+            border-radius: 20px;
+        }
+
+        .user_profile_stats p:nth-child(odd) {
+            text-align: right;
         }
 
         .purchase-history-container {
@@ -644,7 +658,7 @@
 
         .purhcase-history-cards {
             width: 90%;
-            margin: 20px auto;
+            margin: 0 auto 20px auto;
             display: grid;
             grid-template-columns: 100%;
             gap: 20px;
@@ -962,10 +976,14 @@
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="user_profile_stats">
-                    <p>Username<span class="profile-username" style="color: black; border-style:none;">Username</span></p>
-                    <p>Orders<span class="profile-total-orders" style="color: black; border-style:none;">Number</span></p>
-                    <p>Cards Ordered<span class="profile-total-cards" style="color: black; border-style:none;">Number</span></p>
-                    <p>Cash Spend<span class="profile-spent-cash" style="color: black; border-style:none;">Number</span></p>
+                    <p>Username</p>
+                    <p class="profile-username" style="color: black; border-style:none;">Username</p>
+                    <p>Orders</p>
+                    <p class="profile-total-orders" style="color: black; border-style:none;">Number</p>
+                    <p>Cards Ordered</p>
+                    <p class="profile-total-cards" style="color: black; border-style:none;">Number</p>
+                    <p>Cash Spent</p>
+                    <p class="profile-spent-cash" style="color: black; border-style:none;">Number</p>
                 </div>
             </div>    
              <div class="purchase-history-container">
