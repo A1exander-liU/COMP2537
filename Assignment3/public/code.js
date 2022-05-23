@@ -160,6 +160,21 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function expand_cards() {
+    $(".purchase-history-card > i").removeClass("fa-minus")
+    $(".purchase-history-card > i").addClass("fa-plus")
+    if ($(this).parent().find(".purchase-history-pokemons").css("display") == "none") {
+        $(this).removeClass("fa-plus")
+        $(this).addClass("fa-minus")
+        $(".purchase-history-pokemons").show()
+    }
+    else {
+        $(this).removeClass("fa-minus")
+        $(this).addClass("fa-plus")
+        $(".purchase-history-pokemons").hide()
+    }
+}
+
 function detect_quantity_change() {
     pokemon_name = $(this).parent().parent().parent().parent().find(".pokemon-card").attr("id")
     amount = $("#card-quantity").val()
@@ -187,19 +202,23 @@ function display_all_orders(data) {
     $(".purhcase-history-cards").html("")
     console.log(data)
     console.log(data[0].orders[0].order[0])
+    price = 0
     for (i = 0; i < data[0].orders.length; i++) {
         order_card = ""
         order_card += `<div class="purchase-history-card">`
-        order_card += `<p>${data[0].orders[i].date}</p>`
+        order_card += `<p>${data[0].orders[i].date}</p><i class="fa-solid fa-plus expand-cards"></i>`
 
         order_card += `<div class="purchase-history-pokemons">`
         for (j = 0; j < data[0].orders[i].order.length; j++) {
-            order_card += `<p>${data[0].orders[i].order[j].name} X${data[0].orders[i].order[j].quantity}</p>`
+            order_card += `<p>${captialize(data[0].orders[i].order[j].name)} Card X${data[0].orders[i].order[j].quantity}</p><p>$${parseFloat(data[0].orders[i].order[j].price).toFixed(2)}</p>`
+            price = data[0].orders[i].order[j].price
         }
+        order_card += `<p>Total</p><p>$${parseFloat(price * 1.08).toFixed(2)}</p>`
         order_card += `</div>`
         order_card += `</div>`
         old = $(".purhcase-history-cards").html()
         $(".purhcase-history-cards").html(old + order_card)
+        $(".purchase-history-pokemons").hide()
     }
 }
 
@@ -1216,6 +1235,7 @@ function setup() {
     $("#user_profile").click(load_user_stats)
     $("body").on("change", "#card-quantity", detect_quantity_change)
     $("body").on("keyup", "#card-quantity", detect_quantity_change)
+    $("body").on("click", ".expand-cards", expand_cards)
 }
 
 $(document).ready(setup)
