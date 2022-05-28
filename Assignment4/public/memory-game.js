@@ -1,6 +1,24 @@
 poke_cards = []
 poke_cards_copy = []
 
+function load_memory_cards() {
+    card_size = Math.floor(Math.sqrt(random_cards.length / 2))
+    console.log(`card size ${card_size}`)
+    console.log("called", random_cards)
+    $(".card-grid").html("")
+    for (i = 0; i < random_cards.length; i++) {
+        card_img = random_cards[i].sprites.other["official-artwork"].front_default
+        card = ""
+        card += `<div class="card">`
+        card += `<img id="front-img${i + 1}" class="front-face" src="${card_img}">`
+        card += `<img id="back-img${i + 1}" class="back-face" src="card_back.png">`
+        card += `</div>`
+        console.log(card)
+        old = $(".card-grid").html()
+        $(".card-grid").html(old + card)
+    }
+}
+
 function shuffle_poke_cards(total_poke_cards, total_poke_cards_copy) {
     random_cards = []
     for (i = 0; i < total_poke_cards_copy.length; i++) {
@@ -33,6 +51,8 @@ async function get_card_amount() {
             )
         }
         shuffled_cards = shuffle_poke_cards(poke_cards, poke_cards_copy)
+        console.log("randomized", shuffled_cards)
+        load_memory_cards(shuffled_cards)
     }
 }
 
