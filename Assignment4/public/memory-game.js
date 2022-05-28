@@ -28,8 +28,9 @@ function perform_match_check() {
     if ($(`#${firstCard}`).attr("src") == $(`#${secondCard}`).attr("src")) {
         console.log("Match!")
         score += 1
-        if (score == 8) {
+        if (score == poke_cards_copy.length / 2) {
             clearInterval(timer)
+            timer = null
         }
         console.log("score", score)
         $(`#${firstCard}`).parent().addClass("matched locked")
@@ -129,6 +130,11 @@ async function get_card_amount() {
     load_memory_cards(shuffled_cards)
     
 }
+
+// 4 x 4: 35 sec to solve
+// 6 x 6: 120 sec
+// 8 x 8: 500 sec
+// 10 x 10: 1000 sec
 
 function setup() {
     $(".start-game").click(get_card_amount)
