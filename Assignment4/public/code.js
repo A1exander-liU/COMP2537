@@ -1256,6 +1256,9 @@ function setup() {
     $("body").on("keyup", "#card-quantity", detect_quantity_change)
     $("body").on("click", ".expand-cards", expand_cards)
     $("body").on("click", ".remove-cart-item", remove_item_from_cart)
+    $("#memory-game").click(function() {
+        location.href = "/memoryGame"
+    })
 }
 
 $(document).ready(setup)
