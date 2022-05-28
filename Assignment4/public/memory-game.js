@@ -9,6 +9,12 @@ clicks = 0
 
 timer = null
 
+function game_over() {
+    console.log("You  lose!")
+    clearInterval(timer)
+    timer = null
+}
+
 function stop_game() {
     $(".card").remove()
     clearInterval(timer)
@@ -82,6 +88,9 @@ function load_memory_cards() {
         $(".time").text(seconds)
         timer = setInterval(function() {
             $(".time").text(seconds -= 1)
+            if (seconds == 0) {
+                game_over()
+            }
         }, 1000)
     }
     $(".loader").hide()
