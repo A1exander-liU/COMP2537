@@ -11,13 +11,16 @@ timer = null
 
 function game_over() {
     // remove all cards display you lose screen
-    $(".card").addClass("locked")
+    $(".card").remove()
+    $(".lose").show()
     console.log("You  lose!")
     clearInterval(timer)
     timer = null
 }
 
 function win() {
+    $(".card").remove()
+    $(".victory").show()
     // remove all cards display win screen
     console.log("You win!")
 }
@@ -44,7 +47,7 @@ function perform_match_check() {
         if (score == poke_cards_copy.length / 2) {
             clearInterval(timer)
             timer = null
-            win()
+            setTimeout(win, 500)
         }
         console.log("score", score)
         $(`#${firstCard}`).parent().addClass("matched locked")
@@ -137,6 +140,8 @@ function determine_countdown(size) {
 
 async function get_card_amount() {
     $(".card").remove()
+    $(".lose").hide()
+    $(".victory").hide()
     $(".loader").show()
     if (timer) {
         clearInterval(timer)
