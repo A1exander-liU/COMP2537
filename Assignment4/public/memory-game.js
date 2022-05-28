@@ -1,6 +1,10 @@
 poke_cards = []
 poke_cards_copy = []
 
+function flip_back_cards() {
+    $(".card:not(.matched)").removeClass("flip")
+}
+
 function perform_match_check() {
     console.log(firstCard, secondCard)
     console.log($(`#${firstCard}`).attr("src"))
@@ -13,6 +17,7 @@ function perform_match_check() {
     else {
         $(`#${firstCard}`).parent().removeClass("locked")
         console.log("Not a match.")
+        setTimeout(flip_back_cards, 1000)
     }
 }
 
