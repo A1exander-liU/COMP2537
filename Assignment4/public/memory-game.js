@@ -9,6 +9,13 @@ clicks = 0
 
 timer = null
 
+function stop_game() {
+    $(".card").remove()
+    clearInterval(timer)
+    timer = null
+    $(".time").text(0)
+}
+
 function flip_back_cards() {
     $(".card:not(.matched)").removeClass("flip")
     $(".card:not(.matched)").removeClass("locked")
@@ -129,6 +136,7 @@ function setup() {
     $(".return-to-home").click(function() {
         location.href = "/pokedex"
     })
+    $(".stop-game").click(stop_game)
 }
 
 $(document).ready(setup)
