@@ -3,6 +3,7 @@ firstCard = undefined
 score = 0
 poke_cards = []
 poke_cards_copy = []
+seconds = 0
 
 clicks = 0
 
@@ -18,6 +19,7 @@ function perform_match_check() {
     if ($(`#${firstCard}`).attr("src") == $(`#${secondCard}`).attr("src")) {
         console.log("Match!")
         score += 1
+        console.log("score", score)
         $(`#${firstCard}`).parent().addClass("matched locked")
         $(`#${secondCard}`).parent().addClass("matched locked")
     }
@@ -61,6 +63,9 @@ function load_memory_cards() {
         old = $(".card-grid").html()
         $(".card-grid").html(old + card)
     }
+    timer = setInterval(function() {
+        $(".game-timer p:nth-child(2)").text(seconds += 1)
+    }, 1000)
 }
 
 function shuffle_poke_cards(total_poke_cards, total_poke_cards_copy) {
