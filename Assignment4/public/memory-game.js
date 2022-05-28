@@ -126,6 +126,9 @@ async function get_card_amount() {
 function setup() {
     $(".start-game").click(get_card_amount)
     $(".card-grid").on("click", ".card", flip_card)
+    $(".return-to-home").click(function() {
+        location.href = "/pokedex"
+    })
 }
 
 $(document).ready(setup)
