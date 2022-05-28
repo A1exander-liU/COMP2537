@@ -1,6 +1,21 @@
 poke_cards = []
 poke_cards_copy = []
 
+function flip_card() {
+    clicks += 1
+    $(this).addClass("flip")
+    if (clicks == 1) {
+        $(this).addClass("locked")
+        firstCard = $(this).find(".front-face").attr("id")
+    }
+    // if you click a second time, then that would be the second card
+    if (clicks == 2) {
+        secondCard = $(this).find(".front-face").attr("id")
+        // reset the clicks back to 0 and perform the match check in here
+        clicks = 0
+    }
+}
+
 function load_memory_cards() {
     card_size = Math.floor(Math.sqrt(random_cards.length / 2))
     console.log(`card size ${card_size}`)
@@ -58,6 +73,7 @@ async function get_card_amount() {
 
 function setup() {
     $("button").click(get_card_amount)
+    $(".card-grid").on("click", ".card", flip_card)
 }
 
 $(document).ready(setup)
