@@ -36,6 +36,10 @@ app.get("/pokedex", function(req, res) {
     }
 })
 
+app.get('/memoryGame', function(req, res) {
+    res.sendFile(__dirname + "/public/card-game.html")
+})
+
 app.post("/findUser", function(req, res) {
     console.log(req.body)
     userModel.find({username: req.body.username}, function(err, found_user) {
