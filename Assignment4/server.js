@@ -72,7 +72,8 @@ app.post("/signUp", function(req, res) {
         username: req.body.username,
         password: req.body.password,
         shopping_cart: req.body.favourites,
-        timeline: req.body.timeline
+        timeline: req.body.timeline,
+        game_log: req.body.game_log
     })
     new_user.save(function(err, event) {
         if (err) {
@@ -410,7 +411,11 @@ const userSchema = new mongoose.Schema({
         times: Number,
         date: String
     }],
-    orders: [Object]
+    orders: [Object],
+    game_log: [{
+        date: String,
+        result: String
+    }]
 })
 
 const userModel = mongoose.model("users", userSchema)
