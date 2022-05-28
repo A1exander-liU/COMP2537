@@ -1,3 +1,4 @@
+current_tab = "memory-game"
 secondCard = undefined
 firstCard = undefined
 score = 0
@@ -8,6 +9,12 @@ seconds = 0
 clicks = 0
 
 timer = null
+
+function change_page() {
+    current_tab = $(this).attr("id")
+    $(".page").hide()
+    $(`#${current_tab}-page`).show()
+}
 
 function game_over() {
     // remove all cards display you lose screen
@@ -174,12 +181,15 @@ async function get_card_amount() {
 // 10 x 10: 1000 sec
 
 function setup() {
+    $(".page").hide()
+    $("#memory-game-page").show()
     $(".start-game").click(get_card_amount)
     $(".card-grid").on("click", ".card", flip_card)
     $(".return-to-home").click(function() {
         location.href = "/pokedex"
     })
     $(".stop-game").click(stop_game)
+    $(".memory-game-tab").click(change_page)
 }
 
 $(document).ready(setup)
