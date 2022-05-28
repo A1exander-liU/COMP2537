@@ -216,10 +216,31 @@
             padding: 5px;
             border: 2px solid black;
             width: 80%;
-            height: 80%;
+            height: 70vh;
             gap: 10px;
             margin: 10px auto auto auto;
             background-image: linear-gradient(to bottom right, rgb(224, 21, 21), rgb(137, 39, 39));
+            display: grid;
+            grid-template-columns: 100%;
+            overflow: auto;
+        }
+
+        .game-log-item {
+            width: 80%;
+            margin: auto;
+            background-image: linear-gradient(to top left, rgb(224, 21, 21), rgb(137, 39, 39));
+            border: 2px solid black;
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: 80% 20%;
+            padding: 0 10px;
+            gap: 10px;
+        }
+
+        .remove-game-log {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>

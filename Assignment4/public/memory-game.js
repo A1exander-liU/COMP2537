@@ -18,6 +18,39 @@ function get_current_timestamp() {
     return date.toUTCString()
 }
 
+function display_game_log_items(data) {
+    $(".game-log-container").html("")
+    console.log("My game log", data)
+    game_log = data[0].game_log
+    for (i = 0; i < game_log.length; i++) {
+        item = ""
+        item += `<div class="game-log-item" id="${game_log[i].date}">`
+
+        item += `<div class="game-log-details">`
+        item += `<p>${game_log[i].date}</p>`
+        item += `<p>${game_log[i].result}</p>`
+        item += `</div>`
+
+        item += `<div class="remove-game-log">`
+        item += `<p>Remove</p>`
+        item += `</div>`
+
+        item += `</div>`
+        old = $(".game-log-container").html()
+        $(".game-log-container").html(old + item)
+    }
+}
+
+function load_game_log() {
+    $.ajax(
+        {
+            "url": "/gameLog",
+            "type": "GET",
+            "success": display_game_log_items
+        }
+    )
+}
+
 function change_page() {
     current_tab = $(this).attr("id")
     $(".page").hide()
@@ -60,7 +93,7 @@ function win() {
             "type": "POST",
             "data": {
                 "date": get_current_timestamp,
-                "result": `Matched all cards for the ${chosen_difficulty} X ${chosen_difficulty} game size in ${time_taken} seconds.`
+                "result": `Matched all cards for the ${chosen_difficulty / 2} X ${chosen_difficulty / 2} game size in ${time_taken} seconds.`
             },
             "success": function(data) {
                 console.log(data)
@@ -234,6 +267,7 @@ function setup() {
     })
     $(".stop-game").click(stop_game)
     $(".memory-game-tab").click(change_page)
+    $("#game-log").click(load_game_log)
 }
 
 $(document).ready(setup)
