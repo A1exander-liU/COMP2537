@@ -13,6 +13,8 @@ timer = null
 function change_page() {
     current_tab = $(this).attr("id")
     $(".page").hide()
+    $(".memory-game-tab").removeClass("active")
+    $(`#${current_tab}`).addClass("active")
     $(`#${current_tab}-page`).show()
 }
 
@@ -182,6 +184,8 @@ async function get_card_amount() {
 
 function setup() {
     $(".page").hide()
+    $(".memory-game-tab").removeClass("active")
+    $("#memory-game").addClass("active")
     $("#memory-game-page").show()
     $(".start-game").click(get_card_amount)
     $(".card-grid").on("click", ".card", flip_card)
