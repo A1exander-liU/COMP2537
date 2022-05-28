@@ -8,6 +8,7 @@ clicks = 0
 
 function flip_back_cards() {
     $(".card:not(.matched)").removeClass("flip")
+    $(".card:not(.matched)").removeClass("locked")
 }
 
 function perform_match_check() {
@@ -23,6 +24,7 @@ function perform_match_check() {
     else {
         $(`#${firstCard}`).parent().removeClass("locked")
         console.log("Not a match.")
+        $(".card").addClass("locked")
         setTimeout(flip_back_cards, 1000)
     }
 }
