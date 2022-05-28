@@ -1,6 +1,12 @@
 poke_cards = []
 poke_cards_copy = []
 
+function build_memory_cards(data) {
+    console.log(data)
+    poke_cards.push(data, data)
+    poke_cards_copy.push(data, data)
+}
+
 function get_card_amount() {
     if ($("#card-amount").val() > 0) {
         console.log($("#card-amount").val())
