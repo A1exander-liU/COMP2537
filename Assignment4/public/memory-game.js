@@ -19,6 +19,9 @@ function perform_match_check() {
     if ($(`#${firstCard}`).attr("src") == $(`#${secondCard}`).attr("src")) {
         console.log("Match!")
         score += 1
+        if (score == 8) {
+            clearInterval(timer)
+        }
         console.log("score", score)
         $(`#${firstCard}`).parent().addClass("matched locked")
         $(`#${secondCard}`).parent().addClass("matched locked")
