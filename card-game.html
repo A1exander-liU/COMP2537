@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <style>
+            body {
+                height: 100vh;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .card-grid {
+                padding-inline-start: 5px;
+                /* Can use flex or grid */
+                border: 2px solid black;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                /* having this will break the math since there is extra space between the cards */
+                /* meaning there wont be 3 cards on each reow since there was extra width */
+                width: 100%;
+                height: 80%;
+                gap: 10px;
+                margin: auto;
+                /* allows the card to be flipped in 3d space*/
+                perspective: 1000px;
+            }
+
+            .card {
+                /* depends on amount of cards displayed per row */
+                /* to fix and make sure the gap doesn't break the grid, use calc() */
+                /* this will make sure the cards will occupy 33.3% still with the gap between the cards */
+                width: calc(25% - 16px);
+                /* positions the container or element to its parent contaienr */
+                position: relative;
+                transition: transform .5s;
+                /* maintains 3d so the others side if the card will be able to be seen */
+                transform-style: preserve-3d;
+                border: 3px solid black;
+            }
+
+            img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .front-face, .back-face {
+                /* fix the size of the img so they are equal */
+                /* the parent container needs to have some sort of postionign in order for position abosolute to wrk properly */
+                position: absolute;
+
+                /* now when flipping the image will be hidden, but the back face is stull not showing, we need to flip the front face one mre time
+                to view it*/
+                /* each image gets flipped and the image is hidden so the pokemon image is also hidden, that is why the pokemon image must also
+                be flippe again to be visble */
+                backface-visibility: hidden;
+                width: 100%;
+                height: 100%;
+            }
+
+            .flip {
+                /* right now it is flipped on 2d, meaning the flip will never show the other card, need to flip in 3d */
+                transform: rotateY(180deg);
+            }
+
+            .front-face {
+                /* flip class flips the whole card 180deg, now they are both not visble because backface visibilty is set to hidden */
+                /* meaning both of the img got flipped and are now both hidden */
+                /* this will flip the pokemon img again, and now it will be visible */
+                transform: rotateY(180deg);
+            }
+
+            .locked {
+                pointer-events: none;
+            }
+
+            .diffculty-selection {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="diffculty-selection">
+            <input type="number" id="card-amount"><button>Start</button>
+        </div>
+        <div class="card-grid">
+
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="card.js"></script>
+</html>
