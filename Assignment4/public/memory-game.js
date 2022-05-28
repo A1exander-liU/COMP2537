@@ -1,5 +1,10 @@
+secondCard = undefined
+firstCard = undefined
+score = 0
 poke_cards = []
 poke_cards_copy = []
+
+clicks = 0
 
 function flip_back_cards() {
     $(".card:not(.matched)").removeClass("flip")
@@ -11,6 +16,7 @@ function perform_match_check() {
     console.log($(`#${secondCard}`).attr("src"))
     if ($(`#${firstCard}`).attr("src") == $(`#${secondCard}`).attr("src")) {
         console.log("Match!")
+        score += 1
         $(`#${firstCard}`).parent().addClass("matched locked")
         $(`#${secondCard}`).parent().addClass("matched locked")
     }
