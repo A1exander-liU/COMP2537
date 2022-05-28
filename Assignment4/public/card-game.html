@@ -159,13 +159,13 @@
             justify-content: flex-end;
         }
 
-        button.start-game, button.stop-game {
+        button.start-game, button.stop-game, .clear-results {
             border: 2px solid black;
             border-radius: 10px;
             width: 28%;
         }
 
-        button.start-game:hover, button.stop-game:hover {
+        button.start-game:hover, button.stop-game:hover, .clear-results:hover {
             color: white;
             background-color: black;
         }
@@ -199,6 +199,27 @@
 
         .memory-game-tab:hover {
             background-color: #a2a2a2;
+        }
+
+        .game-log-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game-log-controls {
+            width: calc(80% + 14px);
+            margin: 10px auto auto auto;
+        }
+
+        .game-log-container {
+            padding: 5px;
+            border: 2px solid black;
+            width: 80%;
+            height: 80%;
+            gap: 10px;
+            margin: 10px auto auto auto;
+            background-image: linear-gradient(to bottom right, rgb(224, 21, 21), rgb(137, 39, 39));
         }
     </style>
 </head>
@@ -236,7 +257,11 @@
         </div>
     </div>
     <div id="game-log-page" class="page">
-        <h4>Game Log</h4>
+        <div class="game-log-controls">
+            <button class="clear-results">Clear All</button>
+        </div>
+        <div class="game-log-container">
+        </div>
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
