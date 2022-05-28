@@ -79,10 +79,9 @@ function load_memory_cards() {
         $(".card").css("width", `calc(${100 / card_size}% - 16px)`)
     }
     if (!timer) {
-        seconds = 0
         $(".time").text(seconds)
         timer = setInterval(function() {
-            $(".time").text(seconds += 1)
+            $(".time").text(seconds -= 1)
         }, 1000)
     }
     $(".loader").hide()
@@ -104,6 +103,21 @@ function build_memory_cards(data) {
     poke_cards_copy.push(data, data)
 }
 
+function determine_countdown(size) {
+    if (size == 8) {
+        seconds = 35
+    }
+    if (size == 18) {
+        seconds = 120
+    }
+    if (size == 32) {
+        seconds = 500
+    }
+    if (size == 50) {
+        seconds = 1000
+    }
+}
+
 async function get_card_amount() {
     $(".card").remove()
     $(".loader").show()
@@ -112,6 +126,7 @@ async function get_card_amount() {
         timer = null
     }
     size = $("#difficulty-dropdown option:selected").val()
+    determine_countdown(size)
     console.log(size)
     poke_cards = []
     poke_cards_copy = []
