@@ -10,6 +10,14 @@ clicks = 0
 
 timer = null
 
+chosen_difficulty = ""
+seconds_limit = 0
+
+function get_current_timestamp() {
+    var date = new Date()
+    return date.toUTCString()
+}
+
 function change_page() {
     current_tab = $(this).attr("id")
     $(".page").hide()
@@ -25,6 +33,19 @@ function game_over() {
     console.log("You  lose!")
     clearInterval(timer)
     timer = null
+    $.ajax(
+        {
+            "url": "/insertGameResult",
+            "type": "POST",
+            "data": {
+                "date": get_current_timestamp(),
+                "result": `Failed to match all cards in time of the ${chosen_difficulty} X ${chosen_difficulty} game size.`
+            },
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
 }
 
 function win() {
@@ -32,6 +53,20 @@ function win() {
     $(".victory").show()
     // remove all cards display win screen
     console.log("You win!")
+    time_taken = seconds_limit - seconds
+    $.ajax(
+        {
+            "url": "/insertGameResult",
+            "type": "POST",
+            "data": {
+                "date": get_current_timestamp,
+                "result": `Matched all cards for the ${chosen_difficulty} X ${chosen_difficulty} game size in ${time_taken} seconds.`
+            },
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
 }
 
 function stop_game() {
@@ -134,15 +169,19 @@ function build_memory_cards(data) {
 
 function determine_countdown(size) {
     if (size == 8) {
+        seconds_limit = 35
         seconds = 35
     }
     if (size == 18) {
+        seconds_limit = 120
         seconds = 120
     }
     if (size == 32) {
+        seconds_limit = 500
         seconds = 500
     }
     if (size == 50) {
+        seconds_limit = 1000
         seconds = 1000
     }
 }
@@ -156,6 +195,7 @@ async function get_card_amount() {
         clearInterval(timer)
         timer = null
     }
+    chosen_difficulty = $("#difficulty-dropdown option:selected").val()
     size = $("#difficulty-dropdown option:selected").val()
     determine_countdown(size)
     console.log(size)
