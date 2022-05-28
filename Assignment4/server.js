@@ -22,21 +22,25 @@ app.listen(process.env.PORT || 5003, function (err) {
 
 app.use(express.static("./public"))
 
+const loginValidator = function(req, res, next) {
+    if (req.session.authenticated != true) {
+        res.redirect("/")
+    }
+    else {
+        next()
+    }
+}
+
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/public/login.html")
 })
 
-app.get("/pokedex", function(req, res) {
-    if (req.session.authenticated) {
-        console.log("User Infoaaaaaaaaaaaaaaaaaaaaaaaa" + req.session.current_user)
-        res.sendFile(__dirname + "/public/pokedex.html")
-    }
-    else {
-        res.redirect("/")
-    }
+app.get("/pokedex", loginValidator, function(req, res) {
+    console.log("User Infoaaaaaaaaaaaaaaaaaaaaaaaa" + req.session.current_user)
+    res.sendFile(__dirname + "/public/pokedex.html")
 })
 
-app.get('/memoryGame', function(req, res) {
+app.get('/memoryGame', loginValidator, function(req, res) {
     res.sendFile(__dirname + "/public/card-game.html")
 })
 
