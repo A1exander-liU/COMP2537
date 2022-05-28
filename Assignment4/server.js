@@ -384,6 +384,19 @@ app.get("/gameLog", function(req, res) {
     })
 })
 
+app.post("/insertGameResult", function(req, res) {
+    update = {$push: {game_log: {date: req.body.date, result: req.body.result}}}
+    userModel.updateOne({username: req.session.current_user[0].username}, update, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.send(data)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
