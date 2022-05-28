@@ -10,9 +10,16 @@ clicks = 0
 timer = null
 
 function game_over() {
+    // remove all cards display you lose screen
+    $(".card").addClass("locked")
     console.log("You  lose!")
     clearInterval(timer)
     timer = null
+}
+
+function win() {
+    // remove all cards display win screen
+    console.log("You win!")
 }
 
 function stop_game() {
@@ -37,6 +44,7 @@ function perform_match_check() {
         if (score == poke_cards_copy.length / 2) {
             clearInterval(timer)
             timer = null
+            win()
         }
         console.log("score", score)
         $(`#${firstCard}`).parent().addClass("matched locked")
