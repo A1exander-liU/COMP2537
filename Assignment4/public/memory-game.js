@@ -1,6 +1,21 @@
 poke_cards = []
 poke_cards_copy = []
 
+function perform_match_check() {
+    console.log(firstCard, secondCard)
+    console.log($(`#${firstCard}`).attr("src"))
+    console.log($(`#${secondCard}`).attr("src"))
+    if ($(`#${firstCard}`).attr("src") == $(`#${secondCard}`).attr("src")) {
+        console.log("Match!")
+        $(`#${firstCard}`).parent().addClass("matched locked")
+        $(`#${secondCard}`).parent().addClass("matched locked")
+    }
+    else {
+        $(`#${firstCard}`).parent().removeClass("locked")
+        console.log("Not a match.")
+    }
+}
+
 function flip_card() {
     clicks += 1
     $(this).addClass("flip")
@@ -13,6 +28,7 @@ function flip_card() {
         secondCard = $(this).find(".front-face").attr("id")
         // reset the clicks back to 0 and perform the match check in here
         clicks = 0
+        perform_match_check()
     }
 }
 
