@@ -57,7 +57,7 @@ function load_memory_cards() {
     card_size = Math.sqrt(random_cards.length)
     console.log(`card size ${card_size}`)
     console.log("called", random_cards)
-    $(".card-grid").html("")
+    $(".card").remove()
     for (i = 0; i < random_cards.length; i++) {
         card_img = random_cards[i].sprites.other["official-artwork"].front_default
         card = ""
@@ -69,14 +69,15 @@ function load_memory_cards() {
         old = $(".card-grid").html()
         $(".card-grid").html(old + card)
         $(".card").css("width", `calc(${100 / card_size}% - 16px)`)
-        if (!timer) {
-            seconds = 0
-            $(".time").text(seconds)
-            timer = setInterval(function() {
-                $(".time").text(seconds += 1)
-            }, 1000)
-        }
     }
+    if (!timer) {
+        seconds = 0
+        $(".time").text(seconds)
+        timer = setInterval(function() {
+            $(".time").text(seconds += 1)
+        }, 1000)
+    }
+    $(".loader").hide()
 }
 
 function shuffle_poke_cards(total_poke_cards, total_poke_cards_copy) {
@@ -96,6 +97,8 @@ function build_memory_cards(data) {
 }
 
 async function get_card_amount() {
+    $(".card").remove()
+    $(".loader").show()
     if (timer) {
         clearInterval(timer)
         timer = null
