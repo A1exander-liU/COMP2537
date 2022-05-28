@@ -372,6 +372,18 @@ app.delete("/clearCart", function(req, res) {
     })
 })
 
+app.get("/gameLog", function(req, res) {
+    userModel.find({username: req.session.current_user[0].username}, {_id: 0, game_log: 1}, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.json(data)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
