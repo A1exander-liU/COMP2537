@@ -7,10 +7,11 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                background-image: linear-gradient(to top left, rgb(224, 21, 21), rgb(137, 39, 39));
             }
 
             .card-grid {
-                padding-inline-start: 5px;
+                padding: 5px;
                 /* Can use flex or grid */
                 border: 2px solid black;
                 display: flex;
@@ -18,15 +19,17 @@
                 flex-wrap: wrap;
                 /* having this will break the math since there is extra space between the cards */
                 /* meaning there wont be 3 cards on each reow since there was extra width */
-                width: 100%;
+                width: 80%;
                 height: 80%;
                 gap: 10px;
                 margin: auto;
                 /* allows the card to be flipped in 3d space*/
                 perspective: 1000px;
+                background-image: linear-gradient(to bottom right, rgb(224, 21, 21), rgb(137, 39, 39));
             }
 
             .card {
+                background-color: white;
                 /* depends on amount of cards displayed per row */
                 /* to fix and make sure the gap doesn't break the grid, use calc() */
                 /* this will make sure the cards will occupy 33.3% still with the gap between the cards */
@@ -82,16 +85,21 @@
     </head>
     <body>
         <div class="diffculty-selection">
-            <input type="number" id="card-amount"><button>Start</button>
+            <label for="diffculty-dropdown">Difficulty</label><br>
+            <select id="difficulty-dropdown">
+                <option value="8" class="selected-difficulty">4 X 4</option>
+                <option value="18" class="selected-difficulty">6 X 6</option>
+                <option value="32" class="selected-difficulty">8 X 8</option>
+                <option value="50" class="selected-difficulty">10 X 10</option>
+            </select>
+            <button class="start-game">Start</button>
+            <div class="game-timer">
+                <p>Time: <span class="time">0</span>s</p>
+            </div>
         </div>
         <div class="card-grid">
 
         </div>
-        <div class="game-timer">
-            <p>Time</p>
-            <p>0</p>
-        </div>
-
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="memory-game.js"></script>

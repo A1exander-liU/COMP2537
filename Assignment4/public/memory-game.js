@@ -7,6 +7,8 @@ seconds = 0
 
 clicks = 0
 
+timer = null
+
 function flip_back_cards() {
     $(".card:not(.matched)").removeClass("flip")
     $(".card:not(.matched)").removeClass("locked")
@@ -38,6 +40,7 @@ function flip_card() {
     clicks += 1
     $(this).addClass("flip")
     if (clicks == 1) {
+        // locks the first selected card
         $(this).addClass("locked")
         firstCard = $(this).find(".front-face").attr("id")
     }
@@ -51,7 +54,7 @@ function flip_card() {
 }
 
 function load_memory_cards() {
-    card_size = Math.floor(Math.sqrt(random_cards.length / 2))
+    card_size = Math.sqrt(random_cards.length)
     console.log(`card size ${card_size}`)
     console.log("called", random_cards)
     $(".card-grid").html("")
@@ -65,10 +68,15 @@ function load_memory_cards() {
         console.log(card)
         old = $(".card-grid").html()
         $(".card-grid").html(old + card)
+        $(".card").css("width", `calc(${100 / card_size}% - 16px)`)
+        if (!timer) {
+            seconds = 0
+            $(".time").text(seconds)
+            timer = setInterval(function() {
+                $(".time").text(seconds += 1)
+            }, 1000)
+        }
     }
-    timer = setInterval(function() {
-        $(".game-timer p:nth-child(2)").text(seconds += 1)
-    }, 1000)
 }
 
 function shuffle_poke_cards(total_poke_cards, total_poke_cards_copy) {
@@ -88,28 +96,32 @@ function build_memory_cards(data) {
 }
 
 async function get_card_amount() {
-    if ($("#card-amount").val() > 0) {
-        console.log($("#card-amount").val())
-        poke_cards = []
-        poke_cards_copy = []
-        for (i = 0; i < $("#card-amount").val(); i++) {
-            console.log(Math.floor(1 + (Math.random() * 897)))
-            await $.ajax(
-                {
-                    "url": `https://pokeapi.co/api/v2/pokemon/${Math.floor((Math.random() * 897) + 1)}`,
-                    "type": "GET",
-                    "success": build_memory_cards
-                }
-            )
-        }
-        shuffled_cards = shuffle_poke_cards(poke_cards, poke_cards_copy)
-        console.log("randomized", shuffled_cards)
-        load_memory_cards(shuffled_cards)
+    if (timer) {
+        clearInterval(timer)
+        timer = null
     }
+    size = $("#difficulty-dropdown option:selected").val()
+    console.log(size)
+    poke_cards = []
+    poke_cards_copy = []
+    for (i = 0; i < size; i++) {
+        console.log(Math.floor(1 + (Math.random() * 897)))
+        await $.ajax(
+            {
+                "url": `https://pokeapi.co/api/v2/pokemon/${Math.floor((Math.random() * 897) + 1)}`,
+                "type": "GET",
+                "success": build_memory_cards
+            }
+        )
+    }
+    shuffled_cards = shuffle_poke_cards(poke_cards, poke_cards_copy)
+    console.log("randomized", shuffled_cards)
+    load_memory_cards(shuffled_cards)
+    
 }
 
 function setup() {
-    $("button").click(get_card_amount)
+    $(".start-game").click(get_card_amount)
     $(".card-grid").on("click", ".card", flip_card)
 }
 
