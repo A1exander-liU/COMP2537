@@ -409,7 +409,7 @@ app.delete("/removeGameResult", function(req, res) {
     })
 })
 
-app.delete("clearGameResults", function(req, res) {
+app.delete("/clearGameResults", function(req, res) {
     userModel.updateOne({username: req.session.current_user[0].username}, {$pull: {game_log: {}}}, function(err, data) {
         if (err) {
             console.log("Err" + err)
