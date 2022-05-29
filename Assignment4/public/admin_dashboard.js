@@ -189,6 +189,7 @@ function return_to_home() {
 
 $(".edit-user").hide()
 $(".edit-admin").hide()
+$(".create-user").hide()
 
 function setup() {
     load_user_data()
