@@ -168,6 +168,16 @@
             gap: 10px;
         }
 
+        .create-admin {
+            background-color: rgb(242, 251, 255);
+            width: calc(95% - 5px);
+            margin: 10px auto;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            gap: 10px;
+        }
+
         .edit-user-controls {
             display: grid;
             width: 100%;
@@ -183,6 +193,12 @@
         }
 
         .create-user-controls {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+        }
+
+        .create-admin-controls {
             display: grid;
             width: 100%;
             grid-template-columns: 20% 20% 20% 20% 20%;
@@ -214,7 +230,8 @@
             border-radius: 10px;
         }
 
-        .save-user-info, .delete-user-info, .delete-admin-info, .cancel, .confirm, .cancel-creation, .confirm-creation {
+        .save-user-info, .delete-user-info, .delete-admin-info, .cancel, .confirm, .cancel-creation, .confirm-creation,
+        .cancel-admin-creation, .confirm-admin-creation {
             width: 80%;
             justify-self: center;
             border: 2px solid black;
@@ -222,16 +239,16 @@
         }
 
         .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover, .cancel:hover, .add-user-account:hover,
-        .cancel-creation:hover, .add-admin-account:hover {
+        .cancel-creation:hover, .add-admin-account:hover, .cancel-admin-creation:hover {
             background-color: black;
             color: white;
         }
 
-        .confirm-creation {
+        .confirm-creation, .confirm-admin-creation {
             border-color: green;
         }
 
-        .confirm-creation:hover {
+        .confirm-creation:hover, .confirm-admin-creation:hover {
             background-color: green;
             color: white;
         }
@@ -253,7 +270,7 @@
             grid-area: 1 / 5 / 2 / 6;
         }
 
-        .close-edit-tab, .close-creation-tab {
+        .close-edit-tab, .close-creation-tab, .close-admin-creation-tab {
             font-size: 1.5em;
             align-self: flex-end;
         }
@@ -277,11 +294,11 @@
             grid-area: 2 / 5 / 3 / 6;
         }
 
-        .cancel-creation {
+        .cancel-creation, .cancel-admin-creation {
             grid-area: 1 / 4 / 2 / 5;
         }
 
-        .confirm-creation {
+        .confirm-creation, .confirm-admin-creation {
             grid-area: 1 / 5 / 2 / 6;
         }
 
@@ -326,7 +343,7 @@
         </div>
         <div class="create-user">
             <i class="fa-solid fa-xmark close-creation-tab"></i>
-            <p>Create Account</p>
+            <p>Create User Account</p>
             <label for="create-username">Username</label>
             <input type="text" id="create-username" name="username">
             <label for="password">Password</label>
@@ -364,6 +381,18 @@
             </select>
             <div class="edit-user-controls">
                 <button class="delete-admin-info">Delete</button>
+            </div>
+        </div>
+        <div class="create-admin">
+            <i class="fa-solid fa-xmark close-admin-creation-tab"></i>
+            <p>Create Admin Account</p>
+            <label for="create-admin-username">Username</label>
+            <input type="text" id="create-admin-username" name="username">
+            <label for="create-admin-password">Password</label>
+            <input type="text" id="create-admin-password" name="password">
+            <div class="create-admin-controls">
+                <button class="cancel-admin-creation">Cancel</button>
+                <button class="confirm-admin-creation">Confirm</button>
             </div>
         </div>
     </div>
