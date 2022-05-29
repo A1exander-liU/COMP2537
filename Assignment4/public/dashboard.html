@@ -41,7 +41,49 @@
         .dashboard-tab.active {
             background-color: rgb(168, 168, 168);
         }
-    
+
+        .users-table {
+            width: calc(95% - 5px);
+            margin: 10px auto auto auto;
+            background-color: rgb(242, 251, 255);
+            padding: 5px;
+        }
+
+        .users-table-headers {
+            display: grid;
+            grid-template-columns: 38% 39% 23%;
+        }
+
+        .users-table-headers p {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+        }
+
+        .users-container {
+            background-color: rgb(242, 251, 255);
+            height: 60vh;
+            overflow: auto;
+            display: grid;
+            grid-template-columns: 100%;
+            font-size: 0.8em;
+        }
+        
+        .users-container-item {
+            border-style: solid;
+            border-width: 0 0 1px 0;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 40% 40% 20%;
+        }
+
+        .users-container-item p:nth-child(3) {
+            display: flex;
+            justify-content: space-between;
+        }
+
     </style>
 </head>
 
@@ -52,7 +94,75 @@
         <div class="dashboard-tab" id="admins">Admins</div>
     </div>
     <div id="users-page" class="dashboard-page">
-        Users
+        <div class="users-table">
+            <div class="users-table-headers">
+                <p class="username-header">Username</p>
+                <p class="password-header">Password</p>
+                <p class="type-header">Type</p>
+            </div>
+            <div class="users-container">
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User <i class="fa-solid fa-pencil"></i></p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+                <div class="users-container-item">
+                    <p>4</p>
+                    <p>4</p>
+                    <p>User</p>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="admins-page" class="dashboard-page">
         Admins
