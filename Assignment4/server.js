@@ -12,7 +12,8 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 
-var session = require('express-session')
+var session = require('express-session');
+const e = require('cors');
 app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 
 app.listen(process.env.PORT || 5003, function (err) {
@@ -461,6 +462,19 @@ app.post("/getUser", function(req, res) {
         else {
             console.log("Data" + data)
             res.json(data)
+        }
+    })
+})
+
+app.post("/editUserInfo", function(req, res) {
+    updates = {username: req.body.new_username, password: req.body.password, type: req.body.type}
+    userModel.updateOne({username: req.body.old_username}, updates, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.send(data)
         }
     })
 })
