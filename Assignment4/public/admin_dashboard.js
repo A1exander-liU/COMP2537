@@ -32,7 +32,7 @@ function create_admin_account() {
                 else {
                     $.ajax(
                         {
-                            "url": "/createNewAdmin",
+                            "url": "/addNewAdmin",
                             "type": "POST",
                             "data": {
                                 "username": username,
