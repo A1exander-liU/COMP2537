@@ -13,7 +13,22 @@ function close_edit_tab() {
 }
 
 function delete_user() {
-    
+    username = $(".edit-user-username").text()
+    $.ajax(
+        {
+            "url": "/deleteUser",
+            "type": "DELETE",
+            "data": {
+                "username": username
+            },
+            "success": function(data) {
+                console.log(data)
+                $(".edit-user").hide()
+                load_user_data()
+            }
+        }
+    )
+
 }
 
 function cancel_user_deletion() {
@@ -98,6 +113,7 @@ function save_this_user() {
             }
         }
     )
+    $(".confirm-deletion").remove()
     $(".edit-user").hide()
     load_user_data()
 }
