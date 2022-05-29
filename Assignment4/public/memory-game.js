@@ -18,6 +18,19 @@ function get_current_timestamp() {
     return date.toUTCString()
 }
 
+function clear_game_log() {
+    $.ajax(
+        {
+            "url": "/clearGameResults",
+            "type": "DELETE",
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
+    load_game_log()
+}
+
 function display_game_log_items(data) {
     $(".game-log-container").html("")
     console.log("My game log", data)
@@ -268,6 +281,7 @@ function setup() {
     $(".stop-game").click(stop_game)
     $(".memory-game-tab").click(change_page)
     $("#game-log").click(load_game_log)
+    $(".clear-results").click(clear_game_log)
 }
 
 $(document).ready(setup)
