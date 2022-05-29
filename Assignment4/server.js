@@ -453,6 +453,18 @@ app.get("/getAdmins", function(req, res) {
     }
 })
 
+app.post("/findUser", function(req, res) {
+    userModel.find({username: req.body.username}, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.json.apply(data)
+        }
+    })
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
