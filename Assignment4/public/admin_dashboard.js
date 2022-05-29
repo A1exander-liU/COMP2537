@@ -39,6 +39,8 @@ function create_new_user() {
                             },
                             "success": function(data) {
                                 console.log(data)
+                                $("#create-username").val("")
+                                $("#create-password").val("")
                                 load_user_data()
                             }
                         }
