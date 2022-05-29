@@ -40,8 +40,12 @@ app.get("/pokedex", loginValidator, function(req, res) {
     res.sendFile(__dirname + "/public/pokedex.html")
 })
 
-app.get('/memoryGame', loginValidator, function(req, res) {
+app.get("/memoryGame", loginValidator, function(req, res) {
     res.sendFile(__dirname + "/public/card-game.html")
+})
+
+app.get("/dashboard", loginValidator, function(req, res) {
+    res.sendFile(__dirname + "/public/dashboard.html")
 })
 
 app.post("/findUser", function(req, res) {
