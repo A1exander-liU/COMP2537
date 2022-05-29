@@ -231,7 +231,7 @@
         }
 
         .save-user-info, .delete-user-info, .delete-admin-info, .cancel, .confirm, .cancel-creation, .confirm-creation,
-        .cancel-admin-creation, .confirm-admin-creation {
+        .cancel-admin-creation, .confirm-admin-creation, .cancel-admin, .confirm-admin {
             width: 80%;
             justify-self: center;
             border: 2px solid black;
@@ -239,7 +239,7 @@
         }
 
         .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover, .cancel:hover, .add-user-account:hover,
-        .cancel-creation:hover, .add-admin-account:hover, .cancel-admin-creation:hover {
+        .cancel-creation:hover, .add-admin-account:hover, .cancel-admin-creation:hover, .cancel-admin:hover {
             background-color: black;
             color: white;
         }
@@ -253,11 +253,11 @@
             color: white;
         }
 
-        .confirm {
+        .confirm, .confirm-admin {
             border-color: rgb(215, 22, 22);
         }
 
-        .confirm:hover {
+        .confirm:hover, .confirm-admin:hover {
             background-color: rgb(215, 22, 22);
             color: white;
         }
@@ -275,22 +275,22 @@
             align-self: flex-end;
         }
 
-        .confirm-deletion {
+        .confirm-deletion, .confirm-admin-deletion {
             display: grid;
             grid-template-columns: 20% 20% 20% 20% 20%;
             grid-template-rows: 50% 50%;
         }
 
-        .confirm-deletion p {
+        .confirm-deletion p, .confirm-admin-deletion p {
             margin: 0;
             grid-area: 1 / 1 / 2 / 6;
         }
 
-        .cancel {
+        .cancel, .cancel-admin {
             grid-area: 2 / 4 / 3 / 5;
         }
 
-        .confirm {
+        .confirm, .confirm-admin {
             grid-area: 2 / 5 / 3 / 6;
         }
 
