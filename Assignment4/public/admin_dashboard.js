@@ -7,6 +7,42 @@ old_username = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function create_admin_account() {
+    username = $("#create-admin-username").val()
+    password = $("#create-admin-password").val()
+    $.ajax(
+        {
+            "url": "/getAdmins",
+            "type": "GET",
+            "success": function(data) {
+                console.log(data)
+                data = data.filter(function(data) {
+                    if (data.username == username) {
+                        return data
+                    }
+                })
+                if (data.length > 0) {
+                    $.ajax(
+                        {
+                            "url": "/createNewAdmin",
+                            "type": "POST",
+                            "data": {
+                                "username": username,
+                                "password": password
+                            },
+                            "success": function(data) {
+                                console.log(data)
+                                close_admin_creation_tab()
+                                load_admins()
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    )
+}
+
 function show_admin_account_creation() {
     $(".create-admin").show()
 }
@@ -278,6 +314,7 @@ function setup() {
     $(".close-admin-creation-tab").click(close_admin_creation_tab)
     $(".add-admin-account").click(show_admin_account_creation)
     $(".cancel-admin-creation").click(close_admin_creation_tab)
+    $(".confirm-admin-creation").click(create_admin_account)
     
 }
 
