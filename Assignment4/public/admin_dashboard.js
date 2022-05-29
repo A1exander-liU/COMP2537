@@ -9,6 +9,11 @@ old_username = ""
 
 function close_edit_tab() {
     $(".edit-user").hide()
+    $(".edit-admin").hide()
+}
+
+function view_this_admin() {
+    $(".edit-admin").show()
 }
 
 function display_admin_data(data) {
@@ -124,6 +129,7 @@ function return_to_home() {
 }
 
 $(".edit-user").hide()
+$(".edit-admin").hide()
 
 function setup() {
     load_user_data()
@@ -138,6 +144,7 @@ function setup() {
     $(".save-user-info").click(save_this_user)
     $(".close-edit-tab").click(close_edit_tab)
     $("#admins").click(load_admins)
+    $("body").on("click", ".admins-container-item", view_this_admin)
 }
 
 $(document).ready(setup)
