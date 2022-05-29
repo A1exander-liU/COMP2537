@@ -426,6 +426,28 @@ app.delete("/clearGameResults", function(req, res) {
     })
 })
 
+app.get("/getUsers", function(req ,res) {
+    userModel.find({type: "user"}, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.json(data)
+        }
+    })
+})
+
+app.get("/getAdmins", function(req, res) {
+    if (err) {
+        console.log("Err" + err)
+    }
+    else {
+        console.log("Data" + data)
+        res.json(data)
+    }
+})
+
 //when defining a collection follow this naming format:
 //-all lowercase
 //-has to have an s at the end of the collection name
