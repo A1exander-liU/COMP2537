@@ -71,6 +71,7 @@ app.post("/signUp", function(req, res) {
     var new_user = new userModel({
         username: req.body.username,
         password: req.body.password,
+        type: "user",
         shopping_cart: req.body.favourites,
         timeline: req.body.timeline,
         game_log: req.body.game_log
@@ -449,6 +450,7 @@ const pokemonSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
     username: {type: String, unique: true},
     password: String,
+    type: String,
     // shopping_cart: [[Object]],
     shopping_cart: [{
         name: String,
