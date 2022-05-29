@@ -41,7 +41,7 @@ function create_admin_account() {
                             "success": function(data) {
                                 console.log(data)
                                 close_admin_creation_tab()
-                                load_admins
+                                load_admins()
                             }
                         }
                     )
