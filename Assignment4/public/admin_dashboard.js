@@ -133,6 +133,8 @@ function load_user_data() {
 }
 
 function change_page() {
+    $(".edit-user").hide()
+    $(".edit-admin").hide()
     current_tab = $(this).attr("id")
     $(".dashboard-tab").removeClass("active")
     $(`#${current_tab}`).addClass("active")
