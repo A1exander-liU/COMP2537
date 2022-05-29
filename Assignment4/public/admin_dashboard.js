@@ -7,6 +7,10 @@ old_username = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function show_admin_account_creation() {
+    $(".create-admin").show()
+}
+
 function close_admin_creation_tab() {
     $("#create-admin-username").val("")
     $("#create-admin-password").val("")
@@ -272,6 +276,7 @@ function setup() {
     $(".cancel-creation").click(close_creation_tab)
     $(".confirm-creation").click(create_new_user)
     $(".close-admin-creation-tab").click(close_admin_creation_tab)
+    $(".add-admin-account").click(show_admin_account_creation)
 }
 
 $(document).ready(setup)
