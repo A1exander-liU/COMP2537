@@ -7,6 +7,46 @@ old_username = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function create_new_user() {
+    username = $("#create-username").val()
+    password = $("#create-password").val()
+    $.ajax(
+        {
+            "url": "/getUsers",
+            "type": "GET",
+            "success": function(data) {
+                data = data.filter(function(data) {
+                    if (data[0].username == username) {
+                        return data
+                    }
+                })
+                if (data.length > 0) {
+                    $(".create-user").append(`
+                    <div class="creation-error">
+                    Username already exists, please try again.
+                    </div>
+                    `)
+                }
+                else {
+                    $.ajax(
+                        {
+                            "url": "/addNewUser",
+                            "type": "POST",
+                            "data": {
+                                "username": username,
+                                "password": password
+                            },
+                            "success": function(data) {
+                                console.log(data)
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    )
+}
+
 function close_creation_tab() {
     $("#create-username").val("")
     $("#create-password").val("")
@@ -214,6 +254,8 @@ function setup() {
     $("body").on("click", ".confirm", delete_user)
     $(".close-creation-tab").click(close_creation_tab)
     $(".add-user-account").click(show_account_creation)
+    $(".cancel-creation").click(close_creation_tab)
+    $(".confirm-creation").click(create_new_user)
 }
 
 $(document).ready(setup)
