@@ -427,6 +427,18 @@ app.delete("/clearGameResults", function(req, res) {
     })
 })
 
+app.get("/getAll", function(req, res) {
+    userModel.find({}, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.json(data)
+        }
+    })
+})
+
 app.get("/getUsers", function(req ,res) {
     userModel.find({type: "user"}, function(err, data) {
         if (err) {
