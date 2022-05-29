@@ -196,6 +196,19 @@
             justify-content: flex-start;
         }
 
+        .admin-account-creation {
+            margin: 10px auto auto auto;
+            width: calc(95% + 5px);
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .add-admin-account {
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
         .add-user-account {
             border: 2px solid black;
             border-radius: 10px;
@@ -209,7 +222,7 @@
         }
 
         .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover, .cancel:hover, .add-user-account:hover,
-        .cancel-creation:hover {
+        .cancel-creation:hover, .add-admin-account:hover {
             background-color: black;
             color: white;
         }
@@ -325,6 +338,9 @@
         </div>
     </div>
     <div id="admins-page" class="dashboard-page">
+        <div class="admin-account-creation">
+            <button class="add-admin-account">Add an Account</button>
+        </div>
         <div class="admins-table">
             <div class="admins-table-headers">
                 <p class="username-header">Username</p>
