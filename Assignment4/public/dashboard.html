@@ -5,7 +5,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
         body {
-            height: 100vh;
+            /* height: 100vh; */
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -90,6 +90,43 @@
             background-color: rgb(201, 201, 201);
         }
 
+        .edit-user {
+            background-color: rgb(242, 251, 255);
+            width: calc(95% - 5px);
+            margin: 10px auto;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            gap: 10px;
+        }
+
+        .edit-user-controls {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+            /* column-gap: 10px; */
+        }
+
+        .save-user-info, .delete-user-info {
+            width: 80%;
+            justify-self: center;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
+        .save-user-info:hover, .delete-user-info:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .save-user-info {
+            grid-area: 1 / 4 / 2 / 5;
+        }
+
+        .delete-user-info {
+            grid-area: 1 / 5 / 2 / 6;
+        }
+
     </style>
 </head>
 
@@ -107,6 +144,23 @@
                 <p class="type-header">Type</p>
             </div>
             <div class="users-container">
+            </div>
+        </div>
+        <div class="edit-user">
+            <p>Edit profile for <span class="edit-user-username"></span></p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password">
+            <label for="user-type-dropdown">User Type</label>
+            <select name="user-type-dropdown" id="user-type-dropdown">
+                <option value="select">Select</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <div class="edit-user-controls">
+                <button class="save-user-info">Save</button>
+                <button class="delete-user-info">Delete</button>
             </div>
         </div>
     </div>
