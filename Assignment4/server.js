@@ -505,6 +505,26 @@ app.delete("/deleteUser", function(req, res) {
     })
 })
 
+app.post("/addNewUser", function(req, res) {
+    var new_user = new userModel({
+        username: req.body.username,
+        password: req.body.password,
+        type: "user",
+        shopping_cart: req.body.favourites,
+        timeline: req.body.timeline,
+        game_log: req.body.game_log
+    })
+    new_user.save(function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.send(data)
+        }
+    })
+})
+
 
 //when defining a collection follow this naming format:
 //-all lowercase
