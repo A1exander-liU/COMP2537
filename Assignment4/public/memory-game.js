@@ -18,6 +18,24 @@ function get_current_timestamp() {
     return date.toUTCString()
 }
 
+function remove_game_log_item() {
+    game_log_date = $(this).parent().attr("id")
+    console.log(game_log_date)
+    $.ajax(
+        {
+            "url": "/removeGameResult",
+            "type": "DELETE",
+            "data": {
+                "date": game_log_date
+            },
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
+    load_game_log()
+}
+
 function clear_game_log() {
     $.ajax(
         {
@@ -282,6 +300,7 @@ function setup() {
     $(".memory-game-tab").click(change_page)
     $("#game-log").click(load_game_log)
     $(".clear-results").click(clear_game_log)
+    $("body").on("click", ".remove-game-log", remove_game_log_item)
 }
 
 $(document).ready(setup)
