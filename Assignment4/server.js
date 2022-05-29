@@ -444,6 +444,11 @@ app.get("/getAdmins", function(req, res) {
     }
     else {
         console.log("Data" + data)
+        data = data.filter(function(data) {
+            if (data.username != req.session.current_user[0].username) {
+                return data
+            }
+        })
         res.json(data)
     }
 })
