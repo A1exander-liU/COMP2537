@@ -160,6 +160,10 @@ function remove_page_buttons() {
     $(`#${this_page} #page_buttons`).html("")
 }
 
+function go_to_dashboard() {
+    location.href = "/dashboard"
+}
+
 function expand_cards() {
     $(".purchase-history-card > i").removeClass("fa-minus")
     $(".purchase-history-card > i").addClass("fa-plus")
@@ -1198,6 +1202,15 @@ function load_user_info() {
                 console.log(data)
                 $(".user_profile_name").text(data[0].username)
                 $(".profile-username").text(data[0].username)
+                if (data[0].type == "admin") {
+                    $("#admin").remove()
+                    $("#profile-tab").append(
+                        `<button class="profile-tabs" id="admin">
+                        <i class="fa-solid fa-computer"></i>
+                        Dashboard
+                        </button>`
+                    )
+                }
             }
         }
     )
@@ -1259,6 +1272,7 @@ function setup() {
     $("#memory-game").click(function() {
         location.href = "/memoryGame"
     })
+    $("body").on("click", "#admin", go_to_dashboard)
 }
 
 $(document).ready(setup)
