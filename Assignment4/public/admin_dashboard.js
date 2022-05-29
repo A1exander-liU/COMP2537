@@ -31,6 +31,8 @@ function save_this_user() {
             }
         }
     )
+    $(".edit-user").hide()
+    load_user_data()
 }
 
 function edit_this_user() {
