@@ -12,7 +12,7 @@ function create_admin_account() {
     password = $("#create-admin-password").val()
     $.ajax(
         {
-            "url": "/getAdmins",
+            "url": "/getAll",
             "type": "GET",
             "success": function(data) {
                 console.log(data)
@@ -67,7 +67,7 @@ function create_new_user() {
     password = $("#create-password").val()
     $.ajax(
         {
-            "url": "/getUsers",
+            "url": "/getAll",
             "type": "GET",
             "success": function(data) {
                 data = data.filter(function(data) {
