@@ -141,6 +141,10 @@ function delete_user() {
 
 }
 
+function cancel_admin_deletion() {
+    $(".confirm-admin-deletion").remove()
+}
+
 function cancel_user_deletion() {
     $(".confirm-deletion").remove()
 }
@@ -335,6 +339,7 @@ function setup() {
     $(".cancel-admin-creation").click(close_admin_creation_tab)
     $(".confirm-admin-creation").click(create_admin_account)
     $(".delete-admin-info").click(confirm_admin_deletion)
+    $("body").on("click", ".cancel-admin", cancel_admin_deletion)
     
 }
 
