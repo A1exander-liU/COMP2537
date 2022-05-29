@@ -440,18 +440,20 @@ app.get("/getUsers", function(req ,res) {
 })
 
 app.get("/getAdmins", function(req, res) {
-    if (err) {
-        console.log("Err" + err)
-    }
-    else {
-        console.log("Data" + data)
-        data = data.filter(function(data) {
-            if (data.username != req.session.current_user[0].username) {
-                return data
-            }
-        })
-        res.json(data)
-    }
+    userModel.find({type: "admin"}, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            data = data.filter(function(data) {
+                if (data.username != req.session.current_user[0].username) {
+                    return data
+                }
+            })
+            res.json(data)
+        }
+    })
 })
 
 app.post("/getUser", function(req, res) {
