@@ -52,6 +52,7 @@ function create_admin_account() {
 }
 
 function show_admin_account_creation() {
+    close_edit_tab()
     $(".create-admin").show()
 }
 
@@ -188,6 +189,7 @@ function view_this_admin() {
             }
         }
     )
+    close_admin_creation_tab()
     $(".edit-admin").show()
 }
 
