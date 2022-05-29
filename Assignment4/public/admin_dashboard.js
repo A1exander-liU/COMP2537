@@ -58,6 +58,7 @@ function close_creation_tab() {
 }
 
 function show_account_creation() {
+    close_edit_tab()
     $(".create-user").show()
 }
 
@@ -173,6 +174,7 @@ function save_this_user() {
 }
 
 function edit_this_user() {
+    close_creation_tab()
     username = $(this).attr("id")
     $(".edit-user").show()
     $.ajax(
