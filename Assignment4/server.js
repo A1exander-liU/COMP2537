@@ -517,6 +517,18 @@ app.delete("/deleteUser", function(req, res) {
     })
 })
 
+app.delete("/deleteAdmin", function(req, res) {
+    userModel.deleteOne({username: req.body.username}, function(err, data) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.send(data)
+        }
+    })
+})
+
 app.post("/addNewUser", function(req, res) {
     var new_user = new userModel({
         username: req.body.username,
