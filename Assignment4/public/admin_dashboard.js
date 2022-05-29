@@ -11,6 +11,20 @@ function close_edit_tab() {
     $(".edit-user").hide()
 }
 
+function display_admin_data(data) {
+    console.log(data)
+}
+
+function load_admins() {
+    $.ajax(
+        {
+            "url": "/getAdmins",
+            "type": "GET",
+            "success": display_admin_data
+        }
+    )
+}
+
 function save_this_user() {
     username = $("#username").val()
     password = $("#password").val()
@@ -110,6 +124,7 @@ function setup() {
     $("body").on("click", ".users-container-item", edit_this_user)
     $(".save-user-info").click(save_this_user)
     $(".close-edit-tab").click(close_edit_tab)
+    $("#admins").click(load_admins)
 }
 
 $(document).ready(setup)
