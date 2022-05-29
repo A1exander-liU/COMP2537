@@ -13,6 +13,22 @@ function close_edit_tab() {
 }
 
 function view_this_admin() {
+    username = $(this).attr("id")
+    $.ajax(
+        {
+            "url": "/getAdmin",
+            "type": "POST",
+            "data": {
+                "username": username
+            },
+            "success": function(data) {
+                console.log(data)
+                $(".edit-admin-username").text(data[0].username)
+                $("#admin-username").val(data[0].username)
+                $("#admin-password").val(data[0].password)
+            }
+        }
+    )
     $(".edit-admin").show()
 }
 
