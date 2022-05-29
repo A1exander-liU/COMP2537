@@ -127,6 +127,11 @@
             grid-area: 1 / 5 / 2 / 6;
         }
 
+        .close-edit-tab {
+            font-size: 1.5em;
+            align-self: flex-end;
+        }
+
     </style>
 </head>
 
@@ -147,6 +152,7 @@
             </div>
         </div>
         <div class="edit-user">
+            <i class="fa-solid fa-xmark close-edit-tab"></i>
             <p>Edit profile for <span class="edit-user-username"></span></p>
             <label for="username">Username</label>
             <input type="text" id="username" name="username">
