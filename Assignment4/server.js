@@ -494,7 +494,7 @@ app.post("/getAdmin", function(req, res) {
 })
 
 app.delete("/deleteUser", function(req, res) {
-    userModel.deleteOne({username: req.body.username}, function(req, res) {
+    userModel.deleteOne({username: req.body.username}, function(err, data) {
         if (err) {
             console.log("Err" + err)
         }
