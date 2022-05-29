@@ -1,4 +1,5 @@
 current_tab = ""
+old_username = ""
 
 {/* <div class="users-container-item">
 <p>4</p>
@@ -15,6 +16,21 @@ function save_this_user() {
     password = $("#password").val()
     user_type = $("#user-type-dropdown option:selected").val()
     console.log(username, password, user_type)
+    $.ajax(
+        {
+            "url": "/editUserInfo",
+            "type": "POST",
+            "data": {
+                "old_username": old_username,
+                "new_username": username,
+                "password": password,
+                "type": user_type
+            },
+            "success": function(data) {
+                console.log(data)
+            }
+        }
+    )
 }
 
 function edit_this_user() {
@@ -29,6 +45,7 @@ function edit_this_user() {
             },
             "success": function(data) {
                 console.log(data)
+                old_username = data[0].username
                 $(".edit-user-username").text(data[0].username)
                 $("#username").val(data[0].username)
                 $("#password").val(data[0].password)
