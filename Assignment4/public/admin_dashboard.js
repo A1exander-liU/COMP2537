@@ -12,6 +12,25 @@ function close_edit_tab() {
     $(".edit-admin").hide()
 }
 
+function delete_user() {
+    
+}
+
+function cancel_user_deletion() {
+    $(".confirm-deletion").remove()
+}
+
+function confirm_user_deletion() {
+    $(".confirm-deletion").remove()
+    $(".edit-user").append(`
+    <div class="confirm-deletion">
+    <p>Are you sure you want to delete this account?</p>
+    <button class="cancel">Cancel</button>
+    <button class="confirm">Confirm</button>
+    </div>
+    `)
+}
+
 function view_this_admin() {
     username = $(this).attr("id")
     $.ajax(
@@ -163,6 +182,9 @@ function setup() {
     $(".close-edit-tab").click(close_edit_tab)
     $("#admins").click(load_admins)
     $("body").on("click", ".admins-container-item", view_this_admin)
+    $(".delete-user-info").click(confirm_user_deletion)
+    $("body").on("click", ".cancel", cancel_user_deletion)
+    $("body").on("click", ".confirm", delete_user)
 }
 
 $(document).ready(setup)
