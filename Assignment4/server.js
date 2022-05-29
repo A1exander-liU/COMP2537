@@ -453,14 +453,14 @@ app.get("/getAdmins", function(req, res) {
     }
 })
 
-app.post("/findUser", function(req, res) {
+app.post("/getUser", function(req, res) {
     userModel.find({username: req.body.username}, function(err, data) {
         if (err) {
             console.log("Err" + err)
         }
         else {
             console.log("Data" + data)
-            res.json.apply(data)
+            res.json(data)
         }
     })
 })
