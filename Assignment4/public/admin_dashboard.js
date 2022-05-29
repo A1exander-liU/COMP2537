@@ -13,6 +13,10 @@ function close_creation_tab() {
     $(".create-user").hide()
 }
 
+function show_account_creation() {
+    $(".create-user").show()
+}
+
 function close_edit_tab() {
     $(".edit-user").hide()
     $(".edit-admin").hide()
@@ -209,6 +213,7 @@ function setup() {
     $("body").on("click", ".cancel", cancel_user_deletion)
     $("body").on("click", ".confirm", delete_user)
     $(".close-creation-tab").click(close_creation_tab)
+    $(".add-user-account").click(show_account_creation)
 }
 
 $(document).ready(setup)
