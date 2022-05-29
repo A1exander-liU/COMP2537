@@ -9,20 +9,48 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            /* justify-content: space-between; */
             background-image: linear-gradient(to top left, rgb(224, 21, 21), rgb(137, 39, 39));
             box-sizing: border-box;
+            font-family: "Roboto", sans-serif;
         }
 
         .go-back-home {
             font-size: 1.5em;
         }
-        
+
+        .dashboard-tabs {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            background-color: rgb(215, 215, 215);
+            height: 5%;
+        }
+
+        .dashboard-tab {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-tab:hover {
+            background-color: rgb(168, 168, 168);
+        }
+
+        .dashboard-tab.active {
+            background-color: rgb(168, 168, 168);
+        }
+    
     </style>
 </head>
 
 <body>
     <i class="fa-solid fa-arrow-left go-back-home"></i>
+    <div class="dashboard-tabs">
+        <div class="dashboard-tab" id="users">Users</div>
+        <div class="dashboard-tab" id="admins">Admins</div>
+    </div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
