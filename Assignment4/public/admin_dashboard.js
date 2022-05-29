@@ -14,7 +14,6 @@ function close_edit_tab() {
 function display_admin_data(data) {
     console.log(data)
     $(".admins-container").html("")
-    console.log(data)
     for (i = 0; i < data.length; i++) {
         admin = ""
         admin += `<div class="admins-container-item" id="${data[i].username}">`
@@ -25,7 +24,7 @@ function display_admin_data(data) {
 
         admin += `</div>`
         old = $(".admins-container").html()
-        $(".admins-container").html(old + user)
+        $(".admins-container").html(old + admin)
     }
 }
 
