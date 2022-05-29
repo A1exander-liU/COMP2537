@@ -7,6 +7,13 @@ old_username = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function close_admin_creation_tab() {
+    $("#create-admin-username").val("")
+    $("#create-admin-password").val("")
+    $(".admin-creation-error").remove()
+    $(".create-admin").hide()
+}
+
 function create_new_user() {
     username = $("#create-username").val()
     password = $("#create-password").val()
@@ -241,6 +248,7 @@ function return_to_home() {
 $(".edit-user").hide()
 $(".edit-admin").hide()
 $(".create-user").hide()
+$(".create-admin").hide()
 
 function setup() {
     load_user_data()
@@ -263,6 +271,7 @@ function setup() {
     $(".add-user-account").click(show_account_creation)
     $(".cancel-creation").click(close_creation_tab)
     $(".confirm-creation").click(create_new_user)
+    $(".close-admin-creation-tab").click(close_admin_creation_tab)
 }
 
 $(document).ready(setup)
