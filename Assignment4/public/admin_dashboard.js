@@ -7,6 +7,24 @@ old_username = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function delete_admin() {
+    username = $(".edit-admin-username").text()
+    $.ajax(
+        {
+            "url": "/deleteAdmin",
+            "type": "DELETE",
+            "data": {
+                "username": username
+            },
+            "success": function(data) {
+                console.log(data)
+                $(".edit-admin").hide()
+                load_admins()
+            }
+        }
+    )
+}
+
 function create_admin_account() {
     username = $("#create-admin-username").val()
     password = $("#create-admin-password").val()
@@ -342,6 +360,7 @@ function setup() {
     $(".confirm-admin-creation").click(create_admin_account)
     $(".delete-admin-info").click(confirm_admin_deletion)
     $("body").on("click", ".cancel-admin", cancel_admin_deletion)
+    $("body").on("click", ".confirm-admin", delete_admin)
     
 }
 
