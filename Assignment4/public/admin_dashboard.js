@@ -277,6 +277,8 @@ function setup() {
     $(".confirm-creation").click(create_new_user)
     $(".close-admin-creation-tab").click(close_admin_creation_tab)
     $(".add-admin-account").click(show_admin_account_creation)
+    $(".cancel-admin-creation").click(close_admin_creation_tab)
+    
 }
 
 $(document).ready(setup)
