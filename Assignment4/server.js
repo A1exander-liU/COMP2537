@@ -493,6 +493,18 @@ app.post("/getAdmin", function(req, res) {
     })
 })
 
+app.delete("/deleteUser", function(req, res) {
+    userModel.deleteOne({username: req.body.username}, function(req, res) {
+        if (err) {
+            console.log("Err" + err)
+        }
+        else {
+            console.log("Data" + data)
+            res.send(data)
+        }
+    })
+})
+
 
 //when defining a collection follow this naming format:
 //-all lowercase
