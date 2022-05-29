@@ -158,6 +158,16 @@
             gap: 10px;
         }
 
+        .create-user {
+            background-color: rgb(242, 251, 255);
+            width: calc(95% - 5px);
+            margin: 10px auto;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            gap: 10px;
+        }
+
         .edit-user-controls {
             display: grid;
             width: 100%;
@@ -172,15 +182,44 @@
             /* column-gap: 10px; */
         }
 
-        .save-user-info, .delete-user-info, .delete-admin-info, .cancel, .confirm {
+        .create-user-controls {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+        }
+
+        .account-creation {
+            margin: 10px auto auto auto;
+            width: calc(95% + 5px);
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .add-user-account {
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
+        .save-user-info, .delete-user-info, .delete-admin-info, .cancel, .confirm, .cancel-creation, .confirm-creation {
             width: 80%;
             justify-self: center;
             border: 2px solid black;
             border-radius: 10px;
         }
 
-        .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover, .cancel:hover {
+        .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover, .cancel:hover, .add-user-account:hover,
+        .cancel-creation:hover {
             background-color: black;
+            color: white;
+        }
+
+        .confirm-creation {
+            border-color: green;
+        }
+
+        .confirm-creation:hover {
+            background-color: green;
             color: white;
         }
 
@@ -201,7 +240,7 @@
             grid-area: 1 / 5 / 2 / 6;
         }
 
-        .close-edit-tab {
+        .close-edit-tab, .close-creation-tab {
             font-size: 1.5em;
             align-self: flex-end;
         }
@@ -225,6 +264,14 @@
             grid-area: 2 / 5 / 3 / 6;
         }
 
+        .cancel-creation {
+            grid-area: 1 / 4 / 2 / 5;
+        }
+
+        .confirm-creation {
+            grid-area: 1 / 5 / 2 / 6;
+        }
+
     </style>
 </head>
 
@@ -235,6 +282,9 @@
         <div class="dashboard-tab" id="admins">Admins</div>
     </div>
     <div id="users-page" class="dashboard-page">
+        <div class="account-creation">
+            <button class="add-user-account">Add an Account</button>
+        </div>
         <div class="users-table">
             <div class="users-table-headers">
                 <p class="username-header">Username</p>
@@ -259,6 +309,18 @@
             <div class="edit-user-controls">
                 <button class="save-user-info">Save</button>
                 <button class="delete-user-info">Delete</button>
+            </div>
+        </div>
+        <div class="create-user">
+            <i class="fa-solid fa-xmark close-creation-tab"></i>
+            <p>Create Account</p>
+            <label for="create-username">Username</label>
+            <input type="text" id="create-username" name="username">
+            <label for="password">Password</label>
+            <input type="text" id="create-password" name="password">
+            <div class="create-user-controls">
+                <button class="cancel-creation">Cancel</button>
+                <button class="confirm-creation">Confirm</button>
             </div>
         </div>
     </div>
