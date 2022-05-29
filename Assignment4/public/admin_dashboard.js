@@ -145,6 +145,17 @@ function cancel_user_deletion() {
     $(".confirm-deletion").remove()
 }
 
+function confirm_admin_deletion() {
+    $(".confirm-admin-deletion").remove()
+    $(".edit-admin").append(`
+    <div class="confirm-admin-deletion">
+    <p>Are you sure you want to delete this account?</p>
+    <button class="cancel-admin">Cancel</button>
+    <button class="confirm-admin">Confirm</button>
+    </div>
+    `)
+}
+
 function confirm_user_deletion() {
     $(".confirm-deletion").remove()
     $(".edit-user").append(`
@@ -323,6 +334,7 @@ function setup() {
     $(".add-admin-account").click(show_admin_account_creation)
     $(".cancel-admin-creation").click(close_admin_creation_tab)
     $(".confirm-admin-creation").click(create_admin_account)
+    $(".delete-admin-info").click(confirm_admin_deletion)
     
 }
 
