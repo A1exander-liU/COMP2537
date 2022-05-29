@@ -13,6 +13,20 @@ function close_edit_tab() {
 
 function display_admin_data(data) {
     console.log(data)
+    $(".admins-container").html("")
+    console.log(data)
+    for (i = 0; i < data.length; i++) {
+        admin = ""
+        admin += `<div class="admins-container-item" id="${data[i].username}">`
+
+        admin += `<p>${data[i].username}</p>`
+        admin += `<p>${data[i].password}</p>`
+        admin += `<p>${data[i].type} <i class="fa-solid fa-pencil"></i></p>`
+
+        admin += `</div>`
+        old = $(".admins-container").html()
+        $(".admins-container").html(old + user)
+    }
 }
 
 function load_admins() {
