@@ -72,7 +72,7 @@ function game_over() {
             "type": "POST",
             "data": {
                 "date": get_current_timestamp(),
-                "result": `Failed to match all cards in time of the ${chosen_difficulty} X ${chosen_difficulty} game size.`
+                "result": `Failed to match all cards in time for the ${chosen_difficulty} X ${chosen_difficulty} game size.`
             },
             "success": function(data) {
                 console.log(data)
