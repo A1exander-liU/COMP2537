@@ -16,11 +16,12 @@ function create_new_user() {
             "type": "GET",
             "success": function(data) {
                 data = data.filter(function(data) {
-                    if (data[0].username == username) {
+                    if (data.username == username) {
                         return data
                     }
                 })
                 if (data.length > 0) {
+                    $(".creation-error").remove()
                     $(".create-user").append(`
                     <div class="creation-error">
                     Username already exists, please try again.
@@ -50,6 +51,7 @@ function create_new_user() {
 function close_creation_tab() {
     $("#create-username").val("")
     $("#create-password").val("")
+    $(".creation-error").remove()
     $(".create-user").hide()
 }
 
@@ -218,6 +220,7 @@ function load_user_data() {
 }
 
 function change_page() {
+    close_creation_tab()
     $(".edit-user").hide()
     $(".edit-admin").hide()
     current_tab = $(this).attr("id")
