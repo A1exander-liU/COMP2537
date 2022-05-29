@@ -22,6 +22,14 @@ function create_admin_account() {
                     }
                 })
                 if (data.length > 0) {
+                    $(".admin-creation-error").remove()
+                    $(".create-admin").append(`
+                    <div class="admin-creation-error">
+                    Username already exists, please try again.
+                    </div>
+                    `)
+                }
+                else {
                     $.ajax(
                         {
                             "url": "/createNewAdmin",
@@ -33,7 +41,7 @@ function create_admin_account() {
                             "success": function(data) {
                                 console.log(data)
                                 close_admin_creation_tab()
-                                load_admins()
+                                load_admins
                             }
                         }
                     )
