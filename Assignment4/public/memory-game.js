@@ -251,6 +251,7 @@ function determine_countdown(size) {
 }
 
 async function get_card_amount() {
+    score = 0
     $(".card").remove()
     $(".lose").hide()
     $(".victory").hide()
