@@ -39,6 +39,7 @@ function create_new_user() {
                             },
                             "success": function(data) {
                                 console.log(data)
+                                load_user_data()
                             }
                         }
                     )
