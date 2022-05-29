@@ -21,7 +21,7 @@ app.listen(process.env.PORT || 5003, function (err) {
         console.log(err);
 })
 
-app.use(express.static("/Assignment4/public"))
+app.use(express.static(__dirname + "/public"))
 
 const loginValidator = function(req, res, next) {
     if (req.session.authenticated != true) {
