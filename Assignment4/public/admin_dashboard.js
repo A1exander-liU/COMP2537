@@ -6,6 +6,27 @@ current_tab = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function edit_this_user() {
+    username = $(this).attr("id")
+    $(".edit-user").show()
+    $.ajax(
+        {
+            "url": "/getUser",
+            "type": "POST",
+            "data": {
+                "username": username
+            },
+            "success": function(data) {
+                console.log(data)
+                $(".edit-user-username").text(data[0].username)
+                $("#username").val(data[0].username)
+                $("#password").val(data[0].password)
+                $("#user-type-dropdown").val(data[0].type).change()
+            } 
+        }
+    )
+}
+
 function display_user_data(data) {
     $(".users-container").html("")
     console.log(data)
@@ -45,6 +66,8 @@ function return_to_home() {
     location.href = "/pokedex"
 }
 
+$(".edit-user").hide()
+
 function setup() {
     load_user_data()
     $(".dashboard-tab").removeClass("active")
@@ -54,6 +77,7 @@ function setup() {
     $(".dashboard-tab").click(change_page)
     $(".go-back-home").click(return_to_home)
     $("#users").click(load_user_data)
+    $("body").on("click", ".users-container-item", edit_this_user)
 }
 
 $(document).ready(setup)
