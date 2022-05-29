@@ -172,15 +172,24 @@
             /* column-gap: 10px; */
         }
 
-        .save-user-info, .delete-user-info, .delete-admin-info {
+        .save-user-info, .delete-user-info, .delete-admin-info, .cancel, .confirm {
             width: 80%;
             justify-self: center;
             border: 2px solid black;
             border-radius: 10px;
         }
 
-        .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover {
+        .save-user-info:hover, .delete-user-info:hover, .delete-admin-info:hover, .cancel:hover {
             background-color: black;
+            color: white;
+        }
+
+        .confirm {
+            border-color: rgb(215, 22, 22);
+        }
+
+        .confirm:hover {
+            background-color: rgb(215, 22, 22);
             color: white;
         }
 
@@ -195,6 +204,25 @@
         .close-edit-tab {
             font-size: 1.5em;
             align-self: flex-end;
+        }
+
+        .confirm-deletion {
+            display: grid;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+            grid-template-rows: 50% 50%;
+        }
+
+        .confirm-deletion p {
+            margin: 0;
+            grid-area: 1 / 1 / 2 / 6;
+        }
+
+        .cancel {
+            grid-area: 2 / 4 / 3 / 5;
+        }
+
+        .confirm {
+            grid-area: 2 / 5 / 3 / 6;
         }
 
     </style>
