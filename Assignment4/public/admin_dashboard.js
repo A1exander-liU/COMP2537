@@ -6,6 +6,17 @@ current_tab = ""
 <p>User <i class="fa-solid fa-pencil"></i></p>
 </div> */}
 
+function close_edit_tab() {
+    $(".edit-user").hide()
+}
+
+function save_this_user() {
+    username = $("#username").val()
+    password = $("#password").val()
+    user_type = $("#user-type-dropdown option:selected").val()
+    console.log(username, password, user_type)
+}
+
 function edit_this_user() {
     username = $(this).attr("id")
     $(".edit-user").show()
@@ -78,6 +89,8 @@ function setup() {
     $(".go-back-home").click(return_to_home)
     $("#users").click(load_user_data)
     $("body").on("click", ".users-container-item", edit_this_user)
+    $(".save-user-info").click(save_this_user)
+    $(".close-edit-tab").click(close_edit_tab)
 }
 
 $(document).ready(setup)
